@@ -1,15 +1,8 @@
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+class Recruitment < ApplicationRecord
+  belongs_to :user
   
-  has_one_attached :image
-  
-  has_many :recruitments, dependent: :destroy
-  belongs_to :shop
-         
-  enum gender: { 男: 0, 女: 1, その他: 2 }
+  enum recruitment_gender: { 男性のみ: 0, 女性のみ: 1, 誰でも可: 2 }
+  enum number_of_people: { "1~2人": 0, "3~5人": 1, "5~10人": 2, "10人以上": 3 }
   enum prefectures:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
@@ -22,16 +15,4 @@ class User < ApplicationRecord
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
   }  
-  
-  def name
-    last_name + first_name
-  end
-  
-  def name_kana
-    last_name_kana + first_name_kana
-  end
-  
-  def adress_all
-    〒 + postal_code + address
-  end
 end

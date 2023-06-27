@@ -1,0 +1,37 @@
+<%= @user.name %>さんの編集画面
+
+<%= form_with model: @user, url:admin_user_path(@user.id), method: :patch do |user| %>
+氏名
+<%= user.text_field :last_name %>
+<%= user.text_field :first_name %>
+<%= user.text_field :last_name_kana %>
+<%= user.text_field :first_name_kana %>
+
+ニックネーム
+<%= user.text_field :nickname %>
+
+自己紹介文
+<%= user.text_field :introduction %>
+
+メールアドレス
+<%= user.text_field :email %>
+
+住所
+<%= user.text_field :postal_code %>
+<%= user.text_field :address %>
+
+電話番号
+<%= user.text_field :telephone_number %>
+
+性別
+<%= user.text_field :gender %>
+
+都道府県
+<!--<%= user.text_field :prefectures %>-->
+<%= user.select :prefecture, User.prefecture.keys, {} %>
+
+退会ステータス
+<%= user.text_field :is_deleted %>
+
+<%= usrt.submit "更新する" %>
+<%end%>

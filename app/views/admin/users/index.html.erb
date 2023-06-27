@@ -1,1 +1,7 @@
 会員一覧画面
+
+<% @users.each do |user| %>
+  <%= user.last_name + user.first_name %>
+  <%= user.nickname %>
+  <%= user.email %>
+<%end%>

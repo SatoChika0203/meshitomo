@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_25_062124) do
+ActiveRecord::Schema.define(version: 2023_06_26_122303) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,29 @@ ActiveRecord::Schema.define(version: 2023_06_25_062124) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "recruitments", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "introduction", null: false
+    t.date "schedule_one", null: false
+    t.date "schedule_two"
+    t.date "schedule_three"
+    t.integer "prefectures", null: false
+    t.integer "number_of_people", null: false
+    t.integer "recruitment_gender", null: false
+    t.datetime "deadline", null: false
+    t.boolean "is_valid", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.string "shop_name", null: false
+    t.string "shop_url", null: false
+    t.string "shop_address", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
