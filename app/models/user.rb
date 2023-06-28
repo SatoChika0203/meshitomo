@@ -7,9 +7,9 @@ class User < ApplicationRecord
   has_one_attached :image
   
   has_many :recruitments, dependent: :destroy
-  belongs_to :shop
+  belongs_to :shop, optional: true
          
-  enum gender: { 男: 0, 女: 1, その他: 2 }
+  enum gender: { male: 0, female: 1, other: 2 }
   enum prefectures:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

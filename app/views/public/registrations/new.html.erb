@@ -1,11 +1,49 @@
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "publics/shared/error_messages", resource: resource %>
+  <%= render "public/shared/error_messages", resource: resource %>
+  
+  <div class="field">
+    <%= f.label :"氏名" %><br />
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"氏名（カナ）" %><br />
+    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+  </div>  
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :"ニックネーム" %><br />
+    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"メールアドレス" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"住所" %><br />
+    〒<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %><br />
+    <%= f.text_area :address, autofocus: true, autocomplete: "address" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"電話番号" %><br />
+    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"性別" %><br />
+    <%= f.radio_button :gender, User.genders.key(0) %>
+    <%= f.label :gender_male, User.genders_i18n[:male] %>
+    <%= f.radio_button :gender, User.genders.key(1) %>
+    <%= f.label :gender_female, User.genders_i18n[:female] %>
+    <%= f.radio_button :gender, User.genders.key(2) %>
+    <%= f.label :gender_other, User.genders_i18n[:other] %>
   </div>
 
   <div class="field">

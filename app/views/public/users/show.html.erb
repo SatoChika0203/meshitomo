@@ -1,0 +1,13 @@
+会員詳細
+
+<%= @user.name %>
+<%= @user.name_kana %>
+<%= @user.nickname %>
+<%= @user.introduction %>
+<%= @user.adress_all %>
+<%= @user.telephone_number %>
+<%= @user.gender_i18n %>
+<%= @user.prefectures %>
+<%= @user.is_deleted %>
+
+<%= link_to "編集", edit_user_path(@user.id), method: :get %>

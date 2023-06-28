@@ -5,5 +5,5 @@
   <%= user.nickname %>
   <%= user.email %>
   
-  <%= link_to "詳細", admin_user_path(user.id), method: :get %>
+  <%= link_to "詳細", user_path(user.id), method: :get %>
 <%end%>

@@ -1,7 +1,7 @@
 <h2>募集一覧</h2>
 
 <% @recruitments.each do |recruitment| %>
-    <% if recruitment.recruitment_gender == @users.gender %>
+    <!--<% if recruitment.recruitment_gender == @users.gender %>-->
         <%= recruitment.shop.name %>
         <%= recruitment.title %>
         <%= recruitment.schedule_one %>
@@ -14,6 +14,6 @@
         <%= recruitment.deadline %>
         
         <%= link_to "詳細", admin_recruitment_path(recruitment.id), method: :get %>
-    <%end%>
+    <!--<%end%>-->
 <%end%>
 
