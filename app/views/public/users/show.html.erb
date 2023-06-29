@@ -1,13 +1,24 @@
-会員詳細
+<h2>会員詳細</h2>
 
-<%= @user.name %>
-<%= @user.name_kana %>
-<%= @user.nickname %>
-<%= @user.introduction %>
-<%= @user.adress_all %>
-<%= @user.telephone_number %>
-<%= @user.gender_i18n %>
-<%= @user.prefectures %>
-<%= @user.is_deleted %>
+<% if @user.image.attached? %>
+<p><%= image_tag @user.image, size: "200x200" %></p>
+<% else %>
+<p><%= image_tag 'no_image', size: "200x200" %></p>
+<% end %>
+<p><%= @user.nickname %></p>
+<p><%= @user.introduction %></p>
+<p><%= @user.gender_i18n %></p>
+<p><%= @user.prefectures %></p>
 
-<%= link_to "編集", edit_user_path(@user.id), method: :get %>
+<% if @user.id == current_user.id %>
+<p><%= @user.name %></p>
+<p><%= @user.name_kana %></p>
+<p><%= @user.adress_all %></p>
+<p><%= @user.telephone_number %></p>
+
+<p><%= link_to "編集", users_information_edit_path, method: :get %></p>
+<% end %>
+
+<% if @user.id != current_user.id %>
+<p><%= @user.nickname %>さんと食事に行きませんか？</p>
+<% end %>

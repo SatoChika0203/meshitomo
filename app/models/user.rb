@@ -32,6 +32,6 @@ class User < ApplicationRecord
   end
   
   def adress_all
-    〒 + postal_code + address
+    "〒" + postal_code + address
   end
 end

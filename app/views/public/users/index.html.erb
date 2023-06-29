@@ -1,9 +1,16 @@
 会員一覧画面
 
 <% @users.each do |user| %>
+  <% if user.image.attached? %>
+    <%= link_to users_path do %>
+      <p><%= image_tag user.image, size: "100x100" %></p>
+    <% end %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
   <%= user.last_name + user.first_name %>
   <%= user.nickname %>
   <%= user.email %>
-  
+
   <%= link_to "詳細", user_path(user.id), method: :get %>
 <%end%>

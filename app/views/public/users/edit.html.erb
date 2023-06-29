@@ -1,6 +1,10 @@
 <%= @user.name %>さんの編集画面
 
 <%= form_with model: @user, url:admin_user_path(@user.id), method: :patch do |user| %>
+プロフィール画像
+<%= user.file_field :image, placeholder: "プロィール画像", accept: "image/*" %>
+<!--image/*　：　画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
+
 氏名
 <%= user.text_field :last_name %>
 <%= user.text_field :first_name %>
@@ -11,7 +15,7 @@
 <%= user.text_field :nickname %>
 
 自己紹介文
-<%= user.text_field :introduction %>
+<%= user.text_area :introduction %>
 
 メールアドレス
 <%= user.text_field :email %>
@@ -27,11 +31,9 @@
 <%= user.text_field :gender %>
 
 都道府県
-<!--<%= user.text_field :prefectures %>-->
-<%= user.select :prefecture, User.prefecture.keys, {} %>
-
-退会ステータス
-<%= user.text_field :is_deleted %>
+<%= user.select :prefectures, User.prefectures.keys, {} %>
 
 <%= user.submit "更新する" %>
 <%end%>
+
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

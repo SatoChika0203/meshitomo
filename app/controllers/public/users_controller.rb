@@ -4,17 +4,17 @@ class Public::UsersController < ApplicationController
   end
   
   def show
-    @user=User.find(params[:id])
+    @user=User.find(current_user.id)
   end
   
   def edit
-    @user=User.find(params[:id])
+    @user=User.find(current_user.id)
   end  
   
   def update
-    @user=User.find(params[:id])
+    @user=User.find(current_user.id)
     if @user.update(user_params)
-      redirect_to admin_user_path(@user.id)
+      redirect_to user_path(current_user.id)
       # redirect_toはgetメソッドに働く
     else
       render :edit

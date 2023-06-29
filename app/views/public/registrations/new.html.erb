@@ -4,6 +4,11 @@
   <%= render "public/shared/error_messages", resource: resource %>
   
   <div class="field">
+    <%= f.label :"プロフィール画像" %><br />
+    <%= f.file_field :image, placeholder: "プロィール画像", accept: "image/*" %>
+  </div>
+  
+  <div class="field">
     <%= f.label :"氏名" %><br />
     <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
     <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>

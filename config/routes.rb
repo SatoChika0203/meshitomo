@@ -13,7 +13,7 @@ scope module: :public do
         patch 'withdraw'
       end
   end
-  resources :recruitments, expect: [:new] do
+  resources :recruitments do
       collection do
         post 'confirm'
         get 'complete'
