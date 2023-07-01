@@ -6,13 +6,13 @@
 <!--image/*　：　画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
 
 氏名
-<%= user.text_field :last_name %>
-<%= user.text_field :first_name %>
-<%= user.text_field :last_name_kana %>
-<%= user.text_field :first_name_kana %>
+<%= user.text_field :last_name, placeholder:"性"%>
+<%= user.text_field :first_name, placeholder:"名" %>
+<%= user.text_field :last_name_kana, placeholder:"セイ" %>
+<%= user.text_field :first_name_kana, placeholder:"メイ" %>
 
 ニックネーム
-<%= user.text_field :nickname %>
+<%= user.text_field :nickname, placeholder %>
 
 自己紹介文
 <%= user.text_area :introduction %>

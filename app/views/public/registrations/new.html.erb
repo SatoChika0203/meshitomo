@@ -10,35 +10,35 @@
   
   <div class="field">
     <%= f.label :"氏名" %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder:"性" %>
+    <%= f.text_field :first_name, autocomplete: "first_name", placeholder:"名" %>
   </div>
   
   <div class="field">
     <%= f.label :"氏名（カナ）" %><br />
-    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
-    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+    <%= f.text_field :last_name_kana, autocomplete: "last_name_kana", placeholder:"セイ" %>
+    <%= f.text_field :first_name_kana, autocomplete: "first_name_kana", placeholder:"メイ" %>
   </div>  
 
   <div class="field">
     <%= f.label :"ニックネーム" %><br />
-    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
+    <%= f.text_field :nickname, autocomplete: "nickname" %>
   </div>
   
   <div class="field">
     <%= f.label :"メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
   
   <div class="field">
     <%= f.label :"住所" %><br />
-    〒<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %><br />
-    <%= f.text_area :address, autofocus: true, autocomplete: "address" %>
+    〒<%= f.text_field :postal_code, autocomplete: "postal_code" %><br />
+    <%= f.text_area :address, autocomplete: "address" %>
   </div>
   
   <div class="field">
     <%= f.label :"電話番号" %><br />
-    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+    <%= f.text_field :telephone_number, autocomplete: "telephone_number" %>
   </div>
   
   <div class="field">

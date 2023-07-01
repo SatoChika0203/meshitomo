@@ -5,3 +5,8 @@
           male: "男"
           female: "女"
           other: "その他"
+      recruitment:
+        recruitment_gender:
+          male_only: "男のみ"
+          female_only: "女のみ"
+          anyone: "誰でも可"

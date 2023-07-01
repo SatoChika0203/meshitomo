@@ -1,7 +1,7 @@
 class Recruitment < ApplicationRecord
   belongs_to :user
   
-  enum recruitment_gender: { 男性のみ: 0, 女性のみ: 1, 誰でも可: 2 }
+  enum recruitment_gender: { male_only: 0, female_only: 1, anyone: 2 }
   enum number_of_people: { "1~2人": 0, "3~5人": 1, "5~10人": 2, "10人以上": 3 }
   enum prefectures:{
      "---":0,
