@@ -1,0 +1,2 @@
+module Publc::ApplicationsHelper
+end

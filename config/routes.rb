@@ -6,9 +6,8 @@ devise_for :users, controllers: {
 
 scope module: :public do
   root to: 'homes#top'
-  get '/users/information/edit' => 'users#edit', as: 'users_information_edit'
-  resource :users, except: [:create, :edit] do
-      collection do
+  resources :users, except: [:createra] do
+      member do
         get 'confirm'
         patch 'withdraw'
       end
@@ -20,6 +19,7 @@ scope module: :public do
         get 'history'
       end
   end
+  
   resources :applications, except: [:new, :index, :edit, :update] do
       collection do
         post 'cancel'

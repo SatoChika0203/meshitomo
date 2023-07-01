@@ -16,9 +16,19 @@
 <p><%= @user.adress_all %></p>
 <p><%= @user.telephone_number %></p>
 
-<p><%= link_to "編集", users_information_edit_path, method: :get %></p>
+<p><%= link_to "編集", edit_user_path(@user.id) %></p>
+<p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
 <% end %>
 
 <% if @user.id != current_user.id %>
-<p><%= @user.nickname %>さんと食事に行きませんか？</p>
+<h3><%= @user.nickname %>さんと食事に行きませんか？</h3>
+    <% @recruitments.each do |recruitment| %>
+    <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+    <p>希望日</p>
+    <p><%= recruitment.schedule_one %></p>
+    <p><%= recruitment.schedule_two %></p>
+    <p><%= recruitment.schedule_three %></p>
+    <p>募集期限</p>
+    <p><%= recruitment.deadline %></p>
+    <% end %>
 <% end %>

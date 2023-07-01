@@ -1,1 +1,25 @@
 募集詳細
+<% if @recruitment.user.image.attached? %>
+<p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
+<% else %>
+<p><%= image_tag 'no_image', size: "200x200" %></p>
+<% end %>
+<p><%= @recruitment.user.name %></p>
+<p><%= @recruitment.title %></p>
+<p><%= @recruitment.introduction %></p>
+<p><%= @recruitment.schedule_one %></p>
+<p><%= @recruitment.schedule_two %></p>
+<p><%= @recruitment.schedule_three %></p>
+<p><%= @recruitment.prefectures %></p>
+<p><%= @recruitment.number_of_people %></p>
+<p><%= @recruitment.recruitment_gender_i18n %></p>
+<p><%= @recruitment.deadline %></p>
+
+<% if @recruitment.user_id != current_user.id %>
+<p><%= link_to "行きたい！", confirm_applications_path, method: :post %></p>
+<% end %>
+
+<% if @recruitment.user_id == current_user.id %>
+<p><%= link_to "編集", edit_recruitment_path %></p>
+<p><%= link_to '削除', recruitment_path(@recruitment.id), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
+<% end %>
