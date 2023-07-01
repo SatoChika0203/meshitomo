@@ -16,7 +16,7 @@
 <p><%= @recruitment.deadline %></p>
 
 <% if @recruitment.user_id != current_user.id %>
-<p><%= link_to "行きたい！", confirm_applications_path, method: :post %></p>
+<p><%= link_to "行きたい！", confirm_application_path, method: :post %></p>
 <% end %>
 
 <% if @recruitment.user_id == current_user.id %>

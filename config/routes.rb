@@ -21,7 +21,7 @@ scope module: :public do
   end
   
   resources :applications, except: [:new, :index, :edit, :update] do
-      collection do
+      member do
         post 'cancel'
         post 'confirm'
         get 'complete'
