@@ -18,5 +18,16 @@
 <p><%= @recruitment.recruitment_gender_i18n %></p>
 <p><%= @recruitment.deadline %></p>
 
-<p><%= link_to "応募する", applications_path, method: :post %></p>
+
+<%= form_with model: @application, url: recruitment_applications_path(@recruitment.id), method: :post do |application| %>
+<p>メッセージをどうぞ</p>
+<p><%= application.text_area :message %></p>
+
+<p>日程（2つ目、3つ目は任意）</p>
+<p><%= application.date_field :schedule_one, placeholder:"1つ目" %></p>
+<p><%= application.date_field :schedule_two, placeholder:"2つ目" %></p>
+<p><%= application.date_field :schedule_three, placeholder:"3つ目" %></p>
+<p><%= application.submit "応募する" %></p>
+<% end %>
+
 <p><%= link_to "やっぱりやめる", recruitment_path(@recruitment.id), method: :get %></p>

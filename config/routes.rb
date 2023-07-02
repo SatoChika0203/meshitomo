@@ -12,6 +12,7 @@ scope module: :public do
         patch 'withdraw'
       end
   end
+  
   resources :recruitments do
       member do
         post 'confirm'   
@@ -21,16 +22,25 @@ scope module: :public do
         get 'history'
         get 'search'
       end
-  end
-  
-  resources :applications, except: [:new, :index, :edit, :update] do
-      collection do
-        post 'cancel'
-        post 'confirm'
-        get 'complete'
-        get 'history'
+      resource :applications, except: [:new, :index, :edit, :update] do
+        collection do
+          post 'cancel'
+          post 'confirm'
+          get 'complete'
+          get 'history'
+        end
       end
-  end
+  end  
+  
+  # resources :applications, except: [:new, :index, :edit, :update] do
+  #     collection do
+  #       post 'cancel'
+  #       post 'confirm'
+  #       get 'complete'
+  #       get 'history'
+  #     end
+  # end
+  
   resources :chat_groups, only: [:index, :show, :create]
   resources :chats, only: [:create]
   resources :reviews, except: [:destroy, :edit, :update]

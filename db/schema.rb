@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_01_041140) do
+ActiveRecord::Schema.define(version: 2023_07_02_120658) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,20 @@ ActiveRecord::Schema.define(version: 2023_07_01_041140) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "applications", force: :cascade do |t|
+    t.integer "recruitment_id"
+    t.integer "applicant_id"
+    t.date "schedule_one", null: false
+    t.date "schedule_two"
+    t.date "schedule_three"
+    t.string "message"
+    t.boolean "is_approval", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["applicant_id"], name: "index_applications_on_applicant_id"
+    t.index ["recruitment_id"], name: "index_applications_on_recruitment_id"
   end
 
   create_table "public_applications", force: :cascade do |t|
@@ -116,4 +130,6 @@ ActiveRecord::Schema.define(version: 2023_07_01_041140) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "applications", "recruitments"
+  add_foreign_key "applications", "users", column: "applicant_id"
 end
