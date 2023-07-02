@@ -1,1 +1,22 @@
 <h2>応募確認画面</h2>
+
+<p>以下のお食事に応募しますか？</p>
+
+<% if @recruitment.user.image.attached? %>
+<p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
+<% else %>
+<p><%= image_tag 'no_image', size: "200x200" %></p>
+<% end %>
+<p><%= @recruitment.user.name %></p>
+<p><%= @recruitment.title %></p>
+<p><%= @recruitment.introduction %></p>
+<p><%= @recruitment.schedule_one %></p>
+<p><%= @recruitment.schedule_two %></p>
+<p><%= @recruitment.schedule_three %></p>
+<p><%= @recruitment.prefectures %></p>
+<p><%= @recruitment.number_of_people %></p>
+<p><%= @recruitment.recruitment_gender_i18n %></p>
+<p><%= @recruitment.deadline %></p>
+
+<p><%= link_to "応募する", applications_path, method: :post %></p>
+<p><%= link_to "やっぱりやめる", recruitment_path(@recruitment.id), method: :get %></p>

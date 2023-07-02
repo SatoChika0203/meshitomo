@@ -13,15 +13,18 @@ scope module: :public do
       end
   end
   resources :recruitments do
+      member do
+        post 'confirm'   
+      end
       collection do
-        post 'confirm'
         get 'complete'
         get 'history'
+        get 'search'
       end
   end
   
   resources :applications, except: [:new, :index, :edit, :update] do
-      member do
+      collection do
         post 'cancel'
         post 'confirm'
         get 'complete'
