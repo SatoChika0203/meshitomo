@@ -19,11 +19,15 @@ class Public::RecruitmentsController < ApplicationController
   end
   
   def show
+    @application=Application.find_by(recruitment_id: params[:id], applicant_id: current_user.id)
+    @applications=Application.where(recruitment_id: params[:id])
+    
     @recruitment=Recruitment.find(params[:id])
     if DateTime.now.after? @recruitment.deadline 
       @recruitment.is_valid.update(is_valid: false)
       # @recruitment.is_valid==false
     end
+    # @application=Application.find_by(recruitment_id: @recruitment.id, applicant_id: current_user.id)
   end
   
   def edit

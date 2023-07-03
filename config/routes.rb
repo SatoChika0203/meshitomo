@@ -6,7 +6,7 @@ devise_for :users, controllers: {
 
 scope module: :public do
   root to: 'homes#top'
-  resources :users, except: [:createra] do
+  resources :users, except: [:new, :index, :create, :destroy] do
       member do
         get 'confirm'
         patch 'withdraw'
@@ -27,10 +27,16 @@ scope module: :public do
           post 'cancel'
           post 'confirm'
           get 'complete'
-          get 'history'
+          # get 'history'
         end
       end
-  end  
+  end 
+  
+  resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do
+    collection do
+      get 'history'
+    end
+  end
   
   # resources :applications, except: [:new, :index, :edit, :update] do
   #     collection do

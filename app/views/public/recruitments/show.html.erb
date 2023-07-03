@@ -16,10 +16,21 @@
 <p><%= @recruitment.deadline %></p>
 
 <% if @recruitment.user_id != current_user.id %>
-<p><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
+    <% if @application.applicant_id.include?(current_user.id) %>
+    <!--current_user.find_by(id: @application.applicant_id)-->
+    <p><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
+    <% else %>
+    <p><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
+    <% end %>
 <% end %>
 
 <% if @recruitment.user_id == current_user.id %>
 <p><%= link_to "編集", edit_recruitment_path %></p>
 <p><%= link_to '削除', recruitment_path(@recruitment.id), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
+
+<p>応募者が来ました！どなたと一緒に行きますか？（行きた人全員にチェックボックスを入れてください）</p>
+    <% @applications.each do |application| %>
+        <p><%= link_to application.user.nickname, user_path(@applications.user.id) %></p>
+        <p><%= application.message %></p>
+    <% end %>
 <% end %>

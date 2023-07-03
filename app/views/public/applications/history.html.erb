@@ -1,0 +1,9 @@
+<h2>応募履歴</h2>
+
+<% @applications.each do |application| %>
+  <p><%= application.recruitments.title %></p>
+  <p><%= application.recruitments.schedule_one %></p>
+  <p><%= application.recruitments.schedule_two %></p>
+  <p><%= application.recruitments.schedule_three %></p>
+  <p><%= application.message %></p>
+<% end %>
