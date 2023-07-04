@@ -22,11 +22,12 @@ scope module: :public do
         get 'history'
         get 'search'
       end
-      resource :applications, except: [:new, :index, :edit, :update] do
+      resource :applications, except: [:new, :index, :edit, :update, :destroy] do
         collection do
           post 'cancel'
           post 'confirm'
           get 'complete'
+          patch 'withdraw'
           # get 'history'
         end
       end

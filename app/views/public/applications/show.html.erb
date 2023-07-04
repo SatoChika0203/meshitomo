@@ -1,0 +1,38 @@
+応募履歴
+<% if @recruitment.user.image.attached? %>
+<p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
+<% else %>
+<p><%= image_tag 'no_image', size: "200x200" %></p>
+<% end %>
+<p><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
+<p><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %></p>
+<p><%= @recruitment.introduction %></p>
+<p><%= @recruitment.schedule_one %></p>
+<p><%= @recruitment.schedule_two %></p>
+<p><%= @recruitment.schedule_three %></p>
+<p><%= @recruitment.prefectures %></p>
+<p><%= @recruitment.number_of_people %></p>
+<p><%= @recruitment.recruitment_gender_i18n %></p>
+<p><%= @recruitment.deadline %></p>
+
+<p>メッセージ</p>
+<p><%= @application.message %></p>
+
+<p>提示スケジュール</p>
+<p><%= @application.schedule_one %></p>
+<p><%= @application.schedule_two %></p>
+<p><%= @application.schedule_three %></p>
+
+<p>応募状況</p>
+<% if @application.is_valid==true %>
+  <p>応募中</p>
+<% else %>
+  <p>キャンセル済み</p>
+<% end %>
+
+<p>募集状況</p>
+<% if @application.recruitment.is_valid==true %>
+  <p>募集中</p>
+<% else %>
+  <p>募集終了</p>
+<% end %>

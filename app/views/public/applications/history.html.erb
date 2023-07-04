@@ -6,4 +6,9 @@
   <p><%= application.recruitment.schedule_two %></p>
   <p><%= application.recruitment.schedule_three %></p>
   <p><%= application.message %></p>
+  <% if application.recruitment.is_valid==true %>
+    <p>募集中</p>
+  <% else %>
+    <p>募集終了</p>
+  <% end %>
 <% end %>

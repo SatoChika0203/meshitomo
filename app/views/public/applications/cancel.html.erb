@@ -1,4 +1,4 @@
 <h2>本当にキャンセルしますか？</h2>
 
-<p><%= link_to "はい", recruitment_applications_path(@recruitment.id), method: :delete %></p>
+<p><%= link_to "はい", withdraw_recruitment_applications(@recruitment.id), method: :patch %></p>
 <p><%= link_to "やっぱりやめます", recruitment_applications_path(@recruitment.id), method: :get %></p>

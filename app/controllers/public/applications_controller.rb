@@ -25,17 +25,21 @@ def history
 end
 
 def show
+  @recruitment=Recruitment.find_by(id: params[:recruitment_id])
+  @application=Application.find_by(recruitment_id: params[:recruitment_id], applicant_id: current_user.id)
 end
 
 def cancel
   @recruitment=Recruitment.find_by(id: params[:recruitment_id])
 end
 
-def destroy
+def withdraw
   recruitment=Recruitment.find_by(id: params[:recruitment_id])
   # application=Application.find_by(recruitment_id: recruitment.id, applicant_id: current_user.id)
   application=Application.find_by(recruitment_id: params[:recruitment_id], applicant_id: current_user.id)
-  application.destroy
+  application.update(is_valid: false)
+
+  # application.destroy
   redirect_to recruitment_applications_path(recruitment.id)
 end
 

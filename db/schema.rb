@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_02_120658) do
+ActiveRecord::Schema.define(version: 2023_07_04_153839) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2023_07_02_120658) do
     t.boolean "is_approval", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_valid", default: true, null: false
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
     t.index ["recruitment_id"], name: "index_applications_on_recruitment_id"
   end
