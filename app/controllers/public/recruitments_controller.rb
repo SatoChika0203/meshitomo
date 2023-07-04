@@ -19,7 +19,7 @@ class Public::RecruitmentsController < ApplicationController
   end
   
   def show
-    @application=Application.find_by(recruitment_id: params[:id], applicant_id: current_user.id)
+    # @application=Application.find_by(recruitment_id: params[:id], applicant_id: current_user.id)
     @applications=Application.where(recruitment_id: params[:id])
     
     @recruitment=Recruitment.find(params[:id])

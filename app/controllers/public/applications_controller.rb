@@ -9,7 +9,10 @@ def create
   @recruitment=Recruitment.find_by(id: params[:recruitment_id])
   application=Application.new(application_params)
   # application.save(recruitment_id: @recruitment.id, applicant_id: current_user.id)
-  application.save(recruitment_id: params[:recruitment_id], applicant_id: current_user.id)
+  application.recruitment_id=@recruitment.id
+  application.applicant_id=current_user.id
+  application.save
+  # application.save(recruitment_id: params[:recruitment_id], applicant_id: current_user.id)
   redirect_to complete_recruitment_applications_path
 end
 

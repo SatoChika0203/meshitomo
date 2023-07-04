@@ -16,8 +16,7 @@
 <p><%= @recruitment.deadline %></p>
 
 <% if @recruitment.user_id != current_user.id %>
-    <% if @application.applicant_id.include?(current_user.id) %>
-    <!--current_user.find_by(id: @application.applicant_id)-->
+    <% if @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
     <p><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
     <% else %>
     <p><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
