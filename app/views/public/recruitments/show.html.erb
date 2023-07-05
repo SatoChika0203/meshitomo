@@ -27,9 +27,17 @@
 <p><%= link_to "編集", edit_recruitment_path %></p>
 <p><%= link_to '削除', recruitment_path(@recruitment.id), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
 
-<p>応募者が来ました！どなたと一緒に行きますか？（行きた人全員にチェックボックスを入れてください）</p>
-    <% @applications.each do |application| %>
-        <p><%= link_to application.user.nickname, user_path(@applications.user.id) %></p>
+<p>応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
+        <% @applications.each do |application| %>
+        <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id),method: :post do |application| %>
+        <%= application.check_box :applicant_id, {class: "check_box"}, true, false %>
+        <% end %>
+        <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
         <p><%= application.message %></p>
+        <p><%= application.schedule_one %></p>
+        <p><%= application.schedule_two %></p>
+        <p><%= application.schedule_three %></p>
     <% end %>
+    <%= link_to "次へ進む", confirm_recruitment_path(@recruitment.id), method: :post %>
 <% end %>
+

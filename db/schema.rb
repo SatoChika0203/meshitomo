@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_04_153839) do
+ActiveRecord::Schema.define(version: 2023_07_05_164333) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,20 @@ ActiveRecord::Schema.define(version: 2023_07_04_153839) do
     t.boolean "is_valid", default: true, null: false
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
     t.index ["recruitment_id"], name: "index_applications_on_recruitment_id"
+  end
+
+  create_table "chat_group_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "chat_group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chat_groups", force: :cascade do |t|
+    t.integer "recruitment_id", null: false
+    t.integer "is_valid", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "public_applications", force: :cascade do |t|
