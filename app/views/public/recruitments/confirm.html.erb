@@ -1,1 +1,9 @@
 応募者選択の確認
+
+<% @chat_group.chat_group_users.each do |chat_group_user| %>
+<%= chat_group_user.user.nickname %>
+<% end %>
+<%= form_for @chat_group, url: generate_recruitment_path(@chat_group.recruitment_id) do |f| %>
+    <%= f.hidden_field :user_ids, value: @chat_group.chat_group_users.map(&:user_id).join(',') %>
+    <%= f.submit 'submit' %>
+<% end %>

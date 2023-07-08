@@ -1,6 +1,7 @@
 <h2>さあ、まだ見ぬ仲間たちと食事を共にしましょう。</h2>
 
 <% @recruitments.each do |recruitment| %>
+<% if recruitment.is_valid==true %>
 <% if recruitment.user.image.attached? %>
 <p><%= image_tag recruitment.user.image, size: "100x100" %></p>
 <% else %>
@@ -14,4 +15,5 @@
 <p><%= recruitment.schedule_three %></p>
 <p>募集期限</p>
 <p><%= recruitment.deadline %></p>
+<% end %>
 <% end %>

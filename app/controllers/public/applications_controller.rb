@@ -37,10 +37,11 @@ def withdraw
   recruitment=Recruitment.find_by(id: params[:recruitment_id])
   # application=Application.find_by(recruitment_id: recruitment.id, applicant_id: current_user.id)
   application=Application.find_by(recruitment_id: params[:recruitment_id], applicant_id: current_user.id)
-  application.update(is_valid: false)
+  # application.update(is_valid: false)
 
-  # application.destroy
-  redirect_to recruitment_applications_path(recruitment.id)
+  application.destroy
+  redirect_to recruitment_path(recruitment.id)
+  # redirect_to recruitment_applications_path(recruitment.id)
 end
 
 end

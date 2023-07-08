@@ -15,7 +15,8 @@ scope module: :public do
   
   resources :recruitments do
       member do
-        post 'confirm'   
+        post 'confirm' 
+        post 'generate' 
       end
       collection do
         get 'complete'
