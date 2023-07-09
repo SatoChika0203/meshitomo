@@ -7,7 +7,7 @@
 <% else %>
 <p><%= image_tag 'no_image', size: "200x200" %></p>
 <% end %>
-<p><%= link_to recruitment.user.name, user_path(recruitment.user.id) %></p>
+<p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
 <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
 <p>希望日</p>
 <p><%= recruitment.schedule_one %></p>

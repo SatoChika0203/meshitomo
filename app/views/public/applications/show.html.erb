@@ -24,10 +24,14 @@
 <p><%= @application.schedule_three %></p>
 
 <p>応募状況</p>
-<% if @application.is_valid==true %>
+<% if @application.is_valid==true && @application.is_approval.blank? %>
   <p>応募済み</p>
-<% else %>
+<% elsif @application.is_valid==false && @application.is_approval.blank? %>
   <p>キャンセル済み</p>
+<% elsif @application.is_approval==true %>
+  <p>応募が承認されました！メッセージをしてみましょう</p>
+<% else @application.is_approval==false %>
+  <p>応募締め切り</p>
 <% end %>
 
 <p>募集状況</p>

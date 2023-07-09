@@ -22,6 +22,8 @@ class Public::RecruitmentsController < ApplicationController
     @applications=Application.where(recruitment_id: params[:id])
     @recruitment=Recruitment.find(params[:id])
     @chat_group_user=ChatGroupUser.new
+    chat_group=ChatGroup.where(recruitment_id: params[:id])
+    @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
     if DateTime.now.after? @recruitment.deadline
       # @recruitment.is_valid.update(is_valid: false)
       @recruitment.is_valid==false
@@ -56,7 +58,7 @@ class Public::RecruitmentsController < ApplicationController
 
   def generate
     user_ids = params[:chat_group][:user_ids].split(',').map(&:to_i)
-    ActiveRecord::Base.transaction do
+    ActiveRecord::Base.transaction do  #中の記述をひとまとめに実行する。何か1つでも実行されなかったら終了
       Recruitment.find(params[:id]).update(is_valid: false)
       Application.where(recruitment_id: params[:id]).update_all(is_valid: false)
       Application.where(recruitment_id: params[:id], applicant_id: user_ids).update_all(is_approval: true)
@@ -80,8 +82,8 @@ class Public::RecruitmentsController < ApplicationController
     params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline)
   end
 
-  def chat_group_user_params
-     params.permit(:user_id)
-          # params.require(:chat_group_users).permit(:user_id, keys: [:applicant_id[]])
-  end
+  # def chat_group_user_params
+  #   params.permit(:user_id)
+  #         # params.require(:chat_group_users).permit(:user_id, keys: [:applicant_id[]])
+  # end
 end
