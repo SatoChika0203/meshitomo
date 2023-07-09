@@ -20,7 +20,7 @@ scope module: :public do
       end
       collection do
         get 'complete'
-        get 'history'
+        get 'history'  #URLにid含めなくても、currentでログインユーザーの情報を表示させる
         get 'search'
       end
       resource :applications, except: [:new, :index, :edit, :update, :destroy] do
@@ -32,6 +32,7 @@ scope module: :public do
           # get 'history'
         end
       end
+      resource :chat_groups, only: [:show]
   end 
   
   resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do
@@ -49,7 +50,7 @@ scope module: :public do
   #     end
   # end
   
-  resources :chat_groups, only: [:index, :show, :create]
+  resources :chat_groups, only: [:index]
   resources :chats, only: [:create]
   resources :reviews, except: [:destroy, :edit, :update]
 end

@@ -1,6 +1,9 @@
 class Recruitment < ApplicationRecord
+  # before_destroy :validate_is_valid_false
+  
   belongs_to :user
   has_many :applications, dependent: :destroy
+  has_many :chat_groups, dependent: :destroy
   has_many :applicants, through: :applications, dependent: :destroy
   # applicationsの中にapplicants（応募者・Userに付随する）があるが、あくまで別物？
   
@@ -17,5 +20,18 @@ class Recruitment < ApplicationRecord
      徳島県:36,香川県:37,愛媛県:38,高知県:39,
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
-  }  
+  } 
+  
+  # def can_destroy?
+  #   :is_valid == false
+  # end
+  
+  # private
+  
+  # def validate_is_valid_false
+  #   return if can_destroy?
+
+  #   errors.add(:base, 'この募集は削除できません。')
+  #   throw :abort
+  # end
 end

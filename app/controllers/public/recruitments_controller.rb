@@ -44,9 +44,17 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def destroy
-    recruitment=Recruitment.find(params[:id])
-    recruitment.destroy
-    redirect_to recruitments_path
+    @applications=Application.where(recruitment_id: params[:id])
+    @recruitment=Recruitment.find(params[:id])
+    @chat_group_user=ChatGroupUser.new
+    chat_group=ChatGroup.where(recruitment_id: params[:id])
+    @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
+    
+    if @recruitment.destroy
+      redirect_to recruitments_path
+    else
+      render :show
+    end
   end
 
   def confirm
