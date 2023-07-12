@@ -20,8 +20,19 @@
         <p><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
     <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
         <p><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
-    <% else @recruitment.is_valid==false %>
+    <% elsif @recruitment.is_valid==false && @application.is_approval==false && %>
         <p>この募集は締め切られました</p>
+    <% else @recruitment.is_valid==false && @application.is_approval==true && %>
+        <p>こちらの募集は終了しました。</p>
+        <p>参加者は以下の方々です。</p>
+            <% @chat_group_users.each do |chat_group_user| %>
+                <% if chat_group_user.user.image.attached? %>
+                    <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+                <% else %>
+                    <p><%= image_tag 'no_image', size: "200x200" %></p>
+                <% end %>
+                    <p><%= chat_group_user.user.nickname %></p>
+            <% end %>
     <% end %>
 <% end %>
 

@@ -20,6 +20,7 @@ class Public::RecruitmentsController < ApplicationController
 
   def show
     @applications=Application.where(recruitment_id: params[:id])
+    @application=Application.find_by(applicant_id: current_user.id)
     @recruitment=Recruitment.find(params[:id])
     @chat_group_user=ChatGroupUser.new
     chat_group=ChatGroup.where(recruitment_id: params[:id])
