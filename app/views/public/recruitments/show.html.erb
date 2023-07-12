@@ -4,7 +4,7 @@
 <% else %>
 <p><%= image_tag 'no_image', size: "200x200" %></p>
 <% end %>
-<p><%= @recruitment.user.name %></p>
+<p><%= @recruitment.user.nickname %></p>
 <p><%= @recruitment.title %></p>
 <p><%= @recruitment.introduction %></p>
 <p><%= @recruitment.schedule_one %></p>
@@ -28,7 +28,7 @@
 <% if @recruitment.user_id == current_user.id %>
     <p><%= link_to "編集", edit_recruitment_path %></p>
     <p><%= link_to '削除', recruitment_path(@recruitment.id), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
-    
+
         <% if @recruitment.is_valid == true && @applications.present? %>
             <p>応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
                 <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id),method: :post do |f| %>
@@ -40,12 +40,12 @@
                         <p><%= application.schedule_two %></p>
                         <p><%= application.schedule_three %></p>
                     <% end %>
-    
+
                     <%= f.submit "次へ進む" %>
                 <% end %>
         <% elsif @recruitment.is_valid == true && @applications.blank? %>
             <p>まだ応募は来ていません。</p>
-        <% else @recruitment.is_valid == false %>
+        <% elsif @recruitment.is_valid == false && @applications.present? %>
             <p>こちらの募集は終了しました。</p>
             <p>参加者は以下の方々です。</p>
                <% @chat_group_users.each do |chat_group_user| %>
@@ -56,6 +56,8 @@
                     <% end %>
                         <p><%= chat_group_user.user.nickname %></p>
             　<% end %>
+        <% else @recruitment.is_valid == false && @applications.blank? %>
+            <p>参加者は集まりませんでした・・・</p>
         <% end %>
 
 <% end %>

@@ -16,12 +16,12 @@ class Public::UsersController < ApplicationController
 
   def update
     @user=User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to user_path(current_user.id)
+    @user.update(user_params)
+    redirect_to user_path(current_user.id)
       # redirect_toはgetメソッドに働く
-    else
-      render :edit
-    end
+    # else
+    #   render :edit
+    # end
   end
 
   def confirm
@@ -39,7 +39,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-  params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number, :email, :encrypted_password, :gender, :prefectures, :introduction, :is_deleted)
+  params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number, :email, :encrypted_password, :gender, :prefectures, :introduction, :is_deleted, :image)
   end
 
   def is_matching_login_user

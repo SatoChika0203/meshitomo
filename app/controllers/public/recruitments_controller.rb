@@ -51,7 +51,7 @@ class Public::RecruitmentsController < ApplicationController
     @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
     
     if @recruitment.destroy
-      redirect_to recruitments_path
+      redirect_to history_recruitments_path
     else
       render :show
     end
@@ -66,6 +66,7 @@ class Public::RecruitmentsController < ApplicationController
 
   def generate
     user_ids = params[:chat_group][:user_ids].split(',').map(&:to_i)
+    user_ids.unshift(current_user.id) #配列の先頭に要素を追加
     ActiveRecord::Base.transaction do  #中の記述をひとまとめに実行する。何か1つでも実行されなかったら終了
       Recruitment.find(params[:id]).update(is_valid: false)
       Application.where(recruitment_id: params[:id]).update_all(is_valid: false)

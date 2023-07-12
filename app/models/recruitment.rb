@@ -30,8 +30,9 @@ class Recruitment < ApplicationRecord
   
   # def validate_is_valid_false
   #   return if can_destroy?
-
+  #   if :application.present?
   #   errors.add(:base, 'この募集は削除できません。')
   #   throw :abort
+  #   end
   # end
 end

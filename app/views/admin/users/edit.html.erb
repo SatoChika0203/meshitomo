@@ -1,6 +1,10 @@
 <%= @user.name %>さんの編集画面
 
 <%= form_with model: @user, url:admin_user_path(@user.id), method: :patch do |user| %>
+<%= form_with model: @user, url:admin_user_path(@user.id), method: :patch do |user| %>
+プロフィール画像
+<%= user.file_field :image, placeholder: "プロィール画像", accept: "image/*" %>
+
 氏名
 <%= user.text_field :last_name %>
 <%= user.text_field :first_name %>

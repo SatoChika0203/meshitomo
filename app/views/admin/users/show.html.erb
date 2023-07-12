@@ -1,5 +1,10 @@
 会員詳細
 
+<% if @user.image.attached? %>
+<p><%= image_tag @user.image, size: "200x200" %></p>
+<% else %>
+<p><%= image_tag 'no_image', size: "200x200" %></p>
+<% end %>
 <%= @user.name %>
 <%= @user.name_kana %>
 <%= @user.nickname %>
