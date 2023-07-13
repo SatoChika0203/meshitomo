@@ -6,9 +6,9 @@
 <% end %>
 
 <div>
-    <%= @chats.each do |chat| %>
-        <% if chat_group_user.user.image.attached? %>
-            <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+    <% @chats.each do |chat| %>
+        <% if chat.user.image.attached? %>
+            <p><%= image_tag chat.user.image, size: "200x200" %></p>
         <% else %>
             <p><%= image_tag 'no_image', size: "200x200" %></p>
         <% end %> 
@@ -20,6 +20,7 @@
 <div>
     <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
         <p><%= chat.text_area :chat %></p>
+        <p><%= chat.hidden_field :chat_group_id, :value => @chat_group.id %></p>
         <p><%= chat.submit "送信" %></p>
     <% end %>
 </div>

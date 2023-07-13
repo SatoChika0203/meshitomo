@@ -14,8 +14,8 @@ class Public::ChatGroupsController < ApplicationController
     @chat_group=ChatGroup.find_by(recruitment_id: params[:recruitment_id])
     @chat_group_users=ChatGroupUser.where(chat_group_id: @chat_group.id)
     @recruitment=Recruitment.find(params[:recruitment_id])
-    @chat=Chat.new
     @chats=Chat.where(chat_group_id: @chat_group.id)
+    @chat=Chat.new
   end
   
 end
