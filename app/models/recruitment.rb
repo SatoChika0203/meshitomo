@@ -22,6 +22,12 @@ class Recruitment < ApplicationRecord
      沖縄県:47
   } 
   
+  def self.search(keyword)
+    where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])
+  end
+  
+  
+  
   # def can_destroy?
   #   :is_valid == false
   # end

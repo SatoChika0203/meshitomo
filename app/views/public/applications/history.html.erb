@@ -1,5 +1,6 @@
 <h2>応募履歴</h2>
 
+<div>
 <% @applications.each do |application| %>
   <p><%= link_to application.recruitment.title, recruitment_applications_path(application.recruitment.id) %></p>
   <p><%= application.recruitment.schedule_one %></p>
@@ -17,3 +18,5 @@
     <p>募集終了</p>
   <% end %>
 <% end %>
+</div
+<%= paginate @applications_page %>

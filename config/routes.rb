@@ -53,6 +53,7 @@ scope module: :public do
   resources :chat_groups, only: [:index]
   resources :chats, only: [:create]
   resources :reviews, except: [:destroy, :edit, :update]
+
 end
 
 devise_for :admin, skip: [:registrations, :passwords], controllers: {

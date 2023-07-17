@@ -22,6 +22,7 @@ end
 
 def history
   @applications=current_user.applications
+  @applications_page = Application.all.page(params[:page]).per(5)
 end
 
 def show

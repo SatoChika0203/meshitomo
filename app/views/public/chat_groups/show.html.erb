@@ -5,7 +5,8 @@
 <p><%= chat_group_user.user.nickname %></p>
 <% end %>
 
-<div>
+
+<div class='jscroll-div'>
     <% @chats.each do |chat| %>
         <% if chat.user.image.attached? %>
             <p><%= image_tag chat.user.image, size: "200x200" %></p>
@@ -15,7 +16,9 @@
             <p><%= chat.user.nickname %></p>
             <p><%= chat.chat %></p>
     <% end %>
+    <%= paginate @chat_pages %>
 </div>
+
 
 <div>
     <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
@@ -24,3 +27,20 @@
         <p><%= chat.submit "送信" %></p>
     <% end %>
 </div>
+
+<!--<script>-->
+<!--  $(document).on('turbolinks:load', function() {-->
+    <!--$('.jscroll-div').jscroll({ // 追加したdivのclass名と合わせる-->
+<!--      contentSelector: '.jscroll', -->
+      <!--nextSelector: '.next a',  // 次ページリンクのセレクタ-->
+<!--      loadingHtml: '読み込み中',-->
+<!--      padding: 10-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+
+<!--<style>-->
+<!--  .pagination {-->
+<!--    visibility: hidden;-->
+<!--  }-->
+<!--</style>-->

@@ -11,3 +11,19 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("@rails/ujs").start()
+require("turbolinks").start()
+require("@rails/activestorage").start()
+require("channels")
+
+require('jquery')
+
+//= require jquery
+//= require jquery_ujs
+//= require jquery.jscroll.min.js　←追加
+//= require activestorage
+//= require turbolinks
+//= require_tree .
+
+

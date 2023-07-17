@@ -1,5 +1,6 @@
 <%= current_user.name %>さんの募集履歴
 
+<div>
 <% @recruitments.each do |recruitment| %>
 <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
 <p>希望日</p>
@@ -9,3 +10,5 @@
 <p>募集期限</p>
 <p><%= recruitment.deadline %></p>
 <% end %>
+</div>
+<%= paginate @recruitments_page %>

@@ -1,6 +1,14 @@
 <h2>募集一覧</h2>
 <!--さあ、まだ見ぬ仲間たちと食事を共にしましょう-->
 
+<div class="search-form">
+  <%= form_with url: search_recruitments_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+
+
 <% @recruitments.each do |recruitment| %>
 <% if recruitment.is_valid==true %>
 <% if recruitment.user.image.attached? %>

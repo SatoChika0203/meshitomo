@@ -70,7 +70,7 @@ class Public::RecruitmentsController < ApplicationController
     user_ids.unshift(current_user.id) #配列の先頭に要素を追加
     ActiveRecord::Base.transaction do  #中の記述をひとまとめに実行する。何か1つでも実行されなかったら終了
       Recruitment.find(params[:id]).update(is_valid: false)
-      Application.where(recruitment_id: params[:id]).update_all(is_valid: false)
+      # Application.where(recruitment_id: params[:id]).update_all(is_valid: false)
       Application.where(recruitment_id: params[:id], applicant_id: user_ids).update_all(is_approval: true)
       @chat_group = ChatGroup.new(recruitment_id: params[:id])
       @chat_group.chat_group_users = user_ids.map do |user_id| ChatGroupUser.new(user_id: user_id) end
@@ -81,9 +81,16 @@ class Public::RecruitmentsController < ApplicationController
 
   def history
     @recruitments=current_user.recruitments
+    @recruitments_page = Recruitment.all.page(params[:page]).per(5)
   end
   
   def complete
+  end
+  
+  def search
+    @recruitments = Recruitment.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
   end
 
   private
