@@ -2,6 +2,7 @@ class Recruitment < ApplicationRecord
   # before_destroy :validate_is_valid_false
   
   belongs_to :user
+  belongs_to :shop
   has_many :applications, dependent: :destroy
   has_many :chat_groups, dependent: :destroy
   has_many :applicants, through: :applications, dependent: :destroy
@@ -26,6 +27,23 @@ class Recruitment < ApplicationRecord
     where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])
   end
   
+#   scope :search, -> (search_params) do      #scopeでsearchメソッドを定義。(search_params)は引数
+#     return if search_params.blank?      #検索フォームに値がなければ以下の手順は行わない
+
+#     keyword(search_params[:keyword])
+#       .check_in_from(search_params[:check_in_from])
+#       .check_in_to(search_params[:check_in_to])
+#       .prefectures_like(search_params[:prefectures])   #下記で定義しているscopeメソッドの呼び出し。「.」で繋げている
+#   end
+  
+#   scope :keyword, -> (keyword) { where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])if keyword.present? }  #scopeを定義。
+#   scope :check_in_from, -> (from) { where('? <= check_in', from) if from.present? }
+#   scope :check_in_to, -> (to) { where('check_in <= ?', to) if to.present? }
+#   #日付の範囲検索をするため、fromとtoをつけている
+#   scope :prefectures_like, -> (prefectures) { where('prefectures LIKE ?', "%#{prefectures}%") if prefectures.present? }
+# #scope :メソッド名 -> (引数) { SQL文 }
+# #if 引数.present?をつけることで、検索フォームに値がない場合は実行されない
+
   
   
   # def can_destroy?

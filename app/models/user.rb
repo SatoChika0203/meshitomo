@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
   has_many :recruitments, dependent: :destroy
   has_many :applications, foreign_key: "applicant_id", dependent: :destroy
+  has_many :user_shops, dependent: :destroy
   belongs_to :shop, optional: true
          
   enum gender: { male: 0, female: 1, other: 2 }

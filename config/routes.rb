@@ -11,12 +11,13 @@ scope module: :public do
         get 'confirm'
         patch 'withdraw'
       end
+      resources :user_shops, only: [:index]
   end
-  
+
   resources :recruitments do
       member do
-        post 'confirm' 
-        post 'generate' 
+        post 'confirm'
+        post 'generate'
       end
       collection do
         get 'complete'
@@ -33,28 +34,25 @@ scope module: :public do
         end
       end
       resource :chat_groups, only: [:show]
-  end 
-  
+  end
+
   resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do
     collection do
       get 'history'
     end
   end
-  
-  # resources :applications, except: [:new, :index, :edit, :update] do
-  #     collection do
-  #       post 'cancel'
-  #       post 'confirm'
-  #       get 'complete'
-  #       get 'history'
-  #     end
-  # end
-  
+
   resources :chat_groups, only: [:index]
   resources :chats, only: [:create]
   resources :reviews, except: [:destroy, :edit, :update]
-
+  resources :shops do
+    collection do
+      get 'search'
+    end
+    resource :user_shops, only: [:index, :create, :destroy]
+  end
 end
+
 
 devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"

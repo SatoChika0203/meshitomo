@@ -2,9 +2,11 @@
 <!--さあ、まだ見ぬ仲間たちと食事を共にしましょう-->
 
 <div class="search-form">
-  <%= form_with url: search_recruitments_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
-    <%= f.submit "検索" %>
+  <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
+    <%= search.text_field :keyword, value: @keyword %>
+    <%= search.select :prefectures, Recruitment.prefectures.keys, {} %>
+    <%= search.date_field :schedule_one %>
+    <%= search.submit "検索" %>
   <% end %>
 </div>
 

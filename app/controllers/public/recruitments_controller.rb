@@ -88,8 +88,18 @@ class Public::RecruitmentsController < ApplicationController
   end
   
   def search
+    # @search_params = recruitment_search_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
+    # @recruitments = Recruitment.search(@search_params) #Reservationモデルのsearchを呼び出し、引数としてparamsを渡している。
+    
     @recruitments = Recruitment.search(params[:keyword])
     @keyword = params[:keyword]
+    # @recruitments_search = Recruitment.order(created_at: :desc);
+    
+    # @users_recruitments = Recruitment.where(prefectures: recruitment_params[:prefectures]) if recruitment_params[:prefectures].present?
+    # @users_schedule = recruitments.where(age: user_params[:age]) if user_params[:age].present?
+    # @users_title_introduction = Recruitment.where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"]) if @keyword.present?
+    
+    # render json:{ status: 200, users: users }
     render "index"
   end
 
@@ -98,6 +108,12 @@ class Public::RecruitmentsController < ApplicationController
   def recruitment_params
     params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline)
   end
+  
+  # def recruitment_search_params
+  #   params.fetch(:recruitment, {}).permit(:keyword, :check_in_from, :check_in_to, :prefectures)
+  #   #fetch(:search, {})と記述することで、検索フォームに値がない場合はnilを返し、エラーが起こらなくなる
+  #   #ここでの:searchには、フォームから送られてくるparamsの値が入っている
+  # end
 
   # def chat_group_user_params
   #   params.permit(:user_id)
