@@ -1,12 +1,31 @@
-お店を検索する
+<h1>お気に入りのお店を探してみましょう</h1>
 
-<%= form_with url: search_shops_path, method: :get do %>
-  <%= text_field_tag :keyword, params[:keyword] %>
-  <%= submit_tag 'Search' %>
+<%= form_with url: shops_path, method: :get do %>
+  <%= label_tag 'keyword', 'Keyword:' %>
+  <%= text_field_tag 'keyword' %>
+  <%= submit_tag '検索' %>
 <% end %>
 
-<% @hotpepper_shop.each do |hotpepper_shop| %>
-  <h2><%= hotpepper_shop['name'] %></h2>
-  <p><%= hotpepper_shop['address'] %></p>
-  <!-- 他の情報を表示する場合は適宜追加してください -->
+<pre>
+  <%= @shops %>
+</pre>
+
+<% if @shops.present? %>
+  <h2>お店の検索結果</h2>
+  <ul>
+    <% @shops.each do |shop| %>
+      <li>
+        <strong><%= shop['name'] %></strong><br>
+        <%= image_tag shop['photo']['pc']['m'] %>
+        <%= shop['genre']['catch'] %><br>
+        
+        住所: <%= shop['address'] %><br>
+        アクセス: <%= shop['access'] %><br>
+        営業時間: <%= shop['open'] %><br>
+        定休日: <%= shop['close'] %><br>
+        店舗URL: <%= shop['urls']['pc'] %><br>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
+
