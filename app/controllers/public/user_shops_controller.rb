@@ -1,5 +1,8 @@
 class Public::UserShopsController < ApplicationController
   def index
+
+    
+    
   end
   
   def create

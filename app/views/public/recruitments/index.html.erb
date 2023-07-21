@@ -10,21 +10,22 @@
   <% end %>
 </div>
 
-
-<% @recruitments.each do |recruitment| %>
-<% if recruitment.is_valid==true %>
-<% if recruitment.user.image.attached? %>
-<p><%= image_tag recruitment.user.image, size: "100x100" %></p>
-<% else %>
-<p><%= image_tag 'no_image', size: "200x200" %></p>
-<% end %>
-<p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
-<p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
-<p>希望日</p>
-<p><%= recruitment.schedule_one %></p>
-<p><%= recruitment.schedule_two %></p>
-<p><%= recruitment.schedule_three %></p>
-<p>募集期限</p>
-<p><%= recruitment.deadline %></p>
-<% end %>
-<% end %>
+<div class="d-flex flex-row">
+  <% @recruitments.each do |recruitment| %>
+    <% if recruitment.is_valid==true %>
+      <div>
+        <% if recruitment.user.image.attached? %>
+          <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
+        <% else %>
+          <p><%= image_tag 'no_image', size: "80x80" %></p>
+        <% end %>
+          <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+      </div>
+      <div>
+          <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+          <p>希望日　<%= recruitment.schedule_one %>　<%= recruitment.schedule_two %>　<%= recruitment.schedule_three %></p>
+          <p>募集期限　<%= recruitment.deadline %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

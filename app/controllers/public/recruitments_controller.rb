@@ -2,6 +2,7 @@ class Public::RecruitmentsController < ApplicationController
 
   def new
     @recruitment=Recruitment.new
+
   end
 
   def create

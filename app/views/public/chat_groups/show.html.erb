@@ -2,23 +2,13 @@
 
 <p>参加者</p>
 <% @chat_group_users.each do |chat_group_user| %>
-<p><%= chat_group_user.user.nickname %></p>
+    <% if chat_group_user.user.image.attached? %>
+        <p><%= image_tag chat_group_user.user.image, size: "80x80" %></p>
+    <% else %>
+        <p><%= image_tag 'no_image', size: "80x80" %></p>
+    <% end %> 
+        <p><%= chat_group_user.user.nickname %></p>
 <% end %>
-
-
-<div class='jscroll-div'>
-    <% @chats.each do |chat| %>
-        <% if chat.user.image.attached? %>
-            <p><%= image_tag chat.user.image, size: "200x200" %></p>
-        <% else %>
-            <p><%= image_tag 'no_image', size: "200x200" %></p>
-        <% end %> 
-            <p><%= chat.user.nickname %></p>
-            <p><%= chat.chat %></p>
-    <% end %>
-    <%= paginate @chat_pages %>
-</div>
-
 
 <div>
     <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
@@ -27,6 +17,23 @@
         <p><%= chat.submit "送信" %></p>
     <% end %>
 </div>
+
+
+<div class='jscroll-div'>
+    <% @chats.each do |chat| %>
+        <% if chat.user.image.attached? %>
+            <p><%= image_tag chat.user.image, size: "80x80" %></p>
+        <% else %>
+            <p><%= image_tag 'no_image', size: "80x80" %></p>
+        <% end %> 
+            <p><%= chat.user.nickname %></p>
+            <p><%= chat.chat %></p>
+    <% end %>
+    <%= paginate @chat_pages %>
+</div>
+
+
+
 
 <!--<script>-->
 <!--  $(document).on('turbolinks:load', function() {-->

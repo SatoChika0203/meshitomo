@@ -28,15 +28,54 @@ class Public::ShopsController < ApplicationController
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
       request = Net::HTTP::Get.new(uri.request_uri)
-      
+
       response = https.request(request)
       response_body = JSON.parse(response.body) #JSON形式をparseでrails用の言語に変換する
       @shops = response_body['results']['shop'] #results>shop の階層までは記述している
+
+      @shop=Shop.new(shop_params)
     end
 
 
   end
 
+  def show
+
+  end
+  
+  def create
+  user_shop = current_user.user_shops.new(shop_params)
+  # user_shopを保存
+  user_shop.save
+  redirect_to recruitments_path
+  
+  
+    # user_shop=current_user.user_shops.new(shop_id: shop_params[:id])
+    # user_shop.id=shop_params[:id]
+    # user_shop.name=shop_params[:name]
+    # user_shop.catch=shop_params[:catch]
+    # user_shop.address=shop_params[:address]
+    # user_shop.open=shop_params[:open]
+    # user_shop.close=shop_params[:close]
+    # # user_shop.image=shop_params[:image]
+    # user_shop.urls=shop_params[:urls]
+    # user_shop.save!
+
+    
+    # @id=shop_params[:id]
+    # @name=shop_params[:name]
+    # @catch=shop_params[:catch]
+    # @address=shop_params[:address]
+    # @open=shop_params[:open]
+    # @close=shop_params[:close]
+    # @image=shop_params[:image]
+    # @urls=shop_params[:urls]
+    
+    # user_shops = current_user.user_shops.new(shop_id: @id)
+    
+    # user_shops.save
+
+  end
 
 
   def search
@@ -52,4 +91,10 @@ class Public::ShopsController < ApplicationController
     # json = Net::HTTP.get(api)
     # @result = JSON.parse(json)
   end
+end
+
+private
+
+def shop_params
+  params.permit('id', 'name', 'catch', 'address', 'open', 'close', 'image', 'urls')
 end

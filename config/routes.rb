@@ -49,7 +49,7 @@ scope module: :public do
     collection do
       get 'search'
     end
-    resource :user_shops, only: [:index, :create, :destroy]
+    resource :user_shops, only: [:create, :destroy]
   end
 end
 
