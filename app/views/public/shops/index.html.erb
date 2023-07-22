@@ -18,26 +18,20 @@
         <strong><%= link_to shop['name'], shop_path(shop['id']) %></strong><br>
         <%= image_tag shop['photo']['pc']['m'] %>
         <%= shop['genre']['catch'] %><br>
-        
+
         住所: <%= shop['address'] %><br>
         アクセス: <%= shop['access'] %><br>
         営業時間: <%= shop['open'] %><br>
         定休日: <%= shop['close'] %><br>
         店舗URL: <%= shop['urls']['pc'] %><br>
       </li>
-              <%= form_tag shops_path, method: :post do %>
-          <%= submit_tag 'お気に入りに追加' %>
-        <% end %>
-        
-        <%= form_tag shops_path, method: :post do %>
-          <%= hidden_field_tag 'name', shop['name'] %>
-          <%= hidden_field_tag 'catch', shop['genre']['catch'] %>
-          <%= hidden_field_tag 'address', shop['address'] %>
-          <%= hidden_field_tag 'open', shop['open'] %>
-          <%= hidden_field_tag 'close', shop['close'] %>
-          <%= hidden_field_tag 'urls', shop['urls']['pc'] %>
-          <%= hidden_field_tag 'image', shop['photo']['pc']['m'] %>
-          <%= submit_tag 'お気に入りに追加' %>
+
+
+        <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
+          <%= f.hidden_field :shop_name, value: shop['name'] %>
+          <%= f.hidden_field :shop_address, value: shop['address'] %>
+          <%= f.hidden_field :shop_url, value: shop['urls']['pc'] %>
+          <%= f.submit 'お気に入りに追加' %>
         <% end %>
     <% end %>
   </ul>

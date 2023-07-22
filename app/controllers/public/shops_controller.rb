@@ -33,7 +33,8 @@ class Public::ShopsController < ApplicationController
       response_body = JSON.parse(response.body) #JSON形式をparseでrails用の言語に変換する
       @shops = response_body['results']['shop'] #results>shop の階層までは記述している
 
-      @shop=Shop.new(shop_params)
+      @shop=Shop.new()
+      # @user_shop=UserShop.new()
     end
 
 
@@ -42,14 +43,15 @@ class Public::ShopsController < ApplicationController
   def show
 
   end
-  
+
   def create
-  user_shop = current_user.user_shops.new(shop_params)
+  shop = Shop.new(shop_params)
+  shop.user_id=current_user.id
   # user_shopを保存
-  user_shop.save
+  shop.save
   redirect_to recruitments_path
-  
-  
+
+
     # user_shop=current_user.user_shops.new(shop_id: shop_params[:id])
     # user_shop.id=shop_params[:id]
     # user_shop.name=shop_params[:name]
@@ -59,9 +61,9 @@ class Public::ShopsController < ApplicationController
     # user_shop.close=shop_params[:close]
     # # user_shop.image=shop_params[:image]
     # user_shop.urls=shop_params[:urls]
-    # user_shop.save!
+    # user_shop.save
 
-    
+
     # @id=shop_params[:id]
     # @name=shop_params[:name]
     # @catch=shop_params[:catch]
@@ -70,9 +72,9 @@ class Public::ShopsController < ApplicationController
     # @close=shop_params[:close]
     # @image=shop_params[:image]
     # @urls=shop_params[:urls]
-    
+
     # user_shops = current_user.user_shops.new(shop_id: @id)
-    
+
     # user_shops.save
 
   end
@@ -96,5 +98,5 @@ end
 private
 
 def shop_params
-  params.permit('id', 'name', 'catch', 'address', 'open', 'close', 'image', 'urls')
+  params.require(:shop).permit(:shop_name, :shop_address, :shop_url)
 end

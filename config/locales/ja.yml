@@ -10,3 +10,9 @@
           male_only: "男のみ"
           female_only: "女のみ"
           anyone: "誰でも可"
+  
+  ja:
+  activerecord:
+  errors:
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"

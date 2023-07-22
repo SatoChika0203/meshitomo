@@ -1,1 +1,5 @@
-<%= @name %>
+お気に入りのお店一覧
+
+<% @shops.each do |shop| %>
+  <%= shop.shop_name %>
+<% end %>

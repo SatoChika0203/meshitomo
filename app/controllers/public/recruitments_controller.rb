@@ -2,13 +2,14 @@ class Public::RecruitmentsController < ApplicationController
 
   def new
     @recruitment=Recruitment.new
-
+    # hotpepper_service = HotpepperService.new('#{ENV['SECRET_KEY']}')
+    # @hotpepper_shop = hotpepper_service.search_restaurants(params[:keyword])
   end
 
   def create
     @recruitment=Recruitment.new(recruitment_params)
     @recruitment.user_id=current_user.id
-    if @recruitment.save
+    if @recruitment.save!
       redirect_to recruitment_path(@recruitment.id)
     else
       render :new
