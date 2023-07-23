@@ -9,7 +9,7 @@ class Recruitment < ApplicationRecord
   # applicationsの中にapplicants（応募者・Userに付随する）があるが、あくまで別物？
   
   enum recruitment_gender: { male_only: 0, female_only: 1, anyone: 2 }
-  enum number_of_people: { "1~2人": 0, "3~5人": 1, "5~10人": 2, "10人以上": 3 }
+  enum number_of_people: { one_to_two: 0, three_to_five: 1, five_to_ten: 2, more_than_ten: 3 }
   enum prefectures:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

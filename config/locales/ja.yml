@@ -1,4 +1,18 @@
   ja:
+    activerecord:
+      attributes:
+        recruitment:
+          shop: 店舗
+          # view側： User.human_attribute_name :name => "名前" /　t("activerecord.attributes.user.name")と同じ
+          title: タイトル
+          introduction: 説明文
+          schedule_one: スケジュール1
+          schedule_two: スケジュール2
+          schedule_three: スケジュール3
+          prefectures: 都道府県
+          number_of_people: 募集人数
+          recruitment_gender: 募集性別
+          deadline: 募集期限
     enums:
       user:
         gender:
@@ -10,9 +24,15 @@
           male_only: "男のみ"
           female_only: "女のみ"
           anyone: "誰でも可"
-  
-  ja:
-  activerecord:
-  errors:
-    messages:
-      record_invalid: "バリデーションに失敗しました: %{errors}"
+        number_of_people:
+          one_to_two: "1~2人"
+          three_to_five: "3〜5人"
+          five_to_ten: "5〜10人"
+          more_than_ten: "10人以上"
+
+
+  # ja:
+  # activerecord:
+  # errors:
+  #   messages:
+  #     record_invalid: "バリデーションに失敗しました: %{errors}"
