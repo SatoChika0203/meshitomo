@@ -28,9 +28,17 @@
 
 
         <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
-          <%= f.hidden_field :shop_name, value: shop['name'] %>
-          <%= f.hidden_field :shop_address, value: shop['address'] %>
-          <%= f.hidden_field :shop_url, value: shop['urls']['pc'] %>
+          <%= f.hidden_field :name, value: shop['name'] %>
+          <%= f.hidden_field :address, value: shop['address'] %>
+          <%= f.hidden_field :url, value: shop['urls']['pc'] %>
+          <%= f.hidden_field :catch, value: shop['catch'] %>
+          <%= f.hidden_field :open, value: shop['open'] %>
+          <%= f.hidden_field :close, value: shop['close'] %>
+          <%= f.hidden_field :genre, value: shop['genre']['name'] %>
+          <%= f.hidden_field :budget_average, value: shop['budget']['average'] %>
+          <%= f.hidden_field :access, value: shop['access	'] %>
+          <%= f.hidden_field :parking, value: shop['parking'] %>
+          <%= f.hidden_field :img, value: shop['photo']['pc']['m'] %>
           <%= f.submit 'お気に入りに追加' %>
         <% end %>
     <% end %>

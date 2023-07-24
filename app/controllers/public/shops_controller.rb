@@ -45,38 +45,16 @@ class Public::ShopsController < ApplicationController
   end
 
   def create
-  shop = Shop.new(shop_params)
-  shop.user_id=current_user.id
-  # user_shopを保存
-  shop.save
-  redirect_to recruitments_path
-
-
-    # user_shop=current_user.user_shops.new(shop_id: shop_params[:id])
-    # user_shop.id=shop_params[:id]
-    # user_shop.name=shop_params[:name]
-    # user_shop.catch=shop_params[:catch]
-    # user_shop.address=shop_params[:address]
-    # user_shop.open=shop_params[:open]
-    # user_shop.close=shop_params[:close]
-    # # user_shop.image=shop_params[:image]
-    # user_shop.urls=shop_params[:urls]
-    # user_shop.save
-
-
-    # @id=shop_params[:id]
-    # @name=shop_params[:name]
-    # @catch=shop_params[:catch]
-    # @address=shop_params[:address]
-    # @open=shop_params[:open]
-    # @close=shop_params[:close]
-    # @image=shop_params[:image]
-    # @urls=shop_params[:urls]
-
-    # user_shops = current_user.user_shops.new(shop_id: @id)
-
-    # user_shops.save
-
+    shop = Shop.new(shop_params)
+    shop.user_id=current_user.id
+    shop.save
+    redirect_to user_user_shops_path(current_user.id)
+  end
+  
+  def destroy
+    shop = Shop.find(params[:id])
+    shop.destroy
+    redirect_to user_user_shops_path(current_user.id)
   end
 
 
@@ -98,5 +76,5 @@ end
 private
 
 def shop_params
-  params.require(:shop).permit(:shop_name, :shop_address, :shop_url)
+  params.require(:shop).permit(:name, :address, :url, :catch, :open, :close, :genre, :budget_average, :access, :parking, :img)
 end

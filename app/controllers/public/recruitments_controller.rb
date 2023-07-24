@@ -2,8 +2,7 @@ class Public::RecruitmentsController < ApplicationController
 
   def new
     @recruitment=Recruitment.new
-    # hotpepper_service = HotpepperService.new('#{ENV['SECRET_KEY']}')
-    # @hotpepper_shop = hotpepper_service.search_restaurants(params[:keyword])
+    @shops=Shop.where(user_id: current_user.id)
   end
 
   def create
@@ -31,6 +30,9 @@ class Public::RecruitmentsController < ApplicationController
       # @recruitment.is_valid.update(is_valid: false)
       @recruitment.is_valid==false
     end
+    
+    # @shop=Shop.find_by(id: params[:shop_id])
+    # :shop_id　はshowに渡されていないため使用できない
   end
 
   def edit
@@ -108,7 +110,7 @@ class Public::RecruitmentsController < ApplicationController
   private
 
   def recruitment_params
-    params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline)
+    params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline, :shop_id)
   end
   
   # def recruitment_search_params

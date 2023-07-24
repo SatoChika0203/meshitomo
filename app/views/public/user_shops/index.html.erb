@@ -1,5 +1,12 @@
 お気に入りのお店一覧
-
+<ul>
 <% @shops.each do |shop| %>
-  <%= shop.shop_name %>
+<li>
+  <p><%= image_tag shop.img %></p>
+  <p><%= shop.name %></p>
+  <p><%= shop.url %></p>
+  <p><%= shop.address %></p>
+  <p><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></p>
+</li>
 <% end %>
+</ul>

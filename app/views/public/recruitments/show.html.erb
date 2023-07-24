@@ -1,8 +1,13 @@
 募集詳細
+<p><%= image_tag @recruitment.shop.img %></p>
+<p><%= @recruitment.shop.name %></p>
+<p><%= @recruitment.shop.address %></p>
+<p><%= link_to @recruitment.shop.url, @recruitment.shop.url %></p>
+
 <% if @recruitment.user.image.attached? %>
-<p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
+<p><%= image_tag @recruitment.user.image, size: "100x100" %></p>
 <% else %>
-<p><%= image_tag 'no_image', size: "200x200" %></p>
+<p><%= image_tag 'no_image', size: "100x100" %></p>
 <% end %>
 <p><%= @recruitment.user.nickname %></p>
 <p><%= @recruitment.title %></p>
