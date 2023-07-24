@@ -26,7 +26,9 @@
         店舗URL: <%= shop['urls']['pc'] %><br>
       </li>
 
-
+      <% if @favorite_shop.present? %>
+        <p><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.id), method: :delete %></p>
+      <% else %>
         <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
           <%= f.hidden_field :name, value: shop['name'] %>
           <%= f.hidden_field :address, value: shop['address'] %>
@@ -41,6 +43,7 @@
           <%= f.hidden_field :img, value: shop['photo']['pc']['m'] %>
           <%= f.submit 'お気に入りに追加' %>
         <% end %>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

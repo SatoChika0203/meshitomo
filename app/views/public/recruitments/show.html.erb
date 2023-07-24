@@ -1,8 +1,18 @@
 募集詳細
-<p><%= image_tag @recruitment.shop.img %></p>
-<p><%= @recruitment.shop.name %></p>
-<p><%= @recruitment.shop.address %></p>
-<p><%= link_to @recruitment.shop.url, @recruitment.shop.url %></p>
+<div class="d-flex flex-row">
+    <p><%= image_tag @recruitment.shop.img %></p>
+        <div>
+            <p><strong><%= link_to @recruitment.shop.name, @recruitment.shop.url %></strong></p>
+            <p><%= @recruitment.shop.catch %></p>
+            <p><%= @recruitment.shop.genre %></p>
+            <p><%= @recruitment.shop.budget_average %></p>
+            <p><%= @recruitment.shop.address %></p>
+            <p><%= @recruitment.shop.access %></p>
+            <p><%= @recruitment.shop.parking %></p>
+            <p><%= @recruitment.shop.open %></p>
+            <p><%= @recruitment.shop.close %></p>
+        </div>
+</div>
 
 <% if @recruitment.user.image.attached? %>
 <p><%= image_tag @recruitment.user.image, size: "100x100" %></p>

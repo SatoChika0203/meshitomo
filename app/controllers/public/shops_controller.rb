@@ -5,21 +5,6 @@ class Public::ShopsController < ApplicationController
   require 'json'
 
   def index
-    # hotpepper_service = HotpepperService.new(ENV['SECRET_KEY'])
-    # @hotpepper_shop = hotpepper_service.search_restaurants(params[:keyword])
-
-    # api_key = ENV['SECRET_KEY']
-    # keyword = params[:keyword]
-
-    # response = HTTParty.get("https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=#{api_key}&keyword=#{keyword}&format=json")
-
-    # if response.code == 200
-    #   @shops = response['results']['shop']
-    # else
-    #   @shops = []
-    #   flash[:alert] = 'Failed to fetch shop data from HotPepper API.'
-    # end
-
     if params[:keyword]
       keyword = URI.encode_www_form_component(params[:keyword]) #文字列をURLとして認識できるようにする
       api_url = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=#{ENV['SECRET_KEY']}&keyword=#{keyword}&format=json"
@@ -34,7 +19,7 @@ class Public::ShopsController < ApplicationController
       @shops = response_body['results']['shop'] #results>shop の階層までは記述している
 
       @shop=Shop.new()
-      # @user_shop=UserShop.new()
+      @favorite_shop = Shop.find_by(name: @shop['name'])
     end
 
 
