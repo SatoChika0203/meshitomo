@@ -27,6 +27,10 @@ class Recruitment < ApplicationRecord
     where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])
   end
   
+  # def self.search(keyword, prefectures, schedule_one)
+  #   where(["title like? OR introduction like? OR prefectures like? OR schedule_one like?", "%#{keyword}%", "%#{keyword}%", "%#{prefectures}%", "%#{schedule_one}%"])
+  # end
+  
 #   scope :search, -> (search_params) do      #scopeでsearchメソッドを定義。(search_params)は引数
 #     return if search_params.blank?      #検索フォームに値がなければ以下の手順は行わない
 

@@ -17,6 +17,10 @@ class Public::RecruitmentsController < ApplicationController
 
   def index
     @recruitments=Recruitment.all
+    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
+    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
+    # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0)
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2)
   end
 
   def show
@@ -92,19 +96,32 @@ class Public::RecruitmentsController < ApplicationController
   end
   
   def search
-    # @search_params = recruitment_search_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
-    # @recruitments = Recruitment.search(@search_params) #Reservationモデルのsearchを呼び出し、引数としてparamsを渡している。
+    male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
+    female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
+    # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0)
+    anyone=Recruitment.where(recruitment_gender: 2)
     
-    @recruitments = Recruitment.search(params[:keyword])
+    if current_user.gender == "male"
+      @recruitments_male_only = male_only.search(params[:keyword])
+    elsif current_user.gender == "female"
+      @recruitments_female_only = female_only.search(params[:keyword])
+    else current_user.gender == "male" && "female" && "other"
+      @recruitments_anyone = anyone.search(params[:keyword])
+    end
     @keyword = params[:keyword]
-    # @recruitments_search = Recruitment.order(created_at: :desc);
-    
-    # @users_recruitments = Recruitment.where(prefectures: recruitment_params[:prefectures]) if recruitment_params[:prefectures].present?
-    # @users_schedule = recruitments.where(age: user_params[:age]) if user_params[:age].present?
-    # @users_title_introduction = Recruitment.where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"]) if @keyword.present?
-    
-    # render json:{ status: 200, users: users }
+    @prefectures = params[:prefectures]
+    @schedule_one = params[:schedule_one]
     render "index"
+    # redirect_to recruitments_path
+    
+  # 　if current_user.gender == "male"
+  #     @recruitments_male_only = Recruitment.search(params[:keyword], params[:prefectures], params[:schedule_one])
+  #   elsif current_user.gender == "female"
+  #     @recruitments_female_only = Recruitment.search(params[:keyword], params[:prefectures], params[:schedule_one])
+  #   else current_user.gender == "male" && "female" && "other"
+  #     @recruitments_anyone = Recruitment.search(params[:keyword], params[:prefectures], params[:schedule_one])
+  #   end
+    
   end
 
   private
