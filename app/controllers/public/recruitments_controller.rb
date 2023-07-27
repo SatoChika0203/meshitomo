@@ -96,8 +96,8 @@ class Public::RecruitmentsController < ApplicationController
 
   def search
     @keyword = params[:keyword]
-    @prefectures = params[:prefectures]
-    @schedule_one = params[:schedule_one]
+    @prefecture = params[:prefecture]
+    @schedule = params[:schedule]
 
     male_only = Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
     female_only = Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
@@ -106,20 +106,20 @@ class Public::RecruitmentsController < ApplicationController
     if current_user.gender == "male"
       @recruitments_male_only = male_only.search(
         params[:keyword],
-        params[:prefectures],
-        params[:schedule_one]
+        params[:prefecture],
+        params[:schedule]
       )
     elsif current_user.gender == "female"
       @recruitments_female_only = female_only.search(
         params[:keyword],
-        params[:prefectures],
-        params[:schedule_one]
+        params[:prefecture],
+        params[:schedule]
       )
     else
       @recruitments_anyone = anyone.search(
         params[:keyword],
-        params[:prefectures],
-        params[:schedule_one]
+        params[:prefecture],
+        params[:schedule]
       )
     end
 

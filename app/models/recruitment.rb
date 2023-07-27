@@ -34,7 +34,7 @@ class Recruitment < ApplicationRecord
   #   end
   # end
 
-  def self.search(keyword, prefecture, schedule_one)
+  def self.search(keyword, prefecture, schedule)
     result = Recruitment.joins(:shop).all
     if keyword.present?
       result = result.where(["recruitments.title like? OR recruitments.introduction like? OR shops.name like?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])

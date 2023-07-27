@@ -4,8 +4,8 @@
 <div class="search-form">
   <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
     <%= search.text_field :keyword, value: @keyword %>
-    <%= search.select :prefectures, Recruitment.prefectures.keys, {include_blank: 'select prefecture'} %>
-    <%= search.date_field :schedule, value: @schedule_one %>
+    <%= search.select :prefectures, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
+    <%= search.date_field :schedule, value: @schedule %>
     <%= search.submit "検索" %>
   <% end %>
 </div>

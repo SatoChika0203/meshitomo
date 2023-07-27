@@ -3,9 +3,7 @@
 <div>
 <% @applications.each do |application| %>
   <p><%= link_to application.recruitment.title, recruitment_applications_path(application.recruitment.id) %></p>
-  <p><%= application.recruitment.schedule_one %></p>
-  <p><%= application.recruitment.schedule_two %></p>
-  <p><%= application.recruitment.schedule_three %></p>
+  <p><%= application.recruitment.schedule %></p>
   <p><%= application.message %></p>
   <% if application.is_valid==true %>
     <p>応募済み</p>

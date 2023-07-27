@@ -53,6 +53,7 @@ scope module: :public do
   end
 end
 
+# __________________________
 
 devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
@@ -60,10 +61,28 @@ devise_for :admin, skip: [:registrations, :passwords], controllers: {
 
 namespace :admin do
   resources :users
-  resources :recruitments
+  
+  resources :recruitments do
+      collection do
+        get 'history'  #URLにid含めなくても、currentでログインユーザーの情報を表示させる
+      end
+      resource :chat_groups, only: [:show]
+  end
+  
   resources :chat_groups, only: [:index, :show]
+  
   resources :chats, only: [:destroy]
+  
   resources :reviews
-end
+  
+  resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do
+    collection do
+      get 'history'
+    end
+    
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+end
+
+end
+
 end
