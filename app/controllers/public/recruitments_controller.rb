@@ -16,7 +16,6 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def index
-    @recruitments=Recruitment.all
     @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
     @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
     # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0)
@@ -34,7 +33,7 @@ class Public::RecruitmentsController < ApplicationController
       # @recruitment.is_valid.update(is_valid: false)
       @recruitment.is_valid==false
     end
-    
+
     # @shop=Shop.find_by(id: params[:shop_id])
     # :shop_id　はshowに渡されていないため使用できない
   end
@@ -58,7 +57,7 @@ class Public::RecruitmentsController < ApplicationController
     @chat_group_user=ChatGroupUser.new
     chat_group=ChatGroup.where(recruitment_id: params[:id])
     @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
-    
+
     if @recruitment.destroy
       redirect_to history_recruitments_path
     else
@@ -91,37 +90,61 @@ class Public::RecruitmentsController < ApplicationController
     @recruitments=current_user.recruitments
     @recruitments_page = Recruitment.all.page(params[:page]).per(5)
   end
-  
+
   def complete
   end
-  
+
   def search
-    male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
-    female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
-    # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0)
-    anyone=Recruitment.where(recruitment_gender: 2)
-    
-    if current_user.gender == "male"
-      @recruitments_male_only = male_only.search(params[:keyword])
-    elsif current_user.gender == "female"
-      @recruitments_female_only = female_only.search(params[:keyword])
-    else current_user.gender == "male" && "female" && "other"
-      @recruitments_anyone = anyone.search(params[:keyword])
-    end
     @keyword = params[:keyword]
     @prefectures = params[:prefectures]
     @schedule_one = params[:schedule_one]
+
+    male_only = Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
+    female_only = Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
+    anyone = Recruitment.where(recruitment_gender: 2)
+
+    if current_user.gender == "male"
+      @recruitments_male_only = male_only.search(
+        params[:keyword],
+        params[:prefectures],
+        params[:schedule_one]
+      )
+    elsif current_user.gender == "female"
+      @recruitments_female_only = female_only.search(
+        params[:keyword],
+        params[:prefectures],
+        params[:schedule_one]
+      )
+    else
+      @recruitments_anyone = anyone.search(
+        params[:keyword],
+        params[:prefectures],
+        params[:schedule_one]
+      )
+    end
+
     render "index"
-    # redirect_to recruitments_path
-    
-  # 　if current_user.gender == "male"
-  #     @recruitments_male_only = Recruitment.search(params[:keyword], params[:prefectures], params[:schedule_one])
-  #   elsif current_user.gender == "female"
-  #     @recruitments_female_only = Recruitment.search(params[:keyword], params[:prefectures], params[:schedule_one])
-  #   else current_user.gender == "male" && "female" && "other"
-  #     @recruitments_anyone = Recruitment.search(params[:keyword], params[:prefectures], params[:schedule_one])
-  #   end
-    
+=begin
+    # if current_user.gender == "male"
+    #   @recruitments_male_only = male_only.search(params[:keyword])
+    # elsif current_user.gender == "female"
+    #   @recruitments_female_only = female_only.search(params[:keyword])
+    # else current_user.gender == "male" && "female" && "other"
+    #   @recruitments_anyone = anyone.search(params[:keyword])
+    # end
+    # render "index"
+
+
+    # @search_params = recruitment_search_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
+    # if current_user.gender == "male"
+    #   @recruitments_male_only = male_only.search(@search_params).joins(:user)
+    # elsif current_user.gender == "female"
+    #   @recruitments_female_only = female_only.search(@search_params).joins(:user)
+    # else current_user.gender == "male" && "female" && "other"
+    #   @recruitments_anyone = anyone.search(@search_params).joins(:user)
+    # end
+    # render "index"
+=end
   end
 
   private
@@ -129,9 +152,11 @@ class Public::RecruitmentsController < ApplicationController
   def recruitment_params
     params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline, :shop_id)
   end
-  
+
+
+
   # def recruitment_search_params
-  #   params.fetch(:recruitment, {}).permit(:keyword, :check_in_from, :check_in_to, :prefectures)
+  #   params.fetch(:recruitment, {}).permit(:keyword, :prefectures, :schedule_one)
   #   #fetch(:search, {})と記述することで、検索フォームに値がない場合はnilを返し、エラーが起こらなくなる
   #   #ここでの:searchには、フォームから送られてくるparamsの値が入っている
   # end

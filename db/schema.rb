@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_24_130655) do
+ActiveRecord::Schema.define(version: 2023_07_27_132558) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -104,10 +104,8 @@ ActiveRecord::Schema.define(version: 2023_07_24_130655) do
   create_table "recruitments", force: :cascade do |t|
     t.string "title", null: false
     t.string "introduction", null: false
-    t.date "schedule_one", null: false
-    t.date "schedule_two"
-    t.date "schedule_three"
-    t.integer "prefectures", null: false
+    t.date "schedule"
+    t.integer "prefecture", null: false
     t.integer "number_of_people", null: false
     t.integer "recruitment_gender", null: false
     t.datetime "deadline", null: false
@@ -165,7 +163,7 @@ ActiveRecord::Schema.define(version: 2023_07_24_130655) do
     t.string "telephone_number", null: false
     t.boolean "is_deleted", default: false, null: false
     t.integer "gender", null: false
-    t.integer "prefectures"
+    t.integer "prefecture"
     t.string "introduction", default: "よろしくお願いします。"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -4,8 +4,8 @@
 <div class="search-form">
   <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
     <%= search.text_field :keyword, value: @keyword %>
-    <%= search.select :prefectures, Recruitment.prefectures.keys, value: @prefectures %>
-    <%= search.date_field :schedule_one, value: @schedule_one %>
+    <%= search.select :prefectures, Recruitment.prefectures.keys, {include_blank: 'select prefecture'} %>
+    <%= search.date_field :schedule, value: @schedule_one %>
     <%= search.submit "検索" %>
   <% end %>
 </div>
@@ -21,7 +21,7 @@
           <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
           <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
           <p><%= recruitment.shop.address %></p>
-          <p>希望日　<%= recruitment.schedule_one %>　<%= recruitment.schedule_two %>　<%= recruitment.schedule_three %></p>
+          <p>希望日　<%= recruitment.schedule %></p>
           <p>募集期限　<%= recruitment.deadline %></p>
         </div>
         <div>
@@ -44,7 +44,7 @@
           <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
           <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
           <p><%= recruitment.shop.address %></p>
-          <p>希望日　<%= recruitment.schedule_one %>　<%= recruitment.schedule_two %>　<%= recruitment.schedule_three %></p>
+          <p>希望日　<%= recruitment.schedule %></p>
           <p>募集期限　<%= recruitment.deadline %></p>
         </div>
         <div>
@@ -67,7 +67,7 @@
           <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
           <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
           <p><%= recruitment.shop.address %></p>
-          <p>希望日　<%= recruitment.schedule_one %>　<%= recruitment.schedule_two %>　<%= recruitment.schedule_three %></p>
+           <p>希望日　<%= recruitment.schedule %></p>
           <p>募集期限　<%= recruitment.deadline %></p>
         </div>
         <div>

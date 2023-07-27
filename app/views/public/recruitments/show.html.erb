@@ -22,10 +22,8 @@
 <p><%= @recruitment.user.nickname %></p>
 <p><%= @recruitment.title %></p>
 <p><%= @recruitment.introduction %></p>
-<p><%= @recruitment.schedule_one %></p>
-<p><%= @recruitment.schedule_two %></p>
-<p><%= @recruitment.schedule_three %></p>
-<p><%= @recruitment.prefectures %></p>
+<p><%= @recruitment.schedule %></p>
+<p><%= @recruitment.prefecture %></p>
 <p><%= @recruitment.number_of_people_i18n %></p>
 <p><%= @recruitment.recruitment_gender_i18n %></p>
 <p><%= @recruitment.deadline %></p>
@@ -62,9 +60,7 @@
                         <%= f.check_box :user_ids, {:multiple => true}, application.applicant_id.to_s, false %>
                         <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
                         <p><%= application.message %></p>
-                        <p><%= application.schedule_one %></p>
-                        <p><%= application.schedule_two %></p>
-                        <p><%= application.schedule_three %></p>
+                        <p><%= application.schedule %></p>
                     <% end %>
 
                     <%= f.submit "次へ進む" %>

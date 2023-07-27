@@ -38,7 +38,7 @@
 <%= user.label :gender_other, User.genders_i18n[:other] %>
 
 都道府県
-<%= user.select :prefectures, User.prefectures.keys, {} %>
+<%= user.select :prefecture, User.prefecture.keys, {} %>
 
 <%= user.submit "更新する" %>
 <%end%>

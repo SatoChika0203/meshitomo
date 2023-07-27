@@ -12,7 +12,7 @@
         <p><%= @user.nickname %></p>
         <p><%= @user.introduction %></p>
         <p><%= @user.gender_i18n %></p>
-        <p><%= @user.prefectures %></p>
+        <p><%= @user.prefecture %></p>
     
     <% if @user.id == current_user.id %>
         <p><%= @user.name %></p>
@@ -32,9 +32,7 @@
             <% @recruitments.each do |recruitment| %>
                 <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
                 <p>希望日</p>
-                <p><%= recruitment.schedule_one %></p>
-                <p><%= recruitment.schedule_two %></p>
-                <p><%= recruitment.schedule_three %></p>
+                <p><%= recruitment.schedule %></p>
                 <p>募集期限</p>
                 <p><%= recruitment.deadline %></p>
             <% end %>
