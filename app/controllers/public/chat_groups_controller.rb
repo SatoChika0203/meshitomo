@@ -6,8 +6,8 @@ class Public::ChatGroupsController < ApplicationController
     # end
     # @chat_groups=ChatGroup.where(recruitment_id: params[:id])
     
-     @chat_group_users=current_user.chat_group_users
-     @chat_groups=ChatGroup.where(id: @chat_group_users.pluck(:chat_group_id))
+    @chat_group_users=current_user.chat_group_users
+    @chat_groups=ChatGroup.where(id: @chat_group_users.pluck(:chat_group_id))
   end
   
   def show

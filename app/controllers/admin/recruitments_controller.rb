@@ -5,7 +5,11 @@ class Admin::RecruitmentsController < ApplicationController
   end
   
   def show
+    @applications=Application.where(recruitment_id: params[:id])
+    # @application=Application.find_by(applicant_id: current_user.id)
     @recruitment=Recruitment.find(params[:id])
+    chat_group=ChatGroup.where(recruitment_id: params[:id])
+    @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
   end
   
   def edit
@@ -22,10 +26,29 @@ class Admin::RecruitmentsController < ApplicationController
     end
   end
   
+  def destroy
+    @applications=Application.where(recruitment_id: params[:id])
+    @recruitment=Recruitment.find(params[:id])
+    @chat_group_user=ChatGroupUser.new
+    chat_group=ChatGroup.where(recruitment_id: params[:id])
+    @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
+
+    if @recruitment.destroy
+      redirect_to history_recruitments_path
+    else
+      render :show
+    end
+  end
+  
+  def history
+    @recruitments=current_user.recruitments
+    @recruitments_page = Recruitment.all.page(params[:page]).per(5)
+  end
+  
   private
   
   def recruitment_params
-  params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline, :is_valid)
+    params.require(:recruitment).permit(:title, :introduction, :schedule, :prefecture, :number_of_people, :recruitment_gender, :deadline, :shop_id)
   end
   
 end

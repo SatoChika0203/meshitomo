@@ -1,18 +1,43 @@
 会員詳細
 
-<% if @user.image.attached? %>
-<p><%= image_tag @user.image, size: "200x200" %></p>
-<% else %>
-<p><%= image_tag 'no_image', size: "200x200" %></p>
-<% end %>
-<%= @user.name %>
-<%= @user.name_kana %>
-<%= @user.nickname %>
-<%= @user.introduction %>
-<%= @user.adress_all %>
-<%= @user.telephone_number %>
-<%= @user.gender_i18n %>
-<%= @user.prefectures %>
-<%= @user.is_deleted %>
+<div class="d-flex flex-row">
+    <div>
+    <% if @user.image.attached? %>
+        <p><%= image_tag @user.image, size: "200x200" %></p>
+    <% else %>
+        <p><%= image_tag 'no_image', size: "200x200" %></p>
+    <% end %>
+    </div>
+    <div>
+        <p><%= @user.name %></p>
+        <p><%= @user.name_kana %></p>
+        <p><%= @user.adress_all %></p>
+        <p><%= @user.telephone_number %></p>
+        <p><%= @user.nickname %></p>
+        <p><%= @user.introduction %></p>
+        <p><%= @user.gender_i18n %></p>
+        <p><%= @user.prefecture %></p>
+        <% if @user.is_deleted == true %>
+          <p>退会中</p>
+        <% else %>
+          <p>有効</p>
+        <% end %>
 
-<%= link_to "編集", edit_admin_user_path(@user.id), method: :get %>
+        <p><%= link_to "編集", edit_user_path(@user.id) %></p>
+    </div>
+</div>
+
+<div>
+<p><%= @user.name %>さんの募集一覧</p>
+    <% if @recruitments.exists? %>
+        <% @recruitments.each do |recruitment| %>
+          <p><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></p>
+          <p>希望日</p>
+          <p><%= recruitment.schedule %></p>
+          <p>募集期限</p>
+          <p><%= recruitment.deadline %></p>
+        <% end %>
+    <% else %>
+          <p>まだ募集はありません…</p>
+    <% end %>
+</div>

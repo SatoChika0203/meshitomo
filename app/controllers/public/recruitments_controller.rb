@@ -73,6 +73,7 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def generate
+    recruitment=Recruitment.find(params[:id])
     user_ids = params[:chat_group][:user_ids].split(',').map(&:to_i)
     user_ids.unshift(current_user.id) #配列の先頭に要素を追加
     ActiveRecord::Base.transaction do  #中の記述をひとまとめに実行する。何か1つでも実行されなかったら終了
@@ -83,15 +84,16 @@ class Public::RecruitmentsController < ApplicationController
       @chat_group.chat_group_users = user_ids.map do |user_id| ChatGroupUser.new(user_id: user_id) end
       @chat_group.save
     end
-    redirect_to  complete_recruitments_path
+    redirect_to  complete_recruitments_path(recruitment.id)
+  end
+  
+  def complete
+    @recruitment=Recruitment.find(params[:id])
   end
 
   def history
     @recruitments=current_user.recruitments
     @recruitments_page = Recruitment.all.page(params[:page]).per(5)
-  end
-
-  def complete
   end
 
   def search
@@ -150,7 +152,7 @@ class Public::RecruitmentsController < ApplicationController
   private
 
   def recruitment_params
-    params.require(:recruitment).permit(:title, :introduction, :schedule_one, :schedule_two, :schedule_three, :prefectures, :number_of_people, :recruitment_gender, :deadline, :shop_id)
+    params.require(:recruitment).permit(:title, :introduction, :schedule, :prefecture, :number_of_people, :recruitment_gender, :deadline, :shop_id)
   end
 
 

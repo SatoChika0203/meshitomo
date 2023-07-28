@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user=User.find(params[:id])
+    @recruitments = Recruitment.where(user_id: @user.id)
   end
   
   def edit
@@ -19,6 +20,13 @@ class Admin::UsersController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def withdraw
+    current_user.update(is_deleted: true)
+    # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
+    reset_session
+    redirect_to root_path
   end
   
   private

@@ -60,7 +60,9 @@
                         <%= f.check_box :user_ids, {:multiple => true}, application.applicant_id.to_s, false %>
                         <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
                         <p><%= application.message %></p>
-                        <p><%= application.schedule %></p>
+                        <p><%= application.schedule_one %></p>
+                        <p><%= application.schedule_two %></p>
+                        <p><%= application.schedule_three %></p>
                     <% end %>
 
                     <%= f.submit "次へ進む" %>

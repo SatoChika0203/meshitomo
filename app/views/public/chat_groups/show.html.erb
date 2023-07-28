@@ -1,14 +1,16 @@
 <h2><%= @recruitment.title %>のメッセージグループです</h2>
 
-<p>参加者</p>
-<% @chat_group_users.each do |chat_group_user| %>
-    <% if chat_group_user.user.image.attached? %>
-        <p><%= image_tag chat_group_user.user.image, size: "80x80" %></p>
-    <% else %>
-        <p><%= image_tag 'no_image', size: "80x80" %></p>
-    <% end %> 
-        <p><%= chat_group_user.user.nickname %></p>
-<% end %>
+<h4>参加者</h4>
+<div class="d-flex flex-row">
+    <% @chat_group_users.each do |chat_group_user| %>
+        <% if chat_group_user.user.image.attached? %>
+            <p><%= image_tag chat_group_user.user.image, size: "80x80" %></p>
+        <% else %>
+            <p><%= image_tag 'no_image', size: "80x80" %></p>
+        <% end %> 
+            <p><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user.id) %></p>
+    <% end %>
+</div>
 
 <div>
     <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>

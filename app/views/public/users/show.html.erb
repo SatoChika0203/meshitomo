@@ -29,12 +29,16 @@
 <div>
     <% if @user.id != current_user.id %>
         <h3><%= @user.nickname %>さんと食事に行きませんか？</h3>
-            <% @recruitments.each do |recruitment| %>
-                <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
-                <p>希望日</p>
-                <p><%= recruitment.schedule %></p>
-                <p>募集期限</p>
-                <p><%= recruitment.deadline %></p>
-            <% end %>
+                <% if @recruitments.exists? %>
+                    <% @recruitments.each do |recruitment| %>
+                        <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+                        <p>希望日</p>
+                        <p><%= recruitment.schedule %></p>
+                        <p>募集期限</p>
+                        <p><%= recruitment.deadline %></p>
+                    <% end %>
+                <% else %>
+                        <p>まだ募集はありません…</p>
+                <% end %>
     <% end %>
 </div>

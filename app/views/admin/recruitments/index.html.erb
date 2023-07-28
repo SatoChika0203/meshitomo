@@ -1,11 +1,32 @@
 <h2>募集一覧</h2>
 
-<% @recruitments.each do |recruitment| %>
-        <%= recruitment.shop.name %>
-        <%= recruitment.title %>
-        <%= recruitment.schedule %>
-        <%= recruitment.deadline %>
-        
-        <%= link_to "詳細", admin_recruitment_path(recruitment.id), method: :get %>
-<%end%>
+<div class="d-flex flex-row">
+  <% @recruitments.each do |recruitment| %>
+      <div>
+        <p><%= image_tag recruitment.shop.img %></p>
+      </div>
+      <div>
+        <p><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></p>
+        <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+        <p><%= recruitment.shop.address %></p>
+        <p>希望日　<%= recruitment.schedule %></p>
+        <p>募集期限　<%= recruitment.deadline %></p>
+        <% if recruitment.is_valid==true %>
+          <p>募集中</p>
+        <% else %>
+          <p>募集終了</p>
+        <% end %>
+      </div>
+      
+      <div>
+        <% if recruitment.user.image.attached? %>
+          <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
+        <% else %>
+          <p><%= image_tag 'no_image', size: "80x80" %></p>
+        <% end %>
+          <p><%= link_to recruitment.user.nickname, admin_user_path(recruitment.user.id) %></p>
+      </div>
+  <% end %>
+</div>
+
 

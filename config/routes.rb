@@ -18,9 +18,9 @@ scope module: :public do
       member do
         post 'confirm'
         post 'generate'
+        get 'complete'
       end
       collection do
-        get 'complete'
         get 'history'  #URLにid含めなくても、currentでログインユーザーの情報を表示させる
         get 'search'
       end
@@ -60,7 +60,12 @@ devise_for :admin, skip: [:registrations, :passwords], controllers: {
 }
 
 namespace :admin do
-  resources :users
+  resources :users do
+      member do
+        patch 'withdraw'
+      end
+      resources :user_shops, only: [:index]
+  end
   
   resources :recruitments do
       collection do
