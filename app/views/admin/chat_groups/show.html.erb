@@ -1,4 +1,4 @@
-<h2><%= @recruitment.title %>のメッセージグループです</h2>
+<h2><%= link_to @recruitment.title, admin_recruitment_path(@recruitment.id) %>のメッセージグループです</h2>
 
 <h4>参加者</h4>
 <div class="d-flex flex-row">
@@ -12,15 +12,6 @@
     <% end %>
 </div>
 
-<div>
-    <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
-        <p><%= chat.text_area :chat %></p>
-        <p><%= chat.hidden_field :chat_group_id, :value => @chat_group.id %></p>
-        <p><%= chat.submit "送信" %></p>
-    <% end %>
-</div>
-
-
 <div class='jscroll-div'>
     <% @chats.each do |chat| %>
         <% if chat.user.image.attached? %>
@@ -30,6 +21,7 @@
         <% end %> 
             <p><%= chat.user.nickname %></p>
             <p><%= chat.chat %></p>
+            <p><%= link_to "削除する", admin_chat_path(chat.id), method: :delete %></p>
     <% end %>
     <%= paginate @chat_pages %>
 </div>

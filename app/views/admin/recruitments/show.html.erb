@@ -20,7 +20,7 @@
 <% else %>
 <p><%= image_tag 'no_image', size: "100x100" %></p>
 <% end %>
-<p><%= @recruitment.user.nickname %></p>
+<p><%= link_to @recruitment.user.name, admin_user_path(@recruitment.user.id) %></p>
 <p><%= @recruitment.title %></p>
 <p><%= @recruitment.introduction %></p>
 <p><%= @recruitment.schedule %></p>
@@ -31,19 +31,20 @@
 
 <p><%= link_to "編集", edit_recruitment_path %></p>
 <p><%= link_to '削除', recruitment_path(@recruitment.id), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
-  
+
 
 <% if @recruitment.is_valid==false %>
     <p>こちらの募集は終了しました。</p>
     <p>参加者は以下の方々です。</p>
         <% @chat_group_users.each do |chat_group_user| %>
             <% if chat_group_user.user.image.attached? %>
-                <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+                <p><%= image_tag chat_group_user.user.image, size: "100x100" %></p>
             <% else %>
-                <p><%= image_tag 'no_image', size: "200x200" %></p>
+                <p><%= image_tag 'no_image', size: "100x100" %></p>
             <% end %>
-                <p><%= chat_group_user.user.nickname %></p>
+                <p><%= link_to chat_group_user.user.name, admin_user_path(chat_group_user.user_id) %></p>
         <% end %>
+    <p><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(@recruitment.id) %></p>
 <% else %>
     <p>募集中</p>
 <% end %>

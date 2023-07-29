@@ -1,0 +1,24 @@
+<h2><%= @user.name %>さんの募集履歴</h2>
+
+<div>
+  <% if @recruitments.exists? %>
+    <% @recruitments.each do |recruitment| %>
+    <p><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></p>
+    <p><%= image_tag recruitment.shop.img %></p>
+    <p><%= recruitment.shop.name %></p>
+    <p>希望日</p>
+    <p><%= recruitment.schedule %></p>
+    <p>募集期限</p>
+    <p><%= recruitment.deadline %></p>
+    <% if recruitment.user.image.attached? %>
+      <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
+    <% else %>
+      <p><%= image_tag 'no_image', size: "80x80" %></p>
+    <% end %>
+    <p><%= link_to recruitment.user.name, admin_user_path(recruitment.user.id) %></p>
+    <% end %>
+  <% else %>
+    <p>まだ募集はありません。</p>
+  <% end %>
+</div>
+<%= paginate @recruitments_page %>

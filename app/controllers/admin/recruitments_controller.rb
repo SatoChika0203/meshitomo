@@ -41,7 +41,8 @@ class Admin::RecruitmentsController < ApplicationController
   end
   
   def history
-    @recruitments=current_user.recruitments
+    @user=User.find(params[:user_id])
+    @recruitments=Recruitment.where(user_id: params[:user_id])
     @recruitments_page = Recruitment.all.page(params[:page]).per(5)
   end
   

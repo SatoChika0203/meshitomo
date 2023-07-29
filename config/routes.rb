@@ -66,16 +66,24 @@ namespace :admin do
         patch 'withdraw'
       end
       resources :user_shops, only: [:index]
+      resources :chat_groups, only: [:index]
+      resource :recruitments, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
+        collection do
+          get 'history'  
+        end 
+      end
+      resource :applications, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
+        collection do
+          get 'history'
+        end
+      end
   end
   
   resources :recruitments do
-      collection do
-        get 'history'  #URLにid含めなくても、currentでログインユーザーの情報を表示させる
-      end
       resource :chat_groups, only: [:show]
   end
   
-  resources :chat_groups, only: [:index, :show]
+  resources :chat_groups, only: [:index]
   
   resources :chats, only: [:destroy]
   

@@ -24,7 +24,10 @@
         <% end %>
 
         <p><%= link_to "編集", edit_admin_user_path(@user.id) %></p>
-        <p><%= link_to "メッセージグループ一覧", </p>
+        <p><%= link_to "募集履歴", history_admin_user_recruitments_path(@user.id) %></p>
+        <p><%= link_to "応募履歴", history_admin_user_applications_path(@user.id) %></p>
+        <p><%= link_to "所属メッセージグループ一覧", admin_user_chat_groups_path(@user.id) %></p>
+        <p><%= link_to "お気に入りの店", admin_user_user_shops_path(@user.id) %></p>       
     </div>
 </div>
 
