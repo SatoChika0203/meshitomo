@@ -50,20 +50,27 @@ class Public::RecruitmentsController < ApplicationController
       render :edit
     end
   end
-
-  def destroy
-    @applications=Application.where(recruitment_id: params[:id])
-    @recruitment=Recruitment.find(params[:id])
-    @chat_group_user=ChatGroupUser.new
-    chat_group=ChatGroup.where(recruitment_id: params[:id])
-    @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
-
-    if @recruitment.destroy
-      redirect_to history_recruitments_path
-    else
-      render :show
-    end
+  
+  def withdraw
+    recruitment=Recruitment.find(params[:id])
+    recruitment.update(is_valid: false)
+    # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
+    redirect_to user_path(current_user.id)
   end
+
+  # def destroy
+  #   @applications=Application.where(recruitment_id: params[:id])
+  #   @recruitment=Recruitment.find(params[:id])
+  #   @chat_group_user=ChatGroupUser.new
+  #   chat_group=ChatGroup.where(recruitment_id: params[:id])
+  #   @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
+
+  #   if @recruitment.destroy
+  #     redirect_to history_recruitments_path
+  #   else
+  #     render :show
+  #   end
+  # end
 
   def confirm
     @chat_group = ChatGroup.new(recruitment_id: params[:id])

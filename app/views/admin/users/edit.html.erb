@@ -1,41 +1,49 @@
-<%= @user.name %>さんの編集画面
+<h2><%= @user.name %>さんの編集画面</h2>
 
 <%= form_with model: @user, url:admin_user_path(@user.id), method: :patch do |user| %>
-<%= form_with model: @user, url:admin_user_path(@user.id), method: :patch do |user| %>
-プロフィール画像
-<%= user.file_field :image, placeholder: "プロィール画像", accept: "image/*" %>
+<p>プロフィール画像
+<p><%= user.file_field :image, placeholder: "プロィール画像", accept: "image/*" %></p>
+<!--image/*　：　画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
 
-氏名
-<%= user.text_field :last_name %>
-<%= user.text_field :first_name %>
-<%= user.text_field :last_name_kana %>
-<%= user.text_field :first_name_kana %>
+<p>氏名</p>
+<p><%= user.text_field :last_name, autofocus: true, placeholder:"性"%></p>
+<p><%= user.text_field :first_name, placeholder:"名" %></p>
+<p><%= user.text_field :last_name_kana, placeholder:"セイ" %></p>
+<p><%= user.text_field :first_name_kana, placeholder:"メイ" %></p>
 
-ニックネーム
-<%= user.text_field :nickname %>
+<p>ニックネーム</p>
+<p><%= user.text_field :nickname %></p>
 
-自己紹介文
-<%= user.text_field :introduction %>
+<p>自己紹介文</p>
+<p><%= user.text_area :introduction %></p>
 
-メールアドレス
-<%= user.text_field :email %>
+<p>メールアドレス</p>
+<p><%= user.text_field :email %></p>
 
-住所
-<%= user.text_field :postal_code %>
-<%= user.text_field :address %>
+<p>住所</p>
+<p><%= user.text_field :postal_code %></p>
+<p><%= user.text_field :address %></p>
 
-電話番号
-<%= user.text_field :telephone_number %>
+<p>電話番号</p>
+<p><%= user.text_field :telephone_number %></p>
 
-性別
-<%= user.text_field :gender %>
+<p>性別</p>
+<p>
+<span><%= user.radio_button :gender, User.genders.key(0) %></span><span><%= user.label :gender_male, User.genders_i18n[:male] %></span>
+<span><%= user.radio_button :gender, User.genders.key(1) %></span><span><%= user.label :gender_female, User.genders_i18n[:female] %></span>
+<span><%= user.radio_button :gender, User.genders.key(2) %></span><span><%= user.label :gender_other, User.genders_i18n[:other] %></span>
+</p>
 
-都道府県
-<!--<%= user.text_field :prefectures %>-->
-<%= user.select :prefecture, User.prefecture.keys, {} %>
+<p>都道府県</p>
+<p><%= user.select :prefecture, User.prefectures.keys, {} %></p>
 
-退会ステータス
-<%= user.text_field :is_deleted %>
+<p>会員ステータス</p>
+<p>
+<span><%= user.radio_button :is_deleted, User.is_deleteds.key(0) %></span><span><%= user.label :is_deleted_false, User.is_deleteds_i18n[:false] %></span>
+<span><%= user.radio_button :is_deleted, User.is_deleteds.key(1) %></span><span><%= user.label :is_deleted_true, User.is_deleteds_i18n[:true] %></span>
+</p>
 
-<%= user.submit "更新する" %>
+<p><%= user.submit "更新する" %></p>
 <%end%>
+<p><%= link_to "戻る", user_path(@user.id) %></p>
+

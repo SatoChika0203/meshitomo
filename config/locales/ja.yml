@@ -19,6 +19,9 @@
           male: "男"
           female: "女"
           other: "その他"
+        is_deleted:
+          true: "退会"
+          false: "会員"
       recruitment:
         recruitment_gender:
           male_only: "男のみ"

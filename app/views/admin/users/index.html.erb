@@ -1,9 +1,18 @@
-会員一覧画面
+<h2>会員一覧画面</h2>
 
-<% @users.each do |user| %>
-  <%= user.last_name + user.first_name %>
-  <%= user.nickname %>
-  <%= user.email %>
-  
-  <%= link_to "詳細", admin_user_path(user.id), method: :get %>
+<div class="d-flex flex-row">
+  <div>
+    <% @users.each do |user| %>
+      <% if user.image.attached? %>
+          <p><%= image_tag user.image, size: "100x100" %></p>
+      <% else %>
+          <p><%= image_tag 'no_image', size: "100x100" %></p>
+      <% end %>
+  </div>
+  <div>
+      <p><%= link_to user.name, admin_user_path(user.id) %></p>
+      <p><%= user.nickname %></p>
+      <p> <%= user.email %></p>
+  </div>
 <%end%>
+</div>

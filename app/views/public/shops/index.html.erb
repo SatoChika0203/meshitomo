@@ -15,7 +15,7 @@
   <ul>
     <% @shops.each do |shop| %>
       <li>
-        <strong><%= link_to shop['name'], shop_path(shop['id']) %></strong><br>
+        <strong><%= link_to shop['name'], shop['urls']['pc'] %></strong><br>
         <%= image_tag shop['photo']['pc']['m'] %>
         <%= shop['genre']['catch'] %><br>
 

@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update, :confirm, :withdraw]
+  # before_action :logged_in_user, only: [:edit, :update, :confirm, :withdraw]
+  before_action :authenticate_user!
 
   def index
     @users=User.all
@@ -39,13 +40,19 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-  params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number, :email, :encrypted_password, :gender, :prefectures, :introduction, :is_deleted, :image)
+  params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number, :email, :encrypted_password, :gender, :prefecture, :introduction, :is_deleted, :image)
   end
 
-  def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to user_path(user.id)
-    end
-  end
+  # def is_matching_login_user
+  #   user = User.find(params[:id])
+  #   unless user.id == current_user.id
+  #     redirect_to user_path(user.id)
+  #   end
+  # end
+  
+  # def logged_in_user
+  #   unless logged_in_user
+  #     redirect_to login_url
+  #   end
+  # end
 end

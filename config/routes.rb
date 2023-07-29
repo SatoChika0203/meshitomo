@@ -19,6 +19,7 @@ scope module: :public do
         post 'confirm'
         post 'generate'
         get 'complete'
+        patch 'withdraw'
       end
       collection do
         get 'history'  #URLにid含めなくても、currentでログインユーザーの情報を表示させる

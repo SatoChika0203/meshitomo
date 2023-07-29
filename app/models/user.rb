@@ -15,6 +15,7 @@ class User < ApplicationRecord
   # belongs_to :shop, optional: true
          
   enum gender: { male: 0, female: 1, other: 2 }
+  enum is_deleted: { false: 0, true: 1 }
   enum prefectures:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
