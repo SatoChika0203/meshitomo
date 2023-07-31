@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_27_132558) do
+ActiveRecord::Schema.define(version: 2023_07_30_111652) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 2023_07_27_132558) do
     t.string "access"
     t.string "parking"
     t.string "img"
+    t.string "hotpepper_shop_id"
+    t.index ["hotpepper_shop_id"], name: "index_shops_on_hotpepper_shop_id", unique: true
   end
 
   create_table "user_shops", force: :cascade do |t|

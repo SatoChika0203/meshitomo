@@ -1,0 +1,5 @@
+<h2>みんなでお食事に行きましたか？</h2>
+<p>行った！ボタンを押した後は、このメッセージグループは削除されます。</p>
+
+<p><%= link_to "行った！", recruitment_chat_groups_path(@recruitment.id), method: :delete %></p>
+<p><%= link_to "まだ行ってない", recruitment_chat_groups_path(@recruitment.id), method: :get %></p>

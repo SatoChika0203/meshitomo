@@ -1,5 +1,9 @@
 <h2><%= @recruitment.title %>のメッセージグループです</h2>
 
+<% if @recruitment.user.id == current_user.id %>
+<%= link_to "食事に行きました！", confirm_recruitment_chat_groups_path(@recruitment.id), method: :post %>
+<% end %>
+
 <h4>参加者</h4>
 <div class="d-flex flex-row">
     <% @chat_group_users.each do |chat_group_user| %>

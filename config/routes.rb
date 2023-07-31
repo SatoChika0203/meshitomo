@@ -34,7 +34,11 @@ scope module: :public do
           # get 'history'
         end
       end
-      resource :chat_groups, only: [:show]
+      resource :chat_groups, expect: [:new, :create, :index, :edit, :update] do
+        collection do
+          post 'confirm'
+        end
+      end
   end
 
   resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do

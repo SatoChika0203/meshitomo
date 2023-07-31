@@ -26,10 +26,11 @@
         店舗URL: <%= shop['urls']['pc'] %><br>
       </li>
 
-      <% if @favorite_shop.present? %>
-        <p><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.id), method: :delete %></p>
+      <% if @favorite_shop.exists?(hotpepper_shop_id: shop['id']) %>
+        <p><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.ids), method: :delete %></p>
       <% else %>
         <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
+          <%= f.hidden_field :hotpepper_shop_id, value: shop['id'] %>
           <%= f.hidden_field :name, value: shop['name'] %>
           <%= f.hidden_field :address, value: shop['address'] %>
           <%= f.hidden_field :url, value: shop['urls']['pc'] %>

@@ -3,10 +3,18 @@ class Recruitment < ApplicationRecord
 
   belongs_to :user
   belongs_to :shop
+  has_many :chat_groups
   has_many :applications, dependent: :destroy
-  has_many :chat_groups, dependent: :destroy
   has_many :applicants, through: :applications, dependent: :destroy
   # applicationsの中にapplicants（応募者・Userに付随する）があるが、あくまで別物？
+
+  validates :title, presence: true
+  validates :introduction, presence: true
+  validates :prefecture, presence: true
+  validates :number_of_people, presence: true
+  validates :recruitment_gender, presence: true
+  validates :deadline, presence: true
+  validates :shop_id, presence: true
 
   enum recruitment_gender: { male_only: 0, female_only: 1, anyone: 2 }
   enum number_of_people: { one_to_two: 0, three_to_five: 1, five_to_ten: 2, more_than_ten: 3 }

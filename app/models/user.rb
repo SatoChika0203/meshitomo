@@ -13,6 +13,18 @@ class User < ApplicationRecord
   has_many :applications, foreign_key: "applicant_id", dependent: :destroy
   has_many :user_shops, dependent: :destroy
   # belongs_to :shop, optional: true
+  
+# 　validates :last_name, presence: true
+# 　validates :first_name, presence: true
+# 　validates :last_name_kana, presence: true
+# 　validates :first_name_kana, presence: true
+# 　validates :nickname, presence: true
+# 　validates :postal_code, presence: true
+# 　validates :address, presence: true
+# 　validates :telephone_number, presence: true
+# 　validates :gender, presence: true
+# 　validates :email, presence: true
+# 　validates :image, presence: true
          
   enum gender: { male: 0, female: 1, other: 2 }
   enum is_deleted: { false: 0, true: 1 }

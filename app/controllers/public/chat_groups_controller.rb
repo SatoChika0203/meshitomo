@@ -22,4 +22,15 @@ class Public::ChatGroupsController < ApplicationController
     # @chat_pages = Kaminari.paginate_array(@chat_data).page(params[:page]).per(10)
   end
   
+  def confirm
+    @recruitment=Recruitment.find(params[:recruitment_id])
+  end
+    
+  
+  def destroy
+    chat_group=ChatGroup.find_by(recruitment_id: params[:recruitment_id])
+    chat_group.destroy
+    redirect_to user_path(current_user.id)
+  end
+  
 end
