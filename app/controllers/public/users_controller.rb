@@ -9,6 +9,10 @@ class Public::UsersController < ApplicationController
   def show
     @user=User.find(params[:id])
     @recruitments = Recruitment.where(user_id: @user.id)
+    
+    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
+    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2)
   end
 
   def edit

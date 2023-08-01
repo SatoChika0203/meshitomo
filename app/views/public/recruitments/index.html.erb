@@ -4,7 +4,7 @@
 <div class="search-form">
   <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
     <%= search.text_field :keyword, value: @keyword %>
-    <%= search.select :prefectures, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
+    <%= search.select :prefecture, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
     <%= search.date_field :schedule, value: @schedule %>
     <%= search.submit "検索" %>
   <% end %>
@@ -14,69 +14,75 @@
   <% if current_user.gender == "male" %>
     <% @recruitments_male_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
-        <div>
-          <p><%= image_tag recruitment.shop.img %></p>
-        </div>
-        <div>
-          <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
-          <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
-          <p><%= recruitment.shop.address %></p>
-          <p>希望日　<%= recruitment.schedule %></p>
-          <p>募集期限　<%= recruitment.deadline %></p>
-        </div>
-        <div>
-          <% if recruitment.user.image.attached? %>
-            <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
-          <% else %>
-            <p><%= image_tag 'no_image', size: "80x80" %></p>
-          <% end %>
-          <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+        <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+        <div class="d-flex flex-row">
+          <div>
+            <p><%= image_tag recruitment.shop.img %></p>
+          </div>
+          <div>
+            <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+            <p><%= recruitment.shop.address %></p>
+            <p>希望日　<%= recruitment.schedule %></p>
+            <p>募集期限　<%= recruitment.deadline %></p>
+          </div>
+          <div>
+            <% if recruitment.user.image.attached? %>
+              <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
+            <% else %>
+              <p><%= image_tag 'no_image', size: "80x80" %></p>
+            <% end %>
+            <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+          </div>
         </div>
       <% end %>
     <% end %>
   <% elsif current_user.gender == "female" %>
     <% @recruitments_female_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
-        <div>
-          <p><%= image_tag recruitment.shop.img %></p>
-        </div>
-        <div>
-          <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
-          <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
-          <p><%= recruitment.shop.address %></p>
-          <p>希望日　<%= recruitment.schedule %></p>
-          <p>募集期限　<%= recruitment.deadline %></p>
-        </div>
-        <div>
-          <% if recruitment.user.image.attached? %>
-            <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
-          <% else %>
-            <p><%= image_tag 'no_image', size: "80x80" %></p>
-          <% end %>
-          <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+        <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+        <div class="d-flex flex-row">
+          <div>
+            <p><%= image_tag recruitment.shop.img %></p>
+          </div>
+          <div>
+            <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+            <p><%= recruitment.shop.address %></p>
+            <p>希望日　<%= recruitment.schedule %></p>
+            <p>募集期限　<%= recruitment.deadline %></p>
+          </div>
+          <div>
+            <% if recruitment.user.image.attached? %>
+              <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
+            <% else %>
+              <p><%= image_tag 'no_image', size: "80x80" %></p>
+            <% end %>
+            <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+          </div>
         </div>
       <% end %>
     <% end %>
   <% else current_user.gender == "male" && "female" && "other" %>
     <% @recruitments_anyone.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
-        <div>
-          <p><%= image_tag recruitment.shop.img %></p>
-        </div>
-        <div>
-          <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
-          <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
-          <p><%= recruitment.shop.address %></p>
-           <p>希望日　<%= recruitment.schedule %></p>
-          <p>募集期限　<%= recruitment.deadline %></p>
-        </div>
-        <div>
-          <% if recruitment.user.image.attached? %>
-            <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
-          <% else %>
-            <p><%= image_tag 'no_image', size: "80x80" %></p>
-          <% end %>
-          <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+        <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+        <div class="d-flex flex-row">
+          <div>
+            <p><%= image_tag recruitment.shop.img %></p>
+          </div>
+          <div>
+            <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+            <p><%= recruitment.shop.address %></p>
+             <p>希望日　<%= recruitment.schedule %></p>
+            <p>募集期限　<%= recruitment.deadline %></p>
+          </div>
+          <div>
+            <% if recruitment.user.image.attached? %>
+              <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
+            <% else %>
+              <p><%= image_tag 'no_image', size: "80x80" %></p>
+            <% end %>
+            <p><%= link_to recruitment.user.nickname, user_path(recruitment.user.id) %></p>
+          </div>
         </div>
       <% end %>
     <% end %>

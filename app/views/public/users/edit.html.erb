@@ -38,7 +38,7 @@
 <p><%= user.label :gender_other, User.genders_i18n[:other] %></p>
 
 <p>都道府県</p>
-<p><%= user.select :prefectures, User.prefectures.keys, {} %></p>
+<p><%= user.select :prefectures, User.prefectures.keys, {include_blank: '都道府県を選択してください'} %></p>
 
 <p><%= user.submit "更新する" %></p>
 <%end%>

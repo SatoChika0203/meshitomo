@@ -1,6 +1,6 @@
 <h2>会員詳細</h2>
 
-<div class="d-flex flex-row">
+<div>
     <div>
     <% if @user.image.attached? %>
         <p><%= image_tag @user.image, size: "200x200" %></p>
@@ -10,35 +10,96 @@
     </div>
     <div>
         <p><%= @user.nickname %></p>
+    </div>    
+    <div>
         <p><%= @user.introduction %></p>
+    </div>    
+    <div class="d-flex flex-row">
+        <p>性別</p>
         <p><%= @user.gender_i18n %></p>
+    </div>    
+    <div class="d-flex flex-row">
+    <% if @user.prefecture.present? %>
+        <p>都道府県</p>
         <p><%= @user.prefecture %></p>
+    <% end %>
+    </div>
     
     <% if @user.id == current_user.id %>
+    <div class="d-flex flex-row">
+        <p>名前</p>
         <p><%= @user.name %></p>
+    </div>
+    <div class="d-flex flex-row">
+        <p>名前（カナ）</p>
         <p><%= @user.name_kana %></p>
+    </div>
+    <div class="d-flex flex-row">
+        <p>住所</p>
         <p><%= @user.adress_all %></p>
+    </div>
+    <div class="d-flex flex-row">
+        <p>電話番号</p>
         <p><%= @user.telephone_number %></p>
-
+    </div>
         <p><%= link_to "編集", edit_user_path(@user.id) %></p>
         <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
     <% end %>
-    </div>
 </div>
 
 <div>
     <% if @user.id != current_user.id %>
         <h3><%= @user.nickname %>さんと食事に行きませんか？</h3>
-                <% if @recruitments.exists? %>
-                    <% @recruitments.each do |recruitment| %>
-                        <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
-                        <p>希望日</p>
-                        <p><%= recruitment.schedule %></p>
-                        <p>募集期限</p>
-                        <p><%= recruitment.deadline %></p>
+            <% if current_user.gender == "male" && @recruitments_male_only.exists? %>
+                <div class="d-flex flex-row">
+                    <% @recruitments_male_only.each do |recruitment| %>
+                      <% if  recruitment.is_valid == true %>
+                          <div>
+                            <p><%= image_tag recruitment.shop.img %></p>
+                          </div>
+                          <div>
+                            <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+                            <p>お店　　　<%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+                            <p>希望日　　<%= recruitment.schedule %></p>
+                            <p>募集期限　<%= recruitment.deadline %></p>
+                          </div>
+                      <% end %>
                     <% end %>
-                <% else %>
-                        <p>まだ募集はありません…</p>
-                <% end %>
+                </div>
+            <% elsif current_user.gender == "female" && @recruitments_female_only.exists? %>
+                <div class="d-flex flex-row">
+                    <% @recruitments_female_only.each do |recruitment| %>
+                      <% if  recruitment.is_valid == true %>
+                          <div>
+                            <p><%= image_tag recruitment.shop.img %></p>
+                          </div>
+                          <div>
+                            <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+                            <p>お店　　　<%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+                            <p>希望日　　<%= recruitment.schedule %></p>
+                            <p>募集期限　<%= recruitment.deadline %></p>
+                          </div>
+                      <% end %>
+                    <% end %>
+                </div>
+            <% elsif current_user.gender == "male" && "female" && "other" && @recruitments_anyone.exists? %>
+                <div class="d-flex flex-row">
+                    <% @recruitments_anyone.each do |recruitment| %>
+                      <% if  recruitment.is_valid == true %>
+                          <div>
+                            <p><%= image_tag recruitment.shop.img %></p>
+                          </div>
+                          <div>
+                            <p><%= link_to recruitment.title, recruitment_path(recruitment.id) %></p>
+                            <p>お店　　　<%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+                            <p>希望日　　<%= recruitment.schedule %></p>
+                            <p>募集期限　<%= recruitment.deadline %></p>
+                          </div>
+                      <% end %>
+                    <% end %>
+                </div>
+            <% else @recruitments.empty? %>
+                    <p>まだ募集はありません…</p>
+            <% end %>
     <% end %>
 </div>

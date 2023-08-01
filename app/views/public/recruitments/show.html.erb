@@ -1,32 +1,84 @@
 募集詳細
+
+<div class="d-flex flex-row">
+    <div>
+        <% if @recruitment.user.image.attached? %>
+        <p><%= image_tag @recruitment.user.image, size: "150x150" %></p>
+        <% else %>
+        <p><%= image_tag 'no_image', size: "150x150" %></p>
+        <% end %>
+        <p><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
+    </div>
+    <div>
+        <p><strong><%= @recruitment.title %></strong></p>
+        <p><%= @recruitment.introduction %></p>
+        <table class="table table-borderless">
+            <tr>
+                <th>希望の日にち</th>
+                <% if @recruitment.schedule.present? %>
+                    <td><%= @recruitment.schedule %></td>
+                <% else %>
+                    <td>いつでもいいよ</td>
+                <% end %>
+            </tr>    
+            <tr>
+                <th>募集している人数</th>
+                <td><%= @recruitment.number_of_people_i18n %></td>
+            </tr>    
+            <tr>
+                <th>募集している人</th>
+                <td><%= @recruitment.recruitment_gender_i18n %></td>
+            </tr>    
+            <tr>
+                <th>募集期限</th>
+                <td><%= @recruitment.deadline %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<h4>お店の情報</h4>
 <div class="d-flex flex-row">
     <p><%= image_tag @recruitment.shop.img %></p>
         <div>
-            <p><strong><%= link_to @recruitment.shop.name, @recruitment.shop.url %></strong></p>
+            <p><%= link_to @recruitment.shop.name, @recruitment.shop.url %></p>
             <p><%= @recruitment.shop.catch %></p>
-            <p><%= @recruitment.shop.genre %></p>
-            <p><%= @recruitment.shop.budget_average %></p>
-            <p><%= @recruitment.shop.address %></p>
-            <p><%= @recruitment.shop.access %></p>
-            <p><%= @recruitment.shop.parking %></p>
-            <p><%= @recruitment.shop.open %></p>
-            <p><%= @recruitment.shop.close %></p>
         </div>
 </div>
+<div>
+    <table class="table table-borderless">
+        <tr>
+            <th>ジャンル</th>
+            <td><%= @recruitment.shop.genre %></td>
+        </tr> 
+        <tr>
+            <th>予算</th>
+            <td><%= @recruitment.shop.budget_average %></td>
+        </tr>
+        <tr>
+            <th>住所</th>
+            <td><%= @recruitment.shop.address %></td>
+        </tr>
+        <tr>
+            <th>アクセス</th>
+            <td><%= @recruitment.shop.access %></td>
+        </tr>
+        <tr>
+            <th>駐車場</th>
+            <td><%= @recruitment.shop.parking %></td>
+        </tr>
+        <tr>
+            <th>営業時間</th>
+            <td><%= @recruitment.shop.open %></td>
+        </tr>
+        <tr>
+            <th>定休日</th>
+            <td><%= @recruitment.shop.close %></td>
+        </tr>
+    </table>
+</div>
 
-<% if @recruitment.user.image.attached? %>
-<p><%= image_tag @recruitment.user.image, size: "100x100" %></p>
-<% else %>
-<p><%= image_tag 'no_image', size: "100x100" %></p>
-<% end %>
-<p><%= @recruitment.user.nickname %></p>
-<p><%= @recruitment.title %></p>
-<p><%= @recruitment.introduction %></p>
-<p><%= @recruitment.schedule %></p>
-<p><%= @recruitment.prefecture %></p>
-<p><%= @recruitment.number_of_people_i18n %></p>
-<p><%= @recruitment.recruitment_gender_i18n %></p>
-<p><%= @recruitment.deadline %></p>
+
 
 <% if @recruitment.user_id != current_user.id %>
     <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
