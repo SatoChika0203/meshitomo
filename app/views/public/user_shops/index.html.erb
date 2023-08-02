@@ -1,22 +1,26 @@
-お気に入りのお店一覧
+<h2><%= @user.nickname %>さんのお気に入りのお店</h2>
+
 <div>
-  <ul class="d-flex flex-row">
-    <% @shops.each do |shop| %>
-       <div>
-            <p><%= image_tag shop.img %></p>
-        </div>
-        <div>
-            <p><strong><%= link_to shop.name, shop.url %></strong></p>
-            <p><%= shop.catch %></p>
-            <p><%= shop.genre %></p>
-            <p><%= shop.budget_average %></p>
-            <p><%= shop.address %></p>
-            <p><%= shop.access %></p>
-            <p>駐車場：<%= shop.parking %></p>
-            <p><%= shop.open %></p>
-            <p><%= shop.close %></p>
-            <p><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></p>
-        </div>
-    <% end %>
-  </ul>
+<ul>
+  <% @shops.each do |shop| %>
+    <div class="d-flex flex-row">
+      <div>
+        <p><%= image_tag shop.img %></p>
+      </div>
+      <div>
+        <p><strong><%= link_to shop.name, shop.url %></strong></p>
+        <p><%= shop.catch %></p>
+        <p><span>ジャンル</span><span><%= shop.genre %></span></p>
+      </div>
+    </div>
+    <div>
+        <p><span>予算</span><span><%= shop.budget_average %></span></p>
+        <p><span>住所</span><span><%= shop.address %></span></p>
+        <p><span>駐車場</span><span><%= shop.parking %></span></p>
+        <p><span>営業時間</span><span><%= shop.open %></span></p>
+        <p><span>定休日</span><span><%= shop.close %></span></p>
+        <p><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></p>
+    </div>
+  <% end %>
+</ul>
 </div>

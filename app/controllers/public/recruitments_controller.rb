@@ -91,7 +91,7 @@ class Public::RecruitmentsController < ApplicationController
       @chat_group.chat_group_users = user_ids.map do |user_id| ChatGroupUser.new(user_id: user_id) end
       @chat_group.save
     end
-    redirect_to  complete_recruitments_path(recruitment.id)
+    redirect_to  complete_recruitment_path(recruitment.id)
   end
   
   def complete

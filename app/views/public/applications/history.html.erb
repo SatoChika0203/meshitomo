@@ -3,19 +3,36 @@
 <div>
 <% @applications.each do |application| %>
   <p><%= link_to application.recruitment.title, recruitment_applications_path(application.recruitment.id) %></p>
-  <p><%= application.recruitment.schedule %></p>
-  <p><%= application.message %></p>
-  <% if application.is_valid==true %>
-    <p>応募済み</p>
-  <% else %>
-    <p>キャンセル済み</p>
-  <% end %>
-  <% if application.recruitment.is_valid==true %>
-    <p>募集中</p>
-  <% else %>
-    <p>募集終了</p>
-  <% end %>
+    <div class="d-flex flex-row">
+      <div>
+        <p><%= image_tag application.recruitment.shop.img %></p>
+      </div>
+      <div>
+        <p><%= link_to application.recruitment.shop.name, application.recruitment.shop.url %></p>
+        <p><%= application.recruitment.shop.address %></p>
+        <p>希望日　<%= application.recruitment.schedule %></p>
+        <p>募集期限　<%= application.recruitment.deadline %></p>
+        <% if application.is_valid==true %>
+          <p><span>応募状況</span><span>応募済み</span></p>
+        <% else %>
+          <p><span>応募状況</span><span>キャンセル済み</span></p>
+        <% end %>
+        <% if application.recruitment.is_valid==true %>
+          <p><span>募集状況</span><span>募集中</span></p>
+        <% else %>
+          <p><span>募集状況</span><span>募集終了</span></p>
+        <% end %>
+      </div>
+      <div>
+        <% if application.recruitment.user.image.attached? %>
+          <p><%= image_tag application.recruitment.user.image, size: "80x80" %></p>
+        <% else %>
+          <p><%= image_tag 'no_image', size: "80x80" %></p>
+        <% end %>
+          <p><%= link_to application.recruitment.user.nickname, user_path(application.recruitment.user.id) %></p>
+      </div>
+    </div>
 <% end %>
-</div
-<%= paginate @applications_page %>
+</div>
 
+<%= paginate @applications_page %>

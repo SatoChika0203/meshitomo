@@ -7,16 +7,18 @@
 <h4>参加者</h4>
 <div class="d-flex flex-row">
     <% @chat_group_users.each do |chat_group_user| %>
+      <div class="d-flex flex-column">
         <% if chat_group_user.user.image.attached? %>
             <p><%= image_tag chat_group_user.user.image, size: "80x80" %></p>
         <% else %>
             <p><%= image_tag 'no_image', size: "80x80" %></p>
-        <% end %> 
+        <% end %>
             <p><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user.id) %></p>
+      </div>
     <% end %>
 </div>
 
-<div>
+<div class="d-flex flex-row">
     <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
         <p><%= chat.text_area :chat %></p>
         <p><%= chat.hidden_field :chat_group_id, :value => @chat_group.id %></p>
@@ -25,15 +27,19 @@
 </div>
 
 
-<div class='jscroll-div'>
+<div class="d-flex flex-row">
     <% @chats.each do |chat| %>
+      <div>
         <% if chat.user.image.attached? %>
             <p><%= image_tag chat.user.image, size: "80x80" %></p>
         <% else %>
             <p><%= image_tag 'no_image', size: "80x80" %></p>
         <% end %> 
             <p><%= chat.user.nickname %></p>
+      </div>
+      <div>
             <p><%= chat.chat %></p>
+      </div>
     <% end %>
     <%= paginate @chat_pages %>
 </div>
