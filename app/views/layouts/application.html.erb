@@ -12,57 +12,65 @@
   </head>
 
   <body>
-          <div>
-            <ul>
-              <% if user_signed_in? %>
-                <li class="m-2">
-                  <%= link_to "募集一覧（後で消す）", recruitments_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "募集", new_recruitment_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "マイページ", user_path(current_user.id) %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "募集履歴", history_recruitments_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "応募履歴", history_applications_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "メッセージグループ一覧", chat_groups_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "お店を調べる", shops_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "お気に入りのお店", user_user_shops_path(current_user.id) %>
-                </li>
-              <% elsif admin_signed_in? %>
-                <li class="m-2">
-                  <%= link_to "会員一覧", admin_users_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "募集一覧", admin_recruitments_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "メッセージグループ一覧", admin_chat_groups_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-                </li>
-              <% else  %>
-                <li class="m-2">
-                  <%= link_to "新規登録", new_user_registration_path %>
-                </li>
-                <li class="m-2">
-                  <%= link_to "ログイン", new_user_session_path %>
-                </li>
-              <% end %>
-             </ul>
-            </div>
-         
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/">meshiTomo</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="justify-content-end collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <% if user_signed_in? %>
+                  <li class="m-2">
+                    <%= link_to "募集一覧（後で消す）", recruitments_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "募集", new_recruitment_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "マイページ", user_path(current_user.id) %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "募集履歴", history_recruitments_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "応募履歴", history_applications_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "メッセージグループ一覧", chat_groups_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "お店を調べる", shops_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "お気に入りのお店", user_user_shops_path(current_user.id) %>
+                  </li>
+                <% elsif admin_signed_in? %>
+                  <li class="m-2">
+                    <%= link_to "会員一覧", admin_users_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "募集一覧", admin_recruitments_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "メッセージグループ一覧", admin_chat_groups_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                  </li>
+                <% else  %>
+                  <li class="m-2">
+                    <%= link_to "新規登録", new_user_registration_path %>
+                  </li>
+                  <li class="m-2">
+                    <%= link_to "ログイン", new_user_session_path %>
+                  </li>
+                <% end %>
+               </ul>
+        </div>
+      </nav>
+    </header>     
     <%= yield %>
   </body>
 </html>

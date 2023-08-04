@@ -16,10 +16,10 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def index
-    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2))
-    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2))
+    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
+    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
     # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0)
-    @recruitments_anyone=Recruitment.where(recruitment_gender: 2)
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2).page(params[:page])
   end
 
   def show
