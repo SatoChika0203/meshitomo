@@ -1,140 +1,150 @@
-募集詳細
-
-<div class="d-flex flex-row">
-    <div>
-        <% if @recruitment.user.image.attached? %>
-        <p><%= image_tag @recruitment.user.image, size: "150x150" %></p>
-        <% else %>
-        <p><%= image_tag 'no_image', size: "150x150" %></p>
-        <% end %>
-        <p><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
-    </div>
-    <div>
-        <p><strong><%= @recruitment.title %></strong></p>
-        <p><%= @recruitment.introduction %></p>
-        <table class="table table-borderless">
-            <tr>
-                <th>希望の日にち</th>
-                <% if @recruitment.schedule.present? %>
-                    <td><%= @recruitment.schedule %></td>
-                <% else %>
-                    <td>いつでもいいよ</td>
-                <% end %>
-            </tr>    
-            <tr>
-                <th>募集している人数</th>
-                <td><%= @recruitment.number_of_people_i18n %></td>
-            </tr>    
-            <tr>
-                <th>募集している人</th>
-                <td><%= @recruitment.recruitment_gender_i18n %></td>
-            </tr>    
-            <tr>
-                <th>募集期限</th>
-                <td><%= @recruitment.deadline %></td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<h4>お店の情報</h4>
-<div class="d-flex flex-row">
-    <p><%= image_tag @recruitment.shop.img %></p>
-        <div>
-            <p><%= link_to @recruitment.shop.name, @recruitment.shop.url %></p>
-            <p><%= @recruitment.shop.catch %></p>
-        </div>
-</div>
 <div>
-    <table class="table table-borderless">
-        <tr>
-            <th>ジャンル</th>
-            <td><%= @recruitment.shop.genre %></td>
-        </tr> 
-        <tr>
-            <th>予算</th>
-            <td><%= @recruitment.shop.budget_average %></td>
-        </tr>
-        <tr>
-            <th>住所</th>
-            <td><%= @recruitment.shop.address %></td>
-        </tr>
-        <tr>
-            <th>アクセス</th>
-            <td><%= @recruitment.shop.access %></td>
-        </tr>
-        <tr>
-            <th>駐車場</th>
-            <td><%= @recruitment.shop.parking %></td>
-        </tr>
-        <tr>
-            <th>営業時間</th>
-            <td><%= @recruitment.shop.open %></td>
-        </tr>
-        <tr>
-            <th>定休日</th>
-            <td><%= @recruitment.shop.close %></td>
-        </tr>
-    </table>
-</div>
+<h2 class="text-center pb-5">募集詳細</h2>
 
-
-
-<% if @recruitment.user_id != current_user.id %>
-    <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
-        <p><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
-    <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
-        <p><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
-    <% elsif @recruitment.is_valid==false && @application.is_approval==false && %>
-        <p>この募集は締め切られました</p>
-    <% else @recruitment.is_valid==false && @application.is_approval==true && %>
-        <p>こちらの募集は終了しました。</p>
-        <p>参加者は以下の方々です。</p>
-            <% @chat_group_users.each do |chat_group_user| %>
-                <% if chat_group_user.user.image.attached? %>
-                    <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
-                <% else %>
-                    <p><%= image_tag 'no_image', size: "200x200" %></p>
-                <% end %>
-                    <p><%= chat_group_user.user.nickname %></p>
+<div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <% if @recruitment.user.image.attached? %>
+            <p><%= image_tag @recruitment.user.image, size: "150x150" %></p>
+            <% else %>
+            <p><%= image_tag 'no_image', size: "150x150" %></p>
             <% end %>
-    <% end %>
-<% end %>
-
-<% if @recruitment.user_id == current_user.id %>
-    <p><%= link_to "編集", edit_recruitment_path %></p>
-    <p><%= link_to '削除', withdraw_recruitment_path(@recruitment.id), { method: :withdraw, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
-
-        <% if @recruitment.is_valid == true && @applications.present? %>
-            <p>応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
-                <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id),method: :post do |f| %>
-                   <% @applications.each.with_index do |application| %>
-                        <%= f.check_box :user_ids, {:multiple => true}, application.applicant_id.to_s, false %>
-                        <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
-                        <p><%= application.message %></p>
-                        <p><%= application.schedule_one %></p>
-                        <p><%= application.schedule_two %></p>
-                        <p><%= application.schedule_three %></p>
-                    <% end %>
-
-                    <%= f.submit "次へ進む" %>
-                <% end %>
-        <% elsif @recruitment.is_valid == true && @applications.blank? %>
-            <p>まだ応募は来ていません。</p>
-        <% elsif @recruitment.is_valid == false && @applications.present? %>
-            <p>こちらの募集は終了しました。</p>
-            <p>参加者は以下の方々です。</p>
-               <% @chat_group_users.each do |chat_group_user| %>
-                    <% if chat_group_user.user.image.attached? %>
-                        <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+            <p><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <h3 class="mb-4"><strong><%= @recruitment.title %></strong></h3>
+            <p class="mb-4 ml-4 pt-2"><%= @recruitment.introduction %></p>
+            <table class="table table-borderless ml-4">
+                <tr class="row">
+                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
+                    <% if @recruitment.schedule.present? %>
+                        <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.schedule %></td>
                     <% else %>
-                        <p><%= image_tag 'no_image', size: "200x200" %></p>
+                        <td class="col-lg-8 col-md-8 col-sm-7 col-7">いつでもいいよ</td>
                     <% end %>
-                        <p><%= chat_group_user.user.nickname %></p>
-            　<% end %>
-        <% else @recruitment.is_valid == false && @applications.blank? %>
-            <p>参加者は集まりませんでした・・・</p>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人数</th>
+                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.number_of_people_i18n %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人</th>
+                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.recruitment_gender_i18n %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集期限</th>
+                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.deadline %></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="pt-5">
+        <h2 class="text-center">お店の情報</h2>
+        <div class="row mt-5">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
+                <p><%= image_tag @recruitment.shop.img %></p>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h4 class="mb-4"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></h4>
+                <p class="mb-3 ml-4"><%= @recruitment.shop.catch %></p>
+                    <table class="table table-borderless ml-4">
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">ジャンル</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.genre %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">予算</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.budget_average %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">住所</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.address %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">アクセス</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.access %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">駐車場</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.parking %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">営業時間</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.open %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">定休日</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.close %></td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-5">
+        <% if @recruitment.user_id != current_user.id %>
+         <h2 class="text-center">応募状況</h2>
+            <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
+                <p><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
+            <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
+                <p><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
+            <% elsif @recruitment.is_valid==false && @application.is_approval==false && %>
+                <p>この募集は締め切られました</p>
+            <% else @recruitment.is_valid==false && @application.is_approval==true && %>
+                <p>こちらの募集は終了しました。</p>
+                <p>参加者は以下の方々です。</p>
+                    <% @chat_group_users.each do |chat_group_user| %>
+                        <% if chat_group_user.user.image.attached? %>
+                            <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+                        <% else %>
+                            <p><%= image_tag 'no_image', size: "200x200" %></p>
+                        <% end %>
+                            <p><%= chat_group_user.user.nickname %></p>
+                    <% end %>
+            <% end %>
         <% end %>
-
-<% end %>
-
+    </div>
+    <div>
+        <div class="row mx-auto ">
+        <% if @recruitment.user_id == current_user.id %>
+            <p><%= link_to "編集", edit_recruitment_path %></p>
+            <p><%= link_to '削除', withdraw_recruitment_path(@recruitment.id), { method: :withdraw, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
+        </div>
+        
+            <h2 class="text-center">応募状況</h2>
+              <div class="mt-5">
+                <% if @recruitment.is_valid == true && @applications.present? %>
+                    <p>応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
+                        <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id),method: :post do |f| %>
+                           <% @applications.each.with_index do |application| %>
+                                <%= f.check_box :user_ids, {:multiple => true}, application.applicant_id.to_s, false %>
+                                <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
+                                <p><%= application.message %></p>
+                                <p><%= application.schedule_one %></p>
+                                <p><%= application.schedule_two %></p>
+                                <p><%= application.schedule_three %></p>
+                            <% end %>
+        
+                            <%= f.submit "次へ進む" %>
+                        <% end %>
+                <% elsif @recruitment.is_valid == true && @applications.blank? %>
+                    <p class="text-center">まだ応募は来ていません。</p>
+                <% elsif @recruitment.is_valid == false && @applications.present? %>
+                    <p class="text-center">こちらの募集は終了しました。</p>
+                    <p class="text-center">参加者は以下の方々です。</p>
+                       <% @chat_group_users.each do |chat_group_user| %>
+                            <% if chat_group_user.user.image.attached? %>
+                                <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+                            <% else %>
+                                <p><%= image_tag 'no_image', size: "200x200" %></p>
+                            <% end %>
+                                <p><%= chat_group_user.user.nickname %></p>
+                    　<% end %>
+                <% else @recruitment.is_valid == false && @applications.blank? %>
+                    <p>参加者は集まりませんでした・・・</p>
+                <% end %>
+              </div>
+        <% end %>
+    </div>
+</div>

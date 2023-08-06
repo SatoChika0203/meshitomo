@@ -17,16 +17,16 @@
         <div class="mb-5 bg-warning rounded p-3">
           <h5><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
             <div class="row pt-2">
-              <div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                 <p class="border border-white border-3"><%= image_tag recruitment.shop.img %></p>
               </div>
-              <div class="col-lg-7 col-md-7 col-sm-12">
+              <div class="col-lg-7 col-md-7 col-sm-10 col-12">
                 <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
                 <p><%= recruitment.shop.address %></p>
                 <p>希望日　<%= recruitment.schedule %></p>
                 <p>募集期限　<%= recruitment.deadline %></p>
               </div>
-              <div class="text-center col-lg-2 col-md-2 col-sm-2">
+              <div class="text-center col-lg-2 col-md-2 col-sm-3 col-12">
                 <% if recruitment.user.image.attached? %>
                   <p><%= image_tag recruitment.user.image, size: "90x90" %></p>
                 <% else %>

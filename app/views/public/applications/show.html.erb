@@ -1,10 +1,10 @@
-応募履歴
-<% if @recruitment.user.image.attached? %>
-<p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
-<% else %>
-<p><%= image_tag 'no_image', size: "200x200" %></p>
-<% end %>
-<p><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
+<h2 class="text-center">応募履歴</h2>
+
+<div class="container mt-5">
+  <div>
+    <p><%= image_tag @recruitment.shop.img %></p>
+  </div>
+<div>
 <p><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %></p>
 <p><%= @recruitment.introduction %></p>
 <p><%= @recruitment.schedule %></p>
@@ -38,3 +38,14 @@
 <% else %>
   <p>募集終了</p>
 <% end %>
+</div>
+<div>
+  <% if @recruitment.user.image.attached? %>
+  <p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
+  <% else %>
+  <p><%= image_tag 'no_image', size: "200x200" %></p>
+  <% end %>
+  <p><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
+</div>
+
+</div>

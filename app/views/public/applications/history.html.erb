@@ -1,38 +1,56 @@
-<h2>応募履歴</h2>
+<h2 class="text-center"><%= current_user.name %>さんの募集履歴</h2>
 
-<div>
+<div class="container mt-5">
 <% @applications.each do |application| %>
-  <p><%= link_to application.recruitment.title, recruitment_applications_path(application.recruitment.id) %></p>
-    <div class="d-flex flex-row">
-      <div>
+  <div class="mb-5 bg-warning rounded p-3">
+  <h4><%= link_to application.recruitment.title, recruitment_applications_path(application.recruitment.id) %></h4>
+    <div class="row pt-4 pl-2">
+      <div class="col-lg-3 col-md-4 col-sm-12 col-12">
         <p><%= image_tag application.recruitment.shop.img %></p>
       </div>
-      <div>
+      <div  class="col-lg-6 col-md-6 col-sm-10 col-12">
         <p><%= link_to application.recruitment.shop.name, application.recruitment.shop.url %></p>
         <p><%= application.recruitment.shop.address %></p>
-        <p>希望日　<%= application.recruitment.schedule %></p>
-        <p>募集期限　<%= application.recruitment.deadline %></p>
-        <% if application.is_valid==true %>
-          <p><span>応募状況</span><span>応募済み</span></p>
-        <% else %>
-          <p><span>応募状況</span><span>キャンセル済み</span></p>
-        <% end %>
-        <% if application.recruitment.is_valid==true %>
-          <p><span>募集状況</span><span>募集中</span></p>
-        <% else %>
-          <p><span>募集状況</span><span>募集終了</span></p>
-        <% end %>
-      </div>
-      <div>
+          <table class="table table-borderless">
+            <tr class="row">
+              <th class="col-lg-3 col-md-4 col-sm-3 col-3 text-right">希望日</th>
+              <td class="col-lg-9 col-md-8 col-sm-9 col-9 text-left"><%= application.recruitment.schedule %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-3 col-md-4 col-sm-3 col-3 text-right">募集期限</th>
+              <td class="col-lg-9 col-md-8 col-sm-9 col-9 text-left"><%= application.recruitment.deadline %></td>
+            </tr>
+            <tr class="row">
+            <% if application.is_valid==true %>
+              <th class="col-lg-3 col-md-4 col-sm-3 col-3 text-right">応募状況</th>
+              <td class="col-lg-9 col-md-8 col-sm-9 col-9 text-left">応募済み</td>
+            <% else %>
+              <th class="col-lg-3 col-md-4 col-sm-3 col-3 text-right">応募状況</th>
+              <td class="col-lg-9 col-md-8 col-sm-9 col-9 text-left">キャンセル済み</td>
+            <% end %>
+            </tr>
+            <tr class="row">
+            <% if application.recruitment.is_valid==true %>  
+              <th class="col-lg-3 col-md-4 col-sm-3 col-3 text-right">募集状況</th>
+              <td class="col-lg-9 col-md-8 col-sm-9 col-9 text-left">募集中</td>
+            <% else %>
+              <th class="col-lg-3 col-md-4 col-sm-3 col-3 text-right">募集状況</th>
+              <td class="col-lg-9 col-md-8 col-sm-9 col-9 text-left">募集終了</td>  
+            <% end %>
+            </tr>
+          </table>
+        </div>
+        <div class="text-center col-lg-3 col-md-2 col-sm-3 col-12">
         <% if application.recruitment.user.image.attached? %>
           <p><%= image_tag application.recruitment.user.image, size: "80x80" %></p>
         <% else %>
           <p><%= image_tag 'no_image', size: "80x80" %></p>
         <% end %>
           <p><%= link_to application.recruitment.user.nickname, user_path(application.recruitment.user.id) %></p>
-      </div>
+        </div>         
+     </div>
     </div>
 <% end %>
-</div>
-
+</div>     
 <%= paginate @applications_page %>
+          

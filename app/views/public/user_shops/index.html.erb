@@ -1,26 +1,42 @@
-<h2><%= @user.nickname %>さんのお気に入りのお店</h2>
+<h2 class="text-center"><%= @user.nickname %>さんのお気に入りのお店</h2>
 
-<div>
-<ul>
+<div class="container mt-5">
   <% @shops.each do |shop| %>
-    <div class="d-flex flex-row">
-      <div>
+    <div class="row pt-3 pb-5">
+      <div class="col-lg-3 col-md-4 col-sm-12 col-12">
         <p><%= image_tag shop.img %></p>
-      </div>
-      <div>
-        <p><strong><%= link_to shop.name, shop.url %></strong></p>
-        <p><%= shop.catch %></p>
-        <p><span>ジャンル</span><span><%= shop.genre %></span></p>
-      </div>
-    </div>
-    <div>
-        <p><span>予算</span><span><%= shop.budget_average %></span></p>
-        <p><span>住所</span><span><%= shop.address %></span></p>
-        <p><span>駐車場</span><span><%= shop.parking %></span></p>
-        <p><span>営業時間</span><span><%= shop.open %></span></p>
-        <p><span>定休日</span><span><%= shop.close %></span></p>
         <p><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></p>
+      </div>
+      <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+        <h4><strong><%= link_to shop.name, shop.url %></strong></h4>
+        <p><%= shop.catch %></p>
+      <table class="table table-borderless">
+        <tr class="row">
+          <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">ジャンル</th>
+          <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.genre %></td>
+        </tr>
+        <tr class="row">
+          <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">予算</th>
+          <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.budget_average %></td>
+        </tr>        
+        <tr class="row">
+          <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">住所</th>
+          <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.address %></td>
+        </tr>        
+        <tr class="row">
+          <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">駐車場</th>
+          <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.parking %></td>
+        </tr>
+        <tr class="row">
+          <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">営業時間</th>
+          <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.open %></td>
+        </tr>        
+        <tr class="row">
+          <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">定休日</th>
+          <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.close %></td>
+        </tr>        
+      </table>
+    </div>
     </div>
   <% end %>
-</ul>
 </div>

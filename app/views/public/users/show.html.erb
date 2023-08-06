@@ -16,37 +16,40 @@
         <div>
             <p><%= @user.introduction %></p>
         </div>    
-        <div class="row">
-            <p class="col-lg-6">性別</p>
-            <p class="col-lg-6"><%= @user.gender_i18n %></p>
-        </div>    
-        <div class="row">
-        <% if @user.prefecture.present? %>
-            <p>都道府県</p>
-            <p><%= @user.prefecture %></p>
-        <% end %>
+        <div>
+          <table class="table table-borderless">
+            <tr class="row">
+                <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">性別</th>
+                <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.gender_i18n %></td>
+            </tr>
+            <tr class="row">
+                <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">都道府県</th>
+                <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.prefecture %></td>
+            </tr>         
+            <% if @user.id == current_user.id %>
+            <tr class="row">
+                <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">名前</th>
+                <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.name %></td>
+            </tr> 
+            <tr class="row">
+                <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">名前（カナ）</th>
+                <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.name_kana %></td>
+            </tr> 
+            <tr class="row">
+                <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">住所</th>
+                <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.adress_all %></td>
+            </tr> 
+            <tr class="row">
+                <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">電話番号</th>
+                <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.telephone_number %></td>
+            </tr> 
+            <% end %>
+          </table>
+        </div>        
+        <div class="row mt-5cd ">
+            <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-center"><%= link_to "編集", edit_user_path(@user.id) %></p>
+            <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-center"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
         </div>
-        
-        <% if @user.id == current_user.id %>
-        <div class="row ">
-            <p>名前</p>
-            <p><%= @user.name %></p>
-        </div>
-        <div class="row">
-            <p>名前（カナ）</p>
-            <p><%= @user.name_kana %></p>
-        </div>
-        <div class="row">
-            <p>住所</p>
-            <p><%= @user.adress_all %></p>
-        </div>
-        <div class="row">
-            <p>電話番号</p>
-            <p><%= @user.telephone_number %></p>
-        </div>
-            <p><%= link_to "編集", edit_user_path(@user.id) %></p>
-            <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
-        <% end %>
     </div>
 
     <div>
@@ -104,6 +107,6 @@
                     <p>まだ募集はありません…</p>
             <% end %>
     <% end %>
-</div>
+    </div>
 
 </div>
