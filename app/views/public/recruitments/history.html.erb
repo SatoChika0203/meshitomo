@@ -3,12 +3,12 @@
 <div class="container mt-5"> 
   <% @recruitments.each do |recruitment| %>
    <div class="mb-5 bg-warning rounded p-3">
-     <h4><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h4>
+     <h4 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h4>
        <div class="row pt-2">
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <p><%= image_tag recruitment.shop.img %></p>
+          <div class="col-lg-3 col-md-4 col-sm-12">
+            <p class="text-center"><%= image_tag recruitment.shop.img %></p>
           </div>
-       <div class="col-lg-8 col-md-8 col-sm-12">
+       <div class="col-lg-9 col-md-8 col-sm-12">
          <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
          <p><%= recruitment.shop.address %></p>
          <p>希望日　<%= recruitment.schedule %></p>

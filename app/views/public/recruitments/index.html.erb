@@ -15,10 +15,10 @@
     <% @recruitments_male_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-warning rounded p-3">
-          <h5><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
+          <h5 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                <p class="border border-white border-3"><%= image_tag recruitment.shop.img %></p>
+                <p class="text-center"><%= image_tag recruitment.shop.img %></p>
               </div>
               <div class="col-lg-7 col-md-7 col-sm-10 col-12">
                 <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
@@ -43,10 +43,10 @@
     <% @recruitments_female_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-warning rounded p-4 ">
-          <h5><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
+          <h5 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12">
-                <p><%= image_tag recruitment.shop.img%></p>
+                <p class="text-center"><%= image_tag recruitment.shop.img%></p>
               </div>
               <div class="col-lg-7 col-md-7 col-sm-12 pl-3">
                 <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
@@ -73,10 +73,10 @@
     <% @recruitments_anyone.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-warning rounded p-3">
-          <h5><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
+          <h5 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12">
-                <p class="border border-white border-3"><%= image_tag recruitment.shop.img %></p>
+                <p class="text-center"><%= image_tag recruitment.shop.img %></p>
               </div>
               <div class="col-lg-7 col-md-7 col-sm-12">
                 <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>

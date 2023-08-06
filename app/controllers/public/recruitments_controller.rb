@@ -31,7 +31,7 @@ class Public::RecruitmentsController < ApplicationController
     @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
     if DateTime.now.after? @recruitment.deadline
       # @recruitment.is_valid.update(is_valid: false)
-      @recruitment.is_valid==false
+      @recruitment.update(is_valid: false)
     end
 
     # @shop=Shop.find_by(id: params[:shop_id])
@@ -117,19 +117,19 @@ class Public::RecruitmentsController < ApplicationController
         params[:keyword],
         params[:prefecture],
         params[:schedule]
-      )
+      ).page(params[:page])
     elsif current_user.gender == "female"
       @recruitments_female_only = female_only.search(
         params[:keyword],
         params[:prefecture],
         params[:schedule]
-      )
+      ).page(params[:page])
     else
       @recruitments_anyone = anyone.search(
         params[:keyword],
         params[:prefecture],
         params[:schedule]
-      )
+      ).page(params[:page])
     end
 
     render "index"

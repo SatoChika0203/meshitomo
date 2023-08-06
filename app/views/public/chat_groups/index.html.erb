@@ -1,6 +1,15 @@
-<h2>メッセージグループ一覧</h2>
-<% @chat_groups.each do |chat_group| %>
+<h2 class="text-center">メッセージグループ一覧</h2>
 
-  <p><%= link_to chat_group.recruitment.title, recruitment_path(chat_group.recruitment.id) %></p>
-  <p><%= link_to "メッセージグループ", recruitment_chat_groups_path(chat_group.recruitment.id) %></p>
-<% end %>
+<div class="container mt-5">
+  <div class="row">
+    <% @chat_groups.each do |chat_group| %>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+      <p class="text-center"><%= image_tag chat_group.recruitment.shop.img %></p>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-7">
+      <h4><%= link_to chat_group.recruitment.title, recruitment_path(chat_group.recruitment.id) %></h4>
+      <p class="mt-5 ml-4"><%= link_to "メッセージグループへ行く", recruitment_chat_groups_path(chat_group.recruitment.id) %></p>
+    </div>
+    <% end %>
+  </div>
+</div>

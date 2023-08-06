@@ -4,12 +4,12 @@
   <% @shops.each do |shop| %>
     <div class="row pt-3 pb-5">
       <div class="col-lg-3 col-md-4 col-sm-12 col-12">
-        <p><%= image_tag shop.img %></p>
-        <p><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></p>
+        <p class="text-center"><%= image_tag shop.img %></p>
+        <p class="text-center mt-5"><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></p>
       </div>
       <div class="col-lg-9 col-md-8 col-sm-12 col-12">
-        <h4><strong><%= link_to shop.name, shop.url %></strong></h4>
-        <p><%= shop.catch %></p>
+        <h4 class="mb-4"><strong><%= link_to shop.name, shop.url %></strong></h4>
+        <p class="mb-4"><%= shop.catch %></p>
       <table class="table table-borderless">
         <tr class="row">
           <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">ジャンル</th>

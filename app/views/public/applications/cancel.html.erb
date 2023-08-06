@@ -1,4 +1,50 @@
-<h2>本当にキャンセルしますか？</h2>
+<h2 class="text-center mb-5">本当にキャンセルしますか？</h2>
 
+<div class="container mt-5">
+  <div class="row mb-4">
+    <h4 class="col-lg-12 col-md-12 col-sm-12 col-12 pb-4 text-center"><strong><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %></strong></h4>
+    <p class="col-lg-12 col-md-12 col-sm-12 col-12 mt-0 text-center"><%= @recruitment.introduction %></p>
+  </div>
+    <div class="row mb-5">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <p class="text-center pb-4"><%= image_tag @recruitment.shop.img %></p>
+        </div> 
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <table class="table table-borderless ml-4">
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">お店</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集者</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
+                  <% if @recruitment.schedule.present? %>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.schedule %></td>
+                  <% else %>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7">いつでもいいよ</td>
+                  <% end %>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人数</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.number_of_people_i18n %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.recruitment_gender_i18n %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集期限</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.deadline %></td>
+              </tr>
+          </table>
+        </div>
+    </div>
+
+
+<div class="text-center">
 <p><%= link_to "はい", withdraw_recruitment_applications_path(@recruitment.id), method: :patch %></p>
 <p><%= link_to "やっぱりやめます", recruitment_applications_path(@recruitment.id), method: :get %></p>
+</div>

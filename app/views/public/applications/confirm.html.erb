@@ -1,31 +1,73 @@
-<h2>応募確認画面</h2>
+<h2 class="text-center mb-5">応募の確認</h2>
 
-<p>以下のお食事に応募しますか？</p>
+<h5 class="text-center mb-2">以下のお食事に応募しますか？</h5>
 
-<% if @recruitment.user.image.attached? %>
-<p><%= image_tag @recruitment.user.image, size: "200x200" %></p>
-<% else %>
-<p><%= image_tag 'no_image', size: "200x200" %></p>
-<% end %>
-<p><%= @recruitment.user.nickname %></p>
-<p><%= @recruitment.title %></p>
-<p><%= @recruitment.introduction %></p>
-<p><%= @recruitment.schedule %></p>
-<p><%= @recruitment.prefecture %></p>
-<p><%= @recruitment.number_of_people_i18n %></p>
-<p><%= @recruitment.recruitment_gender_i18n %></p>
-<p><%= @recruitment.deadline %></p>
+<div class="container mt-5">
+  <div class="row mb-4">
+    <h4 class="col-lg-12 col-md-12 col-sm-12 col-12 pb-4 text-center"><strong><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %></strong></h4>
+    <p class="col-lg-12 col-md-12 col-sm-12 col-12 mt-0 text-center"><%= @recruitment.introduction %></p>
+  </div>
+    <div class="row mb-5">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <p class="text-center pb-4"><%= image_tag @recruitment.shop.img %></p>
+        </div> 
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <table class="table table-borderless ml-4">
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">お店</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集者</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
+                  <% if @recruitment.schedule.present? %>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.schedule %></td>
+                  <% else %>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7">いつでもいいよ</td>
+                  <% end %>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人数</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.number_of_people_i18n %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.recruitment_gender_i18n %></td>
+              </tr>
+              <tr class="row">
+                  <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集期限</th>
+                  <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.deadline %></td>
+              </tr>
+          </table>
+        </div>
+    </div>
 
 
-<%= form_with model: @application, url: recruitment_applications_path(@recruitment.id), method: :post do |application| %>
-<p>メッセージをどうぞ</p>
-<p><%= application.text_area :message %></p>
+    <div class="text-center">
+      <h4>応募するための情報を入力しましょう！</h4>
+      <%= form_with model: @application, url: recruitment_applications_path(@recruitment.id), method: :post do |application| %>
+        <div>
+          <table class="table table-borderless ml-4">
+            <tr class="row">
+                <th class="col-lg-12 col-md-12 col-sm-12 col-12">希望の日にち<br>（2つ目、3つ目は任意）</th>
+                <td class="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <p class="mb-0">1：<%= application.date_field :schedule_one, placeholder:"1つ目" %></p><br>
+                  <p class="my-0">２：<%= application.date_field :schedule_two, placeholder:"2つ目" %></p><br>
+                  <p class="mt-0">３：<%= application.date_field :schedule_three, placeholder:"3つ目" %></p>
+                </td>
+            </tr>
+            <tr class="row">
+                <th class="col-lg-12 col-md-12 col-sm-12 col-12 mt-1 mb-0">メッセージをどうぞ</th>
+                <td class="col-lg-12 col-md-12 col-sm-12 col-12 mt-0"><%= application.text_area :message %></td>
+            </tr>
+          </table>
+        </div>
+        <p><%= application.submit "応募する！"%></p>
+      <% end %>
+    </div>
+  <p><%= link_to "やっぱりやめる", recruitment_path(@recruitment.id), method: :get %></p>
+</div>
 
-<p>日程（2つ目、3つ目は任意）</p>
-<p><%= application.date_field :schedule_one, placeholder:"1つ目" %></p>
-<p><%= application.date_field :schedule_two, placeholder:"2つ目" %></p>
-<p><%= application.date_field :schedule_three, placeholder:"3つ目" %></p>
-<p><%= application.submit "応募する" %></p>
-<% end %>
-
-<p><%= link_to "やっぱりやめる", recruitment_path(@recruitment.id), method: :get %></p>

@@ -1,6 +1,6 @@
-<h2>ご飯を食べに行きましょう！</h2>
+<h2 class="text-center">ご飯を食べに行きましょう！</h2>
 
-<div>
+<div class="container mt-5">
   <div>
     <% if @recruitment.errors.any? %>
       <%= @recruitment.errors.count %>件のエラーが発生しました
@@ -11,92 +11,59 @@
       </ul>
     <% end %>
   </div>
-  
-  <div>
+
+  <div class="text-center">
     <%= form_with model: @recruitment do |recruitment| %>
-    <div>
-      <div>
-        <%= recruitment.label :"お店" %>
-      </div>
-      <div>
-        <%= recruitment.select :shop_id,  @shops.map{ |shop| [shop.name, shop.id] }, { include_blank: "お気に入りの店から選択してください" } %>
-        <!--@shops.map{ |shop|  [ 選択肢の表示名, 実際に送信されるデータ] }-->
-        <p><%= link_to "お気に入りの店を登録しよう", shops_path %></p>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :title, 'タイトル' %>
-      </div>
-      <div>
-        <%= recruitment.text_field :title, autofocus: true %>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :introduction, '説明文' %>
-      </div>
-      <div>
-        <%= recruitment.text_area :introduction %>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :schedule, '日程' %>
-      </div>
-      <div>
-        <%= recruitment.date_field :schedule, placeholder:"希望日を選択してください" %>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :number_of_people, '募集する人数' %>
-      </div>
-      <div>
-        <%= recruitment.select :number_of_people, Recruitment.number_of_people.keys.map {|k| [I18n.t("enums.recruitment.number_of_people.#{k}"), k]} %>
-      </div>
-      <!--recruitment.select :number_of_people, Recruitment.number_of_people_i18n.keys, {}-->
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :prefecture, 'お店がある都道府県' %>
-      </div>
-      <div>
-        <%= recruitment.select :prefecture, Recruitment.prefectures_i18n.keys, {} %>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :recruitment_gender, '募集する性別' %>
-      </div>
-      <div>
-        <%= recruitment.radio_button :recruitment_gender, Recruitment.recruitment_genders.key(0) %>
-        <%= recruitment.label :recruitment_gender, Recruitment.recruitment_genders_i18n[:male_only] %>
-        <%= recruitment.radio_button :recruitment_gender, Recruitment.recruitment_genders.key(1) %>
-        <%= recruitment.label :recruitment_gender, Recruitment.recruitment_genders_i18n[:female_only] %>
-        <%= recruitment.radio_button :recruitment_gender, Recruitment.recruitment_genders.key(2) %>
-        <%= recruitment.label :recruitment_gender, Recruitment.recruitment_genders_i18n[:anyone] %>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        <%= recruitment.label :deadline, '募集の締め切り日' %>
-      </div>
-      <div>
-        <%= recruitment.datetime_field :deadline %>
-      </div>
-    </div>
-    
-    <div>
-      <%= recruitment.submit "募集する" %>
-    </div>
+      <table class="table table-borderless">
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :"お店" %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
+            <%= recruitment.select :shop_id,  @shops.map{ |shop| [shop.name, shop.id] }, { include_blank: "お気に入りの店から選択してください" } %><br>
+            <%= link_to "お気に入りの店を登録しよう", shops_path %>
+          </td>
+          <!--@shops.map{ |shop|  [ 選択肢の表示名, 実際に送信されるデータ] }-->
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :title, 'タイトル' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.text_field :title, autofocus: true %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :introduction, '説明文' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.text_area :introduction %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :schedule, '日程' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.date_field :schedule, placeholder:"希望日を選択してください" %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :number_of_people, '募集する人数' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :number_of_people, Recruitment.number_of_people.keys.map {|k| [I18n.t("enums.recruitment.number_of_people.#{k}"), k]} %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :prefecture, 'お店がある都道府県' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :prefecture, Recruitment.prefectures_i18n.keys, {} %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :recruitment_gender, '募集する性別' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
+            <%= recruitment.radio_button :recruitment_gender, Recruitment.recruitment_genders.key(0) %>
+            <%= recruitment.label :recruitment_gender, Recruitment.recruitment_genders_i18n[:male_only] %>
+            <%= recruitment.radio_button :recruitment_gender, Recruitment.recruitment_genders.key(1) %>
+            <%= recruitment.label :recruitment_gender, Recruitment.recruitment_genders_i18n[:female_only] %>
+            <%= recruitment.radio_button :recruitment_gender, Recruitment.recruitment_genders.key(2) %>
+            <%= recruitment.label :recruitment_gender, Recruitment.recruitment_genders_i18n[:anyone] %>
+          </td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :deadline, '募集の締め切り日' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.datetime_field :deadline %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :prefecture, 'お店がある都道府県' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :prefecture, Recruitment.prefectures_i18n.keys, {} %></td>
+        </tr>
+      </table>
+      <p><%= recruitment.submit "募集する" %></p>
     <% end %>
   </div>
 </div>
