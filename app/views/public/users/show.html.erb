@@ -73,10 +73,10 @@
                 <div class="row mt-5 pt-4">
                     <% @recruitments_male_only.each do |recruitment| %>
                         <% if  recruitment.is_valid == true %>
-                          <div class="col-lg-4 col-md-4 col-sm-5 col-5">
+                          <div class="col-xl-5 col-lg-6 col-md-4 col-sm-5 col-5">
                             <p class="text-center"><%= image_tag recruitment.shop.img %></p>
                           </div>
-                          <div class="col-lg-8 col-md-8 col-sm-7 col-7">
+                          <div class="col-xl-7 col-lg-6 col-md-8 col-sm-7 col-7">
                             <h6 class="mb-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
                             <table class="table table-borderless ml-4">
                                 <tr class="row">
@@ -87,7 +87,7 @@
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">希望日</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.schedule %></td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="row mb-5">
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">募集期限</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.deadline %></td>
                                 </tr>
@@ -96,14 +96,15 @@
                         <% end %>
                     <% end %>
                 </div>
+                <%= paginate @recruitments_male_only %>
             <% elsif current_user.gender == "female" && @recruitments_female_only.exists? %>
                 <div class="row mt-5 pt-4">
                     <% @recruitments_female_only.each do |recruitment| %>
                         <% if  recruitment.is_valid == true %>
-                          <div class="col-lg-4 col-md-4 col-sm-5 col-5">
+                          <div class="col-xl-5 col-lg-6 col-md-4 col-sm-5 col-5">
                             <p class="text-center"><%= image_tag recruitment.shop.img %></p>
                           </div>
-                          <div class="col-lg-8 col-md-8 col-sm-7 col-7">
+                          <div class="col-xl-7 col-lg-6 col-md-8 col-sm-7 col-7">
                             <h6 class="mb-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
                             <table class="table table-borderless ml-4">
                                 <tr class="row">
@@ -114,7 +115,7 @@
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">希望日</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.schedule %></td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="row mb-5">
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">募集期限</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.deadline %></td>
                                 </tr>
@@ -123,14 +124,15 @@
                         <% end %>
                     <% end %>
                 </div>
-            <% elsif current_user.gender == "male" && "female" && "other" && @recruitments_anyone.exists? %>
+                <%= paginate @recruitments_female_only %>
+            <% elsif current_user.gender == "other" && @recruitments_anyone.exists? %>
                 <div class="d-flex flex-row">
                     <% @recruitments_anyone.each do |recruitment| %>
                         <% if  recruitment.is_valid == true %>
-                          <div class="col-lg-4 col-md-4 col-sm-5 col-5">
+                          <div class="col-xl-5 col-lg-6 col-md-4 col-sm-5 col-5">
                             <p class="text-center"><%= image_tag recruitment.shop.img %></p>
                           </div>
-                          <div class="col-lg-8 col-md-8 col-sm-7 col-7">
+                          <div class="col-xl-7 col-lg-6 col-md-8 col-sm-7 col-7">
                             <h6 class="mb-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
                             <table class="table table-borderless ml-4">
                                 <tr class="row">
@@ -141,7 +143,7 @@
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">希望日</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.schedule %></td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="row mb-5">
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">募集期限</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.deadline %></td>
                                 </tr>
@@ -150,6 +152,7 @@
                         <% end %>
                     <% end %>
                 </div>
+                <%= paginate @recruitments_anyone %>
             <% elsif @recruitments.empty? %>
                 <p class="text-center pt-5">まだ募集はありません…</p>
             <% end %>

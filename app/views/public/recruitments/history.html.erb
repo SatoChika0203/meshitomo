@@ -3,7 +3,7 @@
 <div class="container mt-5"> 
   <% @recruitments.each do |recruitment| %>
    <div class="mb-5 bg-warning rounded p-3">
-     <h4 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h4>
+     <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
        <div class="row pt-2">
           <div class="col-lg-3 col-md-4 col-sm-12">
             <p class="text-center"><%= image_tag recruitment.shop.img %></p>
@@ -18,4 +18,4 @@
    </div>
   <% end %>
 </div>
-<%= paginate @recruitments_page %>
+<%= paginate @recruitments %>

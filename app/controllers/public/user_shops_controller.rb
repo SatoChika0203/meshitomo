@@ -1,6 +1,6 @@
 class Public::UserShopsController < ApplicationController
   def index
-    @shops=Shop.where(user_id: current_user.id)
+    @shops=Shop.where(user_id: current_user.id).page(params[:page])
     @user=User.find(params[:user_id])
   end
   

@@ -15,7 +15,7 @@
     <% @recruitments_male_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-warning rounded p-3">
-          <h5 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
+          <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                 <p class="text-center"><%= image_tag recruitment.shop.img %></p>
@@ -43,7 +43,7 @@
     <% @recruitments_female_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-warning rounded p-4 ">
-          <h5 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
+          <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12">
                 <p class="text-center"><%= image_tag recruitment.shop.img%></p>
@@ -73,7 +73,7 @@
     <% @recruitments_anyone.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-warning rounded p-3">
-          <h5 class="my-2 ml-3"><%= link_to recruitment.title, recruitment_path(recruitment.id) %></h5>
+          <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12">
                 <p class="text-center"><%= image_tag recruitment.shop.img %></p>

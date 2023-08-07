@@ -21,8 +21,9 @@ def complete
 end
 
 def history
-  @applications=current_user.applications
-  @applications_page = Application.all.page(params[:page]).per(5)
+  @applications=current_user.applications.page(params[:page])
+  # @applications_page = Application.all.page(params[:page]).per(5)
+  @applications=current_user.applications.order(created_at: :desc).page(params[:page])
 end
 
 def show

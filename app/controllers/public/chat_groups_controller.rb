@@ -7,7 +7,7 @@ class Public::ChatGroupsController < ApplicationController
     # @chat_groups=ChatGroup.where(recruitment_id: params[:id])
     
     @chat_group_users=current_user.chat_group_users
-    @chat_groups=ChatGroup.where(id: @chat_group_users.pluck(:chat_group_id))
+    @chat_groups=ChatGroup.where(id: @chat_group_users.pluck(:chat_group_id)).page(params[:page])
   end
   
   def show
@@ -15,8 +15,9 @@ class Public::ChatGroupsController < ApplicationController
     @chat_group_users=ChatGroupUser.where(chat_group_id: @chat_group.id)
     @recruitment=Recruitment.find(params[:recruitment_id])
     @chats=Chat.where(chat_group_id: @chat_group.id)
+    @chats=Chat.where(chat_group_id: @chat_group.id).order(created_at: :desc)
     @chat=Chat.new
-    @chat_pages = Chat.all.page(params[:page]).per(5)
+    # @chat_pages = Chat.all.page(params[:page]).per(5)
     
     # @chat_data = Chat.all.order(created_at: :desc)
     # @chat_pages = Kaminari.paginate_array(@chat_data).page(params[:page]).per(10)

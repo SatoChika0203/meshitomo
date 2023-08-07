@@ -36,12 +36,12 @@
           <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.date_field :schedule, placeholder:"希望日を選択してください" %></td>
         </tr>
         <tr class="row mb-4">
-          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :number_of_people, '募集する人数' %></th>
-          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :number_of_people, Recruitment.number_of_people.keys.map {|k| [I18n.t("enums.recruitment.number_of_people.#{k}"), k]} %></td>
-        </tr>
-        <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :prefecture, 'お店がある都道府県' %></th>
           <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :prefecture, Recruitment.prefectures_i18n.keys, {} %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :number_of_people, '募集する人数' %></th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :number_of_people, Recruitment.number_of_people.keys.map {|k| [I18n.t("enums.recruitment.number_of_people.#{k}"), k]} %></td>
         </tr>
         <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :recruitment_gender, '募集する性別' %></th>
@@ -57,10 +57,6 @@
         <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :deadline, '募集の締め切り日' %></th>
           <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.datetime_field :deadline %></td>
-        </tr>
-        <tr class="row mb-4">
-          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :prefecture, 'お店がある都道府県' %></th>
-          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.select :prefecture, Recruitment.prefectures_i18n.keys, {} %></td>
         </tr>
       </table>
       <p><%= recruitment.submit "募集する" %></p>
