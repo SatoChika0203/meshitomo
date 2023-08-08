@@ -14,7 +14,7 @@
   <% if current_user.gender == "male" %>
     <% @recruitments_male_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
-        <div class="mb-5 bg-warning rounded p-3">
+        <div class="mb-5 bg-white rounded-3 p-5" style="border-radius:50px;">
           <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12 col-12">
@@ -42,7 +42,7 @@
   <% elsif current_user.gender == "female" %>
     <% @recruitments_female_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
-        <div class="mb-5 bg-warning rounded p-4 ">
+        <div class="mb-5 bg-white rounded-3 p-5" style="border-radius:50px;">
           <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12">
@@ -72,7 +72,7 @@
   <% elsif current_user.gender == "other" %>
     <% @recruitments_anyone.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
-        <div class="mb-5 bg-warning rounded p-3">
+        <div class="mb-5 bg-white rounded-3 p-5" style="border-radius:50px;">
           <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
             <div class="row pt-2">
               <div class="col-lg-3 col-md-3 col-sm-12">

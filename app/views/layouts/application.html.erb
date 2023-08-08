@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
   </head>
 
-  <body>
+  <body style="background-color:#F2EECC;">
     <header class="sticky-top">
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
@@ -24,9 +24,6 @@
                 <% if user_signed_in? %>
                   <li class="m-2">
                     <%= link_to "募集一覧（後で消す）", recruitments_path %>
-                  </li>
-                  <li class="m-2">
-                    <%= link_to "募集", new_recruitment_path %>
                   </li>
                   <li class="m-2">
                     <%= link_to "マイページ", user_path(current_user.id) %>
@@ -72,5 +69,10 @@
       </nav>
     </header>     
     <%= yield %>
+    <% if user_signed_in? %>
+      <div class="fixed-bottom m-5 p3-2" style="left:initial;">
+        <div class="text-center rounded-circle position-relative bg-white" style="width:10rem;height:10rem;color:#e67c00;"><%= link_to image_tag('ramen.png'), new_recruitment_path %><br>食事に行く</button>
+      </div>
+    <% end %>
   </body>
 </html>

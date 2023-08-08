@@ -1,6 +1,6 @@
 <h2 class="text-center">ご飯を食べに行きましょう！</h2>
 
-<div class="container mt-5">
+<div class="container my-5">
   <div>
     <% if @recruitment.errors.any? %>
       <%= @recruitment.errors.count %>件のエラーが発生しました
@@ -12,7 +12,7 @@
     <% end %>
   </div>
 
-  <div class="text-center">
+  <div class="text-center rounded-3 bg-white" style="border-radius:100px;">
     <%= form_with model: @recruitment do |recruitment| %>
       <table class="table table-borderless">
         <tr class="row mb-4">
@@ -59,7 +59,7 @@
           <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.datetime_field :deadline %></td>
         </tr>
       </table>
-      <p><%= recruitment.submit "募集する" %></p>
+      <p class="pb-4"><%= recruitment.submit "募集する" %></p>
     <% end %>
   </div>
 </div>

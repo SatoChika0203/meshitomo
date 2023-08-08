@@ -12,50 +12,52 @@
 <% if @shops.present? %>
   <h4>お店の検索結果</h4>
     <% @shops.each do |shop| %>
-      <div class="row pt-5 pb-2">
-        <div class="col-lg-3 col-md-4 col-sm-12 col-12">
-          <p class="text-center"><%= image_tag shop['photo']['pc']['m'] %></p>
-           <% if @favorite_shop.exists?(hotpepper_shop_id: shop['id']) %>
-              <p class="text-center pt-2"><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.ids), method: :delete %></p>
-            <% else %>
-                <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
-                <%= f.hidden_field :hotpepper_shop_id, value: shop['id'] %>
-                <%= f.hidden_field :name, value: shop['name'] %>
-                <%= f.hidden_field :address, value: shop['address'] %>
-                <%= f.hidden_field :url, value: shop['urls']['pc'] %>
-                <%= f.hidden_field :catch, value: shop['catch'] %>
-                <%= f.hidden_field :open, value: shop['open'] %>
-                <%= f.hidden_field :close, value: shop['close'] %>
-                <%= f.hidden_field :genre, value: shop['genre']['name'] %>
-                <%= f.hidden_field :budget_average, value: shop['budget']['average'] %>
-                <%= f.hidden_field :access, value: shop['access	'] %>
-                <%= f.hidden_field :parking, value: shop['parking'] %>
-                <%= f.hidden_field :img, value: shop['photo']['pc']['m'] %>
-                <p class="text-center pt-2"><%= f.submit 'お気に入りに追加' %></p>
+      <div class="rounded-3 bg-white p-5 mb-5" style="border-radius:50px;">
+        <div class="row pt-3">
+          <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+            <p class="text-center"><%= image_tag shop['photo']['pc']['m'] %></p>
+             <% if @favorite_shop.exists?(hotpepper_shop_id: shop['id']) %>
+                <p class="text-center pt-2"><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.ids), method: :delete %></p>
+              <% else %>
+                  <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
+                  <%= f.hidden_field :hotpepper_shop_id, value: shop['id'] %>
+                  <%= f.hidden_field :name, value: shop['name'] %>
+                  <%= f.hidden_field :address, value: shop['address'] %>
+                  <%= f.hidden_field :url, value: shop['urls']['pc'] %>
+                  <%= f.hidden_field :catch, value: shop['catch'] %>
+                  <%= f.hidden_field :open, value: shop['open'] %>
+                  <%= f.hidden_field :close, value: shop['close'] %>
+                  <%= f.hidden_field :genre, value: shop['genre']['name'] %>
+                  <%= f.hidden_field :budget_average, value: shop['budget']['average'] %>
+                  <%= f.hidden_field :access, value: shop['access	'] %>
+                  <%= f.hidden_field :parking, value: shop['parking'] %>
+                  <%= f.hidden_field :img, value: shop['photo']['pc']['m'] %>
+                  <p class="text-center pt-2"><%= f.submit 'お気に入りに追加' %></p>
+                <% end %>
               <% end %>
-            <% end %>
-        </div>
-        
-        <div class="col-lg-9 col-md-8 col-sm-12 col-12">
-          <h4><strong><%= link_to shop['name'], shop['urls']['pc'] %></strong></h4>
-          <table class="table table-borderless">
-            <tr class="row">
-              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">ジャンル</th>
-              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['address'] %></td>
-            </tr>
-            <tr class="row">
-              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">アクセス</th>
-              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['access'] %></td>
-            </tr>
-            <tr class="row">
-              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">営業時間</th>
-              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['open'] %></td>
-            </tr>
-            <tr class="row">
-              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">定休日</th>
-              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['close'] %></td>
-            </tr>
-          </table>
+          </div>
+          
+          <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+            <h4><strong><%= link_to shop['name'], shop['urls']['pc'] %></strong></h4>
+            <table class="table table-borderless">
+              <tr class="row">
+                <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">ジャンル</th>
+                <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['address'] %></td>
+              </tr>
+              <tr class="row">
+                <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">アクセス</th>
+                <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['access'] %></td>
+              </tr>
+              <tr class="row">
+                <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">営業時間</th>
+                <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['open'] %></td>
+              </tr>
+              <tr class="row">
+                <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">定休日</th>
+                <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop['close'] %></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     <% end %>
