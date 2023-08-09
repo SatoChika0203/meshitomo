@@ -1,1 +1,19 @@
 @use '~bootstrap/scss/bootstrap';
+
+.btn-color-green{
+  background: #56683A;
+  color: white;
+}
+
+.btn-color-gray{
+  background: #C6C2BE;
+  color: white;
+}
+
+.border-radius-80{
+  border-radius: 80px;
+}
+
+.border-radius-50{
+  border-radius: 50px;
+}

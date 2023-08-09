@@ -1,4 +1,4 @@
-<h2 class="text-center"><%= @user.nickname %>さんのお気に入りのお店</h2>
+<h2 class="text-center" id="user-shops"><%= @user.nickname %>さんのお気に入りのお店</h2>
 
 <div class="container mt-5">
   <% @shops.each do |shop| %>
@@ -6,7 +6,7 @@
       <div class="row pt-3">
         <div class="col-lg-3 col-md-4 col-sm-12 col-12">
           <p class="text-center"><%= image_tag shop.img %></p>
-          <button type="button" class="btn btn-danger text-center mt-5 link-light"><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete %></button>
+          <p class="text-center mt-5"><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delet, class: "btn btn-color-green btn-sm" %></p>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-12 col-12">
           <h4 class="mb-4"><strong><%= link_to shop.name, shop.url %></strong></h4>
@@ -19,11 +19,11 @@
           <tr class="row">
             <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">予算</th>
             <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.budget_average %></td>
-          </tr>        
+          </tr>
           <tr class="row">
             <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">住所</th>
             <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.address %></td>
-          </tr>        
+          </tr>
           <tr class="row">
             <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">駐車場</th>
             <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.parking %></td>
@@ -31,11 +31,11 @@
           <tr class="row">
             <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">営業時間</th>
             <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.open %></td>
-          </tr>        
+          </tr>
           <tr class="row">
             <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">定休日</th>
             <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.close %></td>
-          </tr>        
+          </tr>
         </table>
       </div>
       </div>

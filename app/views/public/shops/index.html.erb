@@ -17,7 +17,7 @@
           <div class="col-lg-3 col-md-4 col-sm-12 col-12">
             <p class="text-center"><%= image_tag shop['photo']['pc']['m'] %></p>
              <% if @favorite_shop.exists?(hotpepper_shop_id: shop['id']) %>
-                <p class="text-center pt-2"><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.ids), method: :delete %></p>
+                <p class="text-center pt-2"><%= link_to "お気に入りを解除する", shop_path(@favorite_shop.ids), method: :delete, class: "btn btn-color-green btn-sm" %></p>
               <% else %>
                   <%= form_with model: @shop, url: shops_path, method: :post do |f| %>
                   <%= f.hidden_field :hotpepper_shop_id, value: shop['id'] %>
@@ -32,7 +32,7 @@
                   <%= f.hidden_field :access, value: shop['access	'] %>
                   <%= f.hidden_field :parking, value: shop['parking'] %>
                   <%= f.hidden_field :img, value: shop['photo']['pc']['m'] %>
-                  <p class="text-center pt-2"><%= f.submit 'お気に入りに追加' %></p>
+                  <p class="text-center pt-2"><button class="btn btn-color-green btn-sm" type="submit">お気に入りに追加</button></p>
                 <% end %>
               <% end %>
           </div>
