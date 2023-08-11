@@ -11,9 +11,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
   </head>
 
-  <body style="background-color:#F2EECC;">
+  <body style="background-color:#fffce7;">
     <header class="sticky-top">
       <nav class="navbar navbar-expand-md navbar-bg">
         <div class="container">
@@ -22,13 +27,13 @@
             <span class="navbar-toggler-icon"></span>
           </button>
             <div class="justify-content-end collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto">
+              <ul class="navbar-nav ml-auto nav-bg">
                 <% if user_signed_in? %>
                   <li class="m-2">
                     <%= link_to "募集一覧（後で消す）", recruitments_path %>
                   </li>
-                  <li class="dropdown m-2">
-                    <%= link_to "マイページ", user_path(current_user.id) %>
+                  <li class="dropdown m-2" data-bs-toggle="tooltip" title="ユーザー情報">
+                    <%= link_to image_tag('people.png'), user_path(current_user.id) %>
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           マイページ
                         </a>
@@ -45,11 +50,11 @@
                   <li class="m-2">
                     <%= link_to "応募履歴", history_applications_path %>
                   </li>
-                  <li class="m-2">
-                    <%= link_to "メッセージグループ一覧", chat_groups_path %>
+                  <li class="m-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
+                    <%= link_to image_tag('mail.png'), chat_groups_path %>
                   </li>
-                  <li class="m-2">
-                    <%= link_to "お店を調べる", shops_path %>
+                  <li class="m-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="お店を探す">
+                    <%= link_to image_tag('cock.png'), shops_path %>
                   </li>
                   <li class="m-2">
                     <%= link_to "お気に入りのお店", user_user_shops_path(current_user.id) %>
@@ -81,8 +86,8 @@
     </header>     
     <%= yield %>
     <% if user_signed_in? %>
-      <div class="fixed-bottom m-5 p3-2" style="left:initial;">
-        <div class="text-center rounded-circle position-relative bg-white" style="width:10rem;height:10rem;color:#e67c00;"><%= link_to image_tag('ramen.png'), new_recruitment_path %><br>食事に行く</button>
+      <div class="fixed-bottom m-5 p3-2 rounded-circle bg-white border border-3" style="left:initial;width:12rem;height:12rem;color:#4b4b4b;">
+        <img class="d-block mx-auto"><%= link_to image_tag('ramen.png'), new_recruitment_path %><br>食事に行く</img>
       </div>
     <% end %>
   </body>

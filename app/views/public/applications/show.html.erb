@@ -76,7 +76,7 @@
                 <% if @application.recruitment.is_valid==true %>
                   <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">
                     <p>募集中</p>
-                    <p><%= link_to "キャンセルしますか？", cancel_recruitment_applications_path(@application.recruitment.id), method: :post %></p>
+                    <p><%= link_to "キャンセルしますか？", cancel_recruitment_applications_path(@application.recruitment.id), method: :post, class: "btn btn-color-gray btn-sm"%></p>
                   </td>
                 <% else %>
                   <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">募集は終了しました。</td>
