@@ -1,6 +1,6 @@
-<h2 class="text-center pb-5">募集詳細</h2>
+<h2 class="text-center">募集詳細</h2>
 
-<div class="container mt-5">
+<div class="container my-3">
     <div class="bg-white border-radius-80 pt-5 pb-3">
         <div class="row mb-5">
             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -13,8 +13,8 @@
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <h3 class="mb-4"><strong><%= @recruitment.title %></strong></h3>
-                <p class="mb-4 ml-4 pt-2"><%= @recruitment.introduction %></p>
-                <table class="table table-borderless ml-4">
+                <p class="mb-4  pt-2"><%= @recruitment.introduction %></p>
+                <table class="table table-borderless ">
                     <tr class="row">
                         <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
                         <% if @recruitment.schedule.present? %>
@@ -41,17 +41,17 @@
     </div>
 </div>
 
-<div class="container mt-5">
-    <h2 class="text-center">お店の情報</h2>
-    <div class="bg-white border-radius-80 p-3">
-        <div class="row mt-5">
-            <div class="col-lg-3 col-md-4 col-sm-12 mb-5">
+<div class="container py-5">
+    <h2 class="text-center pb-3">お店の情報</h2>
+    <div class="bg-white border-radius-80">
+        <div class="row pt-5 pb-3">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
                 <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
             </div>
-            <div class="col-lg-9 col-md-8 col-sm-12">
+            <div class="col-lg-8 col-md-8 col-sm-12 text-wrap">
                 <h4 class="mb-4"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></h4>
-                <p class="mb-3 ml-4"><%= @recruitment.shop.catch %></p>
-                    <table class="table table-borderless ml-4">
+                <p class="mb-3"><%= @recruitment.shop.catch %></p>
+                    <table class="table table-borderless ">
                         <tr class="row">
                             <th class="col-lg-2 col-md-4 col-sm-5 col-5">ジャンル</th>
                             <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.genre %></td>
@@ -88,8 +88,8 @@
 
 <div class="container mt-5">
     <% if @recruitment.user_id != current_user.id %>
-     <h2 class="text-center mb-4">応募状況</h2>
-     <div class="bg-white border-radius-80 pt-5 pb-3">
+     <h2 class="text-center">応募状況</h2>
+     <div class="bg-white border-radius-80 py-3 my-3">
         <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
             <p class="text-center"><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
         <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
@@ -126,11 +126,31 @@
     <div class="row mx-auto">
     <% if @recruitment.user_id == current_user.id %>
         <p><%= link_to "編集", edit_recruitment_path, class: "btn btn-color-green" %></p>
-        <p><%= link_to '削除', withdraw_recruitment_path(@recruitment.id), { method: :withdraw, form: { data: { turbo_confirm: "本当に削除しますか？" } },  class: "btn btn-color-gray" } %></p>
+        <p><button type="button" class="btn btn-color-gray" data-toggle="modal" data-target="#exampleModal">削除</button></p>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!--モーダルのタイトル-->
+                <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                 <!--モーダルのメッセージ-->
+              <div class="modal-body">削除しますか？</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-color-green" data-dismiss="modal">やめる</button>
+                <%= link_to "削除", withdraw_recruitment_path(@recruitment.id), method: :withdraw, class: "btn btn-color-gray" %>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     
         <h2 class="text-center">応募状況</h2>
-            <div class="bg-white border-radius-80 pt-5 pb-3">
+            <div class="bg-white border-radius-80 py-3 my-3">
                 <% if @recruitment.is_valid == true && @applications.present? %>
                     <p class="text-center mt-4 pb-3">応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
                         <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id),method: :post do |f| %>

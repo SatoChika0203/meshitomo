@@ -1,8 +1,14 @@
 @use '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;900&display=swap');
+
 
 // .nav-bg{
 //   background-image: url(app/assets/images/background_wahu.jpeg);
 // }
+
+*{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
 
 .btn-color-green{
   background: #abb97f;
@@ -21,4 +27,9 @@
 .border-radius-50{
   border-radius: 50px;
 }
+
+.nav-bg{
+  background-image: url(../images/check.png);
+}
+
 

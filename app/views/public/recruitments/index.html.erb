@@ -15,8 +15,8 @@
     <% @recruitments_male_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-white rounded-3 p-5 border" style="border-radius:50px;">
-          <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
-            <div class="row pt-2">
+          <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
+            <div class="row pt-3">
               <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                 <p class="text-center"><%= image_tag recruitment.shop.img %></p>
               </div>
@@ -43,8 +43,8 @@
     <% @recruitments_female_only.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-white rounded-3 p-5 border" style="border-radius:50px;">
-          <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
-            <div class="row pt-2">
+          <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
+            <div class="row pt-3">
               <div class="col-lg-3 col-md-3 col-sm-12">
                 <p class="text-center"><%= image_tag recruitment.shop.img%></p>
               </div>
@@ -73,8 +73,8 @@
     <% @recruitments_anyone.each do |recruitment| %>
       <% if recruitment.is_valid==true %>
         <div class="mb-5 bg-white rounded-3 p-5 border" style="border-radius:50px;">
-          <h5 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h5>
-            <div class="row pt-2">
+          <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
+            <div class="row pt-3">
               <div class="col-lg-3 col-md-3 col-sm-12">
                 <p class="text-center"><%= image_tag recruitment.shop.img %></p>
               </div>

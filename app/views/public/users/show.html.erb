@@ -1,6 +1,6 @@
 <h2 class="text-center" id="user-page">会員詳細</h2>
 
-<div class="container mt-5 border-radius-80 bg-white p-5">
+<div class="container mt-5 border border-radius-80 bg-white py-5">
     <div class="text-center pt-4">
         <% if @user.image.attached? %>
             <p><%= image_tag @user.image, size: "200x200" %></p>
@@ -74,10 +74,10 @@
                     <div class="row mt-5 pt-4">
                         <% @recruitments_male_only.each do |recruitment| %>
                             <% if  recruitment.is_valid == true %>
-                                  <div class="col-xl-5 col-lg-6 col-md-4 col-sm-5 col-5">
+                                  <div class="col-xl-4 col-lg-5 col-md-4 col-sm-12 col-12 pb-4">
                                     <p class="text-center"><%= image_tag recruitment.shop.img %></p>
                                   </div>
-                                  <div class="col-xl-7 col-lg-6 col-md-8 col-sm-7 col-7">
+                                  <div class="col-xl-8 col-lg-7 col-md-8 col-sm-12 col-12">
                                     <h6 class="mb-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
                                     <table class="table table-borderless ml-4">
                                         <tr class="row">
@@ -100,14 +100,14 @@
                 </div>                        
                 <%= paginate @recruitments_male_only %>
             <% elsif current_user.gender == "female" && @recruitments_female_only.exists? %>
-                <div class="mt-5 border-bottom border-radius-80 bg-white p-5">
-                    <div class="row mt-5 pt-4">
+                <div class="mt-5 border border-bottom border-radius-80 bg-white p-5">
+                    <div class="row mt-5">
                         <% @recruitments_female_only.each do |recruitment| %>
                             <% if  recruitment.is_valid == true %>
-                              <div class="col-xl-5 col-lg-6 col-md-4 col-sm-5 col-5">
+                              <div class="col-xl-4 col-lg-5 col-md-4 col-sm-12 col-12 pb-4">
                                 <p class="text-center"><%= image_tag recruitment.shop.img %></p>
                               </div>
-                              <div class="col-xl-7 col-lg-6 col-md-8 col-sm-7 col-7">
+                              <div class="col-xl-8 col-lg-7 col-md-8 col-sm-12 col-12">
                                 <h6 class="mb-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
                                 <table class="table table-borderless ml-4">
                                     <tr class="row">
@@ -135,10 +135,10 @@
                         <% @recruitments_anyone.each do |recruitment| %>
                             <% if  recruitment.is_valid == true %>
                             <div class="container border-bottom mt-5 rounded-3 bg-white p-5" style="border-radius:80px;">
-                              <div class="col-xl-5 col-lg-6 col-md-4 col-sm-5 col-5">
+                              <div class="col-xl-4 col-lg-5 col-md-4 col-sm-12 col-12 pb-4">
                                 <p class="text-center"><%= image_tag recruitment.shop.img %></p>
                               </div>
-                              <div class="col-xl-7 col-lg-6 col-md-8 col-sm-7 col-7">
+                              <div class="col-xl-8 col-lg-7 col-md-8 col-sm-12 col-12">
                                 <h6 class="mb-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
                                 <table class="table table-borderless ml-4">
                                     <tr class="row">
