@@ -1,21 +1,23 @@
-<h2 class="text-center" id="history-recruitments"><%= current_user.name %>さんの募集履歴</h2>
-
-<div class="container mt-5"> 
-  <% @recruitments.each do |recruitment| %>
-   <div class="mb-5 p-5 rounded-3 bg-white border" style="border-radius:50px;">
-     <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
-       <div class="row pt-3">
-          <div class="col-lg-3 col-md-4 col-sm-12">
-            <p class="text-center"><%= image_tag recruitment.shop.img %></p>
-          </div>
-       <div class="col-lg-9 col-md-8 col-sm-12">
-         <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
-         <p><%= recruitment.shop.address %></p>
-         <p>希望日　<%= recruitment.schedule %></p>
-         <p>募集期限　<%= recruitment.deadline %></p>
+<div class="my-5">
+  <h2 class="text-center"><%= current_user.name %>さんの募集履歴</h2>
+  
+  <div class="container mt-5"> 
+    <% @recruitments.each do |recruitment| %>
+     <div class="mb-5 p-5 rounded-3 bg-white border" style="border-radius:50px;">
+       <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
+         <div class="row pt-3">
+            <div class="col-lg-3 col-md-4 col-sm-12">
+              <p class="text-center"><%= image_tag recruitment.shop.img %></p>
+            </div>
+         <div class="col-lg-9 col-md-8 col-sm-12">
+           <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+           <p><%= recruitment.shop.address %></p>
+           <p>希望日　<%= recruitment.schedule %></p>
+           <p>募集期限　<%= recruitment.deadline %></p>
+         </div>
        </div>
      </div>
-   </div>
-  <% end %>
+    <% end %>
+  </div>
+  <%= paginate @recruitments %>
 </div>
-<%= paginate @recruitments %>

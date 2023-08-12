@@ -27,9 +27,6 @@ class Public::ShopsController < ApplicationController
 
   end
 
-  def show
-
-  end
 
   def create
     shop = Shop.new(shop_params)
@@ -37,8 +34,8 @@ class Public::ShopsController < ApplicationController
     # if Shop.exists?(hotpepper_shop_id: shop.hotpepper_shop_id)
     #   render :index
     # else
-      shop.save
-      redirect_to user_user_shops_path(current_user.id)
+    shop.save
+    redirect_to user_user_shops_path(current_user.id)
     # end
   end
   

@@ -1,9 +1,27 @@
-応募者選択の確認
-
-<% @chat_group.chat_group_users.each do |chat_group_user| %>
-<%= chat_group_user.user.nickname %>
-<% end %>
-<%= form_with model: @chat_group, url: generate_recruitment_path(@chat_group.recruitment_id) do |f| %>
-    <%= f.hidden_field :user_ids, value: @chat_group.chat_group_users.map(&:user_id).join(',') %>
-    <%= f.submit 'submit' %>
-<% end %>
+<div class="my-5">
+    <h2 class="text-center">こちらの方と一緒に行きますか？</h2>
+    
+    <div class="container mt-5">
+        <div class="row">
+        <% @chat_group.chat_group_users.each do |chat_group_user| %>
+            <div class="text-center">
+                <% if application.applicant.image.attached? %>
+                    <p class="text-center"><%= image_tag application.applicant.image, size: "80x80" %></p>
+                <% else %>
+                    <p class="text-center"><%= image_tag 'no_image', size: "80x80" %></p>
+                <% end %>
+                <p><%= chat_group_user.user.nickname %></p>
+            </div> 
+            <div>
+                <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
+                <p><%= application.message %></p>
+                <p>希望日：<%= application.schedule_one %>　<%= application.schedule_two %>　<%= application.schedule_three %></p>        
+            </div>
+        <% end %>
+        </div>
+        <%= form_with model: @chat_group, url: generate_recruitment_path(@chat_group.recruitment_id) do |f| %>
+        <%= f.hidden_field :user_ids, value: @chat_group.chat_group_users.map(&:user_id).join(',') %>
+        <p><button class="btn btn-color-green btn-lg my-3" type="submit">決定</button></p>
+        <p><%= link_to "戻る", user_path(current_user.id) %></p>
+    <% end %>
+</div>

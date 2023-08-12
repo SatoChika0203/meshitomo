@@ -1,88 +1,90 @@
-<h2 class="text-center">応募履歴</h2>
-
-<div class="container my-4">
-  <div class="border border-radius-80 bg-white p-5">
-    <div class="row mb-5">
-        <div class="col-lg-4 col-md-4 col-sm-12">
-            <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
-            <h3 class="mb-4"><strong><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %></strong></h3>
-            <p class="mb-4 ml-4 pt-2"><%= @recruitment.introduction %></p>
-            <table class="table table-borderless ml-4">
-                <tr class="row">
-                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">お店</th>
-                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集者</th>
-                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
-                    <% if @recruitment.schedule.present? %>
-                        <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.schedule %></td>
-                    <% else %>
-                        <td class="col-lg-8 col-md-8 col-sm-7 col-7">いつでもいいよ</td>
-                    <% end %>
-                </tr>
-                <tr class="row">
-                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人数</th>
-                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.number_of_people_i18n %></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人</th>
-                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.recruitment_gender_i18n %></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集期限</th>
-                    <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.deadline %></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-  </div>
+<div class="my-5">
+  <h2 class="text-center">応募履歴</h2>
   
-    <div class="mt-5">
-      <h4 class="text-center py-3">応募情報</h4>
-        <div class="bg-white pt-4 border-radius-80 border">
-          <table class="table table-borderless ml-4">
-            <tr class="row pb-3">
-                <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">メッセージ</th>
-                <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left"><%= @application.message %></td>
-            </tr>      
-            <tr class="row pb-3">
-                <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">提示スケジュール</th>
-                <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">
-                  <%= @application.schedule_one %><br>
-                  <%= @application.schedule_two %>
-                  <%= @application.schedule_three %>
-                </td>
-            </tr>    
-            <tr class="row pb-3">
-                <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">応募状況</th>
-                <% if @application.is_valid==true && @application.is_approval.blank? %>
-                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">応募済み</td>
-                <% elsif @application.is_valid==false && @application.is_approval.blank? %>
-                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">キャンセル済み</td>
-                <% elsif @application.is_approval==true %>
-                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">応募が承認されました！</td>
-                <% elsif @application.is_approval==false %>
-                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">応募締め切り</td>
-                <% end %>
-            </tr>  
-            <tr class="row pb-3">
-                <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">募集状況</th>
-                <% if @application.recruitment.is_valid==true %>
-                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">
-                    <p>募集中</p>
-                    <p><%= link_to "キャンセルしますか？", cancel_recruitment_applications_path(@application.recruitment.id), method: :post, class: "btn btn-color-gray btn-sm"%></p>
-                  </td>
-                <% else %>
-                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">募集は終了しました。</td>
-                <% end %>
-            </tr> 
-          </table>
-        </div>
+  <div class="container my-4">
+    <div class="border border-radius-80 bg-white p-5">
+      <div class="row mb-5">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+              <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12">
+              <h3 class="mb-4"><strong><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %></strong></h3>
+              <p class="mb-4 ml-4 pt-2"><%= @recruitment.introduction %></p>
+              <table class="table table-borderless ml-4">
+                  <tr class="row">
+                      <th class="col-lg-4 col-md-4 col-sm-5 col-5">お店</th>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集者</th>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
+                      <% if @recruitment.schedule.present? %>
+                          <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.schedule %></td>
+                      <% else %>
+                          <td class="col-lg-8 col-md-8 col-sm-7 col-7">いつでもいいよ</td>
+                      <% end %>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人数</th>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.number_of_people_i18n %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人</th>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.recruitment_gender_i18n %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集期限</th>
+                      <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.deadline %></td>
+                  </tr>
+              </table>
+          </div>
+      </div>
     </div>
+    
+      <div class="mt-5">
+        <h4 class="text-center py-3">応募情報</h4>
+          <div class="bg-white pt-4 border-radius-80 border">
+            <table class="table table-borderless ml-4">
+              <tr class="row pb-3">
+                  <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">メッセージ</th>
+                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left"><%= @application.message %></td>
+              </tr>      
+              <tr class="row pb-3">
+                  <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">提示スケジュール</th>
+                  <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">
+                    <%= @application.schedule_one %><br>
+                    <%= @application.schedule_two %>
+                    <%= @application.schedule_three %>
+                  </td>
+              </tr>    
+              <tr class="row pb-3">
+                  <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">応募状況</th>
+                  <% if @application.is_valid==true && @application.is_approval.blank? %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">応募済み</td>
+                  <% elsif @application.is_valid==false && @application.is_approval.blank? %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">キャンセル済み</td>
+                  <% elsif @application.is_approval==true %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">応募が承認されました！</td>
+                  <% elsif @application.is_approval==false %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">応募締め切り</td>
+                  <% end %>
+              </tr>  
+              <tr class="row pb-3">
+                  <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">募集状況</th>
+                  <% if @application.recruitment.is_valid==true %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">
+                      <p>募集中</p>
+                      <p><%= link_to "キャンセルしますか？", cancel_recruitment_applications_path(@application.recruitment.id), method: :post, class: "btn btn-color-gray btn-sm"%></p>
+                    </td>
+                  <% else %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">募集は終了しました。</td>
+                  <% end %>
+              </tr> 
+            </table>
+          </div>
+      </div>
+  </div>
 </div>

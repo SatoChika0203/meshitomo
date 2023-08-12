@@ -1,62 +1,64 @@
-<h2 class="text-center"><%= @user.name %>さんの編集画面</h2>
-
-<div class="container text-center bg-white my-5 py-5 border-radius-80">
-  <%= form_with model: @user, url:user_path(@user.id), method: :patch do |user| %>
-<table class="table table-borderless">
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">プロフィール画像</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.file_field :image, placeholder: "プロィール画像", accept: "image/*" %></td>
-    <!--image/*　：　画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
-  </tr>  
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">氏名</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :last_name, autofocus: true, placeholder:"性"%> <%= user.text_field :first_name, placeholder:"名" %></td>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :last_name_kana, placeholder:"セイ" %> <%= user.text_field :first_name_kana, placeholder:"メイ" %></td>
-  </tr>
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">ニックネーム</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :nickname %></td>
-  </tr>    
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0">自己紹介文</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_area :introduction %></td>
-  </tr>  
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">メールアドレス</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :email %></td>
-  </tr>  
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">住所</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
-      <p>〒<%= user.text_field :postal_code, placeholder:"郵便番号" %></p>
-      <p><%= user.text_area :address, placeholder:"住所" %></p>
-    </td>
-  </tr>  
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">電話番号</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :telephone_number %></td>
-  </tr> 
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">性別</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
-      <%= user.radio_button :gender, User.genders.key(0) %>
-      <%= user.label :gender_male, User.genders_i18n[:male] %>
-      <%= user.radio_button :gender, User.genders.key(1) %>
-      <%= user.label :gender_female, User.genders_i18n[:female] %>
-      <%= user.radio_button :gender, User.genders.key(2) %>
-      <%= user.label :gender_other, User.genders_i18n[:other] %>
-    </td>
-  </tr> 
-  <tr class="row mb-4">
-    <th class="col-lg-12 col-md-12 col-sm-12 col-12">都道府県</th>
-    <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.select :prefectures, User.prefectures.keys, {include_blank: '都道府県を選択してください'} %></td>
-  </tr> 
-</table>
-<p><button class="btn btn-color-green btn-lg my-3" type="submit">更新する</button></p>
-<%end%>
-<p><%= link_to "戻る", user_path(@user.id) %></p>
-</div>
-
-<div class="text-center">
-<p><%= link_to "退会する", confirm_user_path(@user.id), class: "btn btn-color-gray btn-sm" %></p>
+<div class="my-5">
+  <h2 class="text-center"><%= @user.name %>さんの編集画面</h2>
+  
+  <div class="container text-center bg-white my-5 py-5 border-radius-80">
+    <%= form_with model: @user, url:user_path(@user.id), method: :patch do |user| %>
+      <table class="table table-borderless">
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">プロフィール画像</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.file_field :image, placeholder: "プロィール画像", accept: "image/*" %></td>
+          <!--image/*　：　画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
+        </tr>  
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">氏名</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :last_name, autofocus: true, placeholder:"性"%> <%= user.text_field :first_name, placeholder:"名" %></td>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :last_name_kana, placeholder:"セイ" %> <%= user.text_field :first_name_kana, placeholder:"メイ" %></td>
+        </tr>
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">ニックネーム</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :nickname %></td>
+        </tr>    
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0">自己紹介文</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_area :introduction %></td>
+        </tr>  
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">メールアドレス</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :email %></td>
+        </tr>  
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">住所</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
+            <p>〒<%= user.text_field :postal_code, placeholder:"郵便番号" %></p>
+            <p><%= user.text_area :address, placeholder:"住所" %></p>
+          </td>
+        </tr>  
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">電話番号</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.text_field :telephone_number %></td>
+        </tr> 
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">性別</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
+            <%= user.radio_button :gender, User.genders.key(0) %>
+            <%= user.label :gender_male, User.genders_i18n[:male] %>
+            <%= user.radio_button :gender, User.genders.key(1) %>
+            <%= user.label :gender_female, User.genders_i18n[:female] %>
+            <%= user.radio_button :gender, User.genders.key(2) %>
+            <%= user.label :gender_other, User.genders_i18n[:other] %>
+          </td>
+        </tr> 
+        <tr class="row mb-4">
+          <th class="col-lg-12 col-md-12 col-sm-12 col-12">都道府県</th>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.select :prefectures, User.prefectures.keys, {include_blank: '都道府県を選択してください'} %></td>
+        </tr> 
+      </table>
+    <p><button class="btn btn-color-green btn-lg my-3" type="submit">更新する</button></p>
+  <%end%>
+  <p><%= link_to "戻る", user_path(@user.id) %></p>
+  </div>
+  
+  <div class="text-center">
+  <p><%= link_to "退会する", confirm_user_path(@user.id), class: "btn btn-color-gray btn-sm" %></p>
+  </div>
 </div>

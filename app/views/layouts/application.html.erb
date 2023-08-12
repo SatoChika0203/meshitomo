@@ -18,9 +18,9 @@
     </script-->
   </head>
 
-  <body style="background-color:#fffce7;">
+  <body class="body-bg" >
     <header class="sticky-top">
-      <nav class="navbar navbar-expand-md navbar-light nav-bg">
+      <nav class="navbar navbar-expand-md navbar-light nav-bg mb-5 pb-5">
           <a class="navbar-brand p-3" href="/recruitments"><%= image_tag('meshitomo_logo.png') %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,9 +36,6 @@
                       <%= search.submit "検索" %>
                     <% end %>
                   </div>                
-                  <li class="nav-item m-2">
-                    <%= link_to "お気に入りのお店", user_user_shops_path(current_user.id) %>
-                  </li>
                   <li class="nav-item m-2" data-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
                     <%= link_to image_tag('mail.png'), chat_groups_path %>
                   </li>
@@ -49,11 +46,11 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <%= image_tag('people.png') %>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item"><%= link_to "マイページ", user_path(current_user.id) %></a></li>
-                      <li><a class="dropdown-item" href="#history-recruitments">募集履歴</a></li>
-                      <li><a class="dropdown-item" href="#history-applications">応募履歴</a></li>
-                      <li><a class="dropdown-item" href="#user-shops">お気に入りのお店</a></li>
+                    <ul class="dropdown-menu dropdown-menu-right text-center border-color" aria-labelledby="navbarDropdown">
+                      <li class="dropdown-item"><%= link_to "マイページ", user_path(current_user.id) %></li>
+                      <li class="dropdown-item"><%= link_to "募集履歴", history_recruitments_path %></li>
+                      <li class="dropdown-item"><%= link_to "応募履歴", history_applications_path %></li>
+                      <li class="dropdown-item"><%= link_to "お気に入りのお店", user_user_shops_path(current_user.id) %></li>
                     </ul>
                   </li>
                 <% elsif admin_signed_in? %>
@@ -83,9 +80,9 @@
     </header>
     <%= yield %>
     <% if user_signed_in? %>
-      <div class="fixed-bottom d-flex justify-content-end">
-        <%= link_to new_recruitment_path, class: "d-block rounded-circle mb-4 mr-4", style: 'width:130px; border:2px solid #999;' do %>
-          <%= image_tag 'ramen.png', class: "img-fluid p-2" %>
+      <div class="fixed-bottom d-flex justify-content-end" data-toggle="tooltip" data-placement="top" title="お食事に行きましょう">
+        <%= link_to new_recruitment_path, class: "d-block rounded-circle mb-4 mr-4 shadow recruitment_logo" do %>
+          <%= image_tag 'katorari.png', class: "img-fluid p-3" %>
         <% end %>
       </div>
     <% end %>
