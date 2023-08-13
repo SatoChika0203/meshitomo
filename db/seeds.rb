@@ -11,4 +11,4 @@
 #   password: "aaaaaa"
 # )
 
-Admin.create(email: 'meshitomo@a', password: 'meshitomo')
+Admin.create!(email: 'meshitomo@mail.com', password: 'meshitomo')

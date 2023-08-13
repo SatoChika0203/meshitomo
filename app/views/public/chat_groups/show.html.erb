@@ -1,9 +1,9 @@
 <div class="my-5">
     <div class="container">
-        <h2 class="text-center"><%= @recruitment.title %>のメッセージグループです</h2>
+        <h2 class="text-center"><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %>のメッセージグループです</h2>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center mt-4">
-                <button class="btn btn-color-green" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                <button class="btn btn-color-gray" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                   aria-controls="collapseExample">
                     参加者
                 </button>

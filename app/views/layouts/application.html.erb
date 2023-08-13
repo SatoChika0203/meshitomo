@@ -26,21 +26,21 @@
             <span class="navbar-toggler-icon"></span>
           </button>
             <div class="justify-content-end collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto">
+              <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center">
                 <% if user_signed_in? %>
-                  <div class="search-form">
+                  <div class="search-form p-5">
                     <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
                       <%= search.text_field :keyword, value: @keyword %>
                       <%= search.select :prefecture, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
                       <%= search.date_field :schedule, value: @schedule %>
-                      <%= search.submit "検索" %>
+                      <button class="btn btn-color-gray btn-sm" type="submit">検索</button>
                     <% end %>
                   </div>                
-                  <li class="nav-item m-2" data-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
+                  <li class="nav-item m-2 p-2" data-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
                     <%= link_to image_tag('mail.png'), chat_groups_path %>
                   </li>
-                  <li class="nav-item m-2" data-toggle="tooltip" data-bs-placement="bottom" title="お店を探す">
-                    <%= link_to image_tag('cock.png'), shops_path %>
+                  <li class="nav-item m-2 p-2" data-toggle="tooltip" data-bs-placement="bottom" title="お店を探す">
+                    <%= link_to image_tag('katorari.png'), shops_path %>
                   </li>
                   <li class="nav-item  dropdown m-2" data-toggle="tooltip" title="ユーザー情報">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,7 +82,7 @@
     <% if user_signed_in? %>
       <div class="fixed-bottom d-flex justify-content-end" data-toggle="tooltip" data-placement="top" title="お食事に行きましょう">
         <%= link_to new_recruitment_path, class: "d-block rounded-circle mb-4 mr-4 shadow recruitment_logo" do %>
-          <%= image_tag 'katorari.png', class: "img-fluid p-3" %>
+          <%= image_tag 'dinner.png', class: "img-fluid p-3" %>
         <% end %>
       </div>
     <% end %>

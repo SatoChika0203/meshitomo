@@ -1,8 +1,6 @@
-<div class="my-5">
+ <div class="container my-3">
     <h2 class="text-center">募集詳細</h2>
-    
-    <div class="container my-3">
-        <div class="bg-white border-radius-80 pt-5 pb-3">
+        <div class="bg-white border-radius-80 pt-5 pb-2 mt-4">
             <div class="row mb-5">
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <% if @recruitment.user.image.attached? %>
@@ -41,10 +39,10 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container py-5">
-        <h2 class="text-center pb-3">お店の情報</h2>
-        <div class="bg-white border-radius-80">
+        <h2 class="text-center">お店の情報</h2>
+        <div class="bg-white border-radius-80 mt-4">
             <div class="row pt-5 pb-3">
                 <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
                     <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
@@ -86,81 +84,85 @@
             </div>
         </div>
     </div>
-    
-    <div class="container mt-5">
-        <% if @recruitment.user_id != current_user.id %>
-         <h2 class="text-center">応募状況</h2>
-         <div class="bg-white border-radius-80 py-3 my-3">
-            <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
-                <p class="text-center"><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post %></p>
-            <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
-                <p class="text-center"><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post %></p>
-            <% elsif @recruitment.is_valid==false && @application.is_approval==false %>
-                <p class="text-center">この募集は締め切られました</p>
-            <% elsif @recruitment.is_valid==false && @application.is_approval==true && @recruitment.chat_groups.exists? %>
-                <p class="text-center">
-                    こちらの募集は終了しました。<br>
-                    参加者は以下の方々です。
-                </p>
-                <div class="row text-wrap">
-                    <% @chat_group_users.each do |chat_group_user| %>
-                        <% if chat_group_user.user.image.attached? %>
-                        <div>
-                            <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
-                        </div>
-                        <% else %>
-                        <div>
-                            <p><%= image_tag 'no_image', size: "200x200" %></p>
-                        </div>
+<div>
+
+<% if @recruitment.user_id != current_user.id %>
+    <div class="my-5">
+        <div class="container">
+             <h2 class="text-center">応募状況</h2>
+             <div class="bg-white border-radius-80 py-3 my-3">
+                <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
+                    <p class="text-center"><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post, class: "btn btn-color-gray" %></p>
+                <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
+                    <p class="text-center"><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post, class: "btn btn-color-green" %></p>
+                <% elsif @recruitment.is_valid==false && @application.is_approval==false %>
+                    <p class="text-center">この募集は締め切られました</p>
+                <% elsif @recruitment.is_valid==false && @application.is_approval==true && @recruitment.chat_groups.exists? %>
+                    <p class="text-center">
+                        こちらの募集は終了しました。<br>
+                        参加者は以下の方々です。
+                    </p>
+                    <div class="row text-wrap">
+                        <% @chat_group_users.each do |chat_group_user| %>
+                            <% if chat_group_user.user.image.attached? %>
+                            <div>
+                                <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+                            </div>
+                            <% else %>
+                            <div>
+                                <p><%= image_tag 'no_image', size: "200x200" %></p>
+                            </div>
+                            <% end %>
+                                <p><%= chat_group_user.user.nickname %></p>
                         <% end %>
-                            <p><%= chat_group_user.user.nickname %></p>
-                    <% end %>
-                </div>
-            <% elsif @recruitment.is_valid==false && @application.is_approval==true && @recruitment.chat_groups.blank? %>
-                <p class="text-center">既にお食事済みのようです。</p>
-            <% end %>
-        <% end %>
-        </div>
-    </div>
-    
-    <div class="container mt-5">
-        <div class="row mx-auto">
-        <% if @recruitment.user_id == current_user.id %>
-            <p><%= link_to "編集", edit_recruitment_path, class: "btn btn-color-green" %></p>
-            <p><button type="button" class="btn btn-color-gray" data-toggle="modal" data-target="#exampleModal">削除</button></p>
-            
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <!--モーダルのタイトル-->
-                    <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                     <!--モーダルのメッセージ-->
-                  <div class="modal-body">削除しますか？</div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-color-green" data-dismiss="modal">やめる</button>
-                    <%= link_to "削除", withdraw_recruitment_path(@recruitment.id), method: :patch, class: "btn btn-color-gray" %>
-                  </div>
-                </div>
-              </div>
+                    </div>
+                <% elsif @recruitment.is_valid==false && @application.is_approval==true && @recruitment.chat_groups.blank? %>
+                    <p class="text-center">既にお食事済みのようです。</p>
+                <% end %>
             </div>
         </div>
-        
+    </div>
+<% end %>
+
+<% if @recruitment.user_id == current_user.id %>
+    <div class="mb-5">
+        <div class="container">
+            <div class="row mx-auto">
+                <p><%= link_to "編集", edit_recruitment_path, class: "btn btn-color-green" %></p>
+                <p><button type="button" class="btn btn-color-gray" data-toggle="modal" data-target="#exampleModal">削除</button></p>
+    
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <!--モーダルのタイトル-->
+                        <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                         <!--モーダルのメッセージ-->
+                      <div class="modal-body">削除しますか？</div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-color-green" data-dismiss="modal">やめる</button>
+                        <%= link_to "削除", withdraw_recruitment_path(@recruitment.id), method: :patch, class: "btn btn-color-gray" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
             <h2 class="text-center">応募状況</h2>
-                <div class="bg-white border-radius-80 py-3 my-3">
+                <div class="bg-white border-radius-80 py-3 mt-4">
                     <% if @recruitment.is_valid == true && @applications.present? %>
                         <p class="text-center mt-4 pb-3">応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
-                            <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id),method: :post do |f| %>
+                            <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id), method: :post do |f| %>
                                <% @applications.each.with_index do |application| %>
-                                <div class="row mt-5">
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-2">
+                                <div class="row mt-4">
+                                    <div class="col-lg-2 col-md-1 col-sm-1 col-2">
                                         <p class="text-right"><%= f.check_box :user_ids, {:multiple => true}, application.applicant_id.to_s, false %></p>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-4">
+                                    <div class="col-lg-2 col-md-3 col-sm-3 col-4">
                                         <% if application.applicant.image.attached? %>
                                             <p class="text-center"><%= image_tag application.applicant.image, size: "80x80" %></p>
                                         <% else %>
@@ -173,8 +175,9 @@
                                         <p>希望日：<%= application.schedule_one %>　<%= application.schedule_two %>　<%= application.schedule_three %></p>
                                     </div>
                                 </div>
+                                <p><%= f.submit "決めた" %></p>
+                                <p class="text-center mt-3"><button type="button" class="btn btn-color-green btn-lg" type="submit">次へ進む</button></p>
                                 <% end %>
-                                <p class="text-center mt-5"><%= f.submit "次へ進む" %></p>
                             <% end %>
                     <% elsif @recruitment.is_valid == true && @applications.blank? %>
                         <p class="text-center mt-4">まだ応募は来ていません。</p>
@@ -200,6 +203,7 @@
                         <p class="text-center mt-4">参加者は集まりませんでした・・・</p>
                     <% end %>
                 </div>
-            <% end %>
+            </div>
+        </div>
     </div>
-</div>
+<% end %>

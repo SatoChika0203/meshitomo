@@ -50,7 +50,7 @@
         </tr> 
         <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12">都道府県</th>
-          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.select :prefectures, User.prefectures.keys, {include_blank: '都道府県を選択してください'} %></td>
+          <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= user.select :prefecture, User.prefectures.keys, {include_blank: '都道府県を選択してください'} %></td>
         </tr> 
       </table>
     <p><button class="btn btn-color-green btn-lg my-3" type="submit">更新する</button></p>

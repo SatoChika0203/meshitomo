@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_30_111652) do
+ActiveRecord::Schema.define(version: 2023_08_13_185659) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2023_07_30_111652) do
   create_table "applications", force: :cascade do |t|
     t.integer "recruitment_id"
     t.integer "applicant_id"
-    t.date "schedule_one", null: false
+    t.date "schedule_one"
     t.date "schedule_two"
     t.date "schedule_three"
     t.string "message"
@@ -117,20 +117,20 @@ ActiveRecord::Schema.define(version: 2023_07_30_111652) do
   end
 
   create_table "shops", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "url", null: false
-    t.string "address", null: false
+    t.string "name", default: "-", null: false
+    t.string "url", default: "-", null: false
+    t.string "address", default: "-", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "recruitment_id"
     t.integer "user_id", null: false
-    t.string "catch"
-    t.string "open"
-    t.string "close"
-    t.string "genre"
-    t.string "budget_average"
-    t.string "access"
-    t.string "parking"
+    t.string "catch", default: "-"
+    t.string "open", default: "-"
+    t.string "close", default: "-"
+    t.string "genre", default: "-"
+    t.string "budget_average", default: "-"
+    t.string "access", default: "-"
+    t.string "parking", default: "-"
     t.string "img"
     t.string "hotpepper_shop_id"
     t.index ["hotpepper_shop_id"], name: "index_shops_on_hotpepper_shop_id", unique: true

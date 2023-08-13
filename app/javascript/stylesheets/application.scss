@@ -9,7 +9,7 @@
 *{
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-color: #4b4b4b;
-  // #fffce7
+  
 }
 
 .btn-color-green{
@@ -24,6 +24,7 @@
 
 .border-radius-80{
   border-radius: 80px;
+  background-color: white;
 }
 
 .border-radius-50{
@@ -31,12 +32,12 @@
 }
 
 .nav-bg{
-  background-image: url(../images/ivy_3.png);
+  background-image: url(../images/check.png);
 }
 
 .recruitment_logo{
   background-image: url(../images/white_grain.jpg);
-  width: 130px;
+  width: 80px;
   border: 6px solid #dfd6c8;
 }
 
@@ -45,5 +46,6 @@
 }
 
 .body-bg{
-  background-image: url(../images/white_grain.jpg);
+  // background-image: url(../images/white_grain.jpg);
+  background-color: #fffce7;
 }
