@@ -1,9 +1,18 @@
 class Public::UserShopsController < ApplicationController
   def index
-    @shops=current_user.shops.page(params[:page])
-    @shops=current_user.shops.order(created_at: :desc).page(params[:page])
+    @shops=current_user.shops.where(registration_flg: 0).page(params[:page])
+    # @shops.each do |shop|
+    #   if shop.chkFlg = "1"
+    #   then  @shopsから除外する
+    # end
+    @shops=current_user.shops.where(registration_flg: 0).order(created_at: :desc).page(params[:page])
     @user=current_user
   end
+  
+  # def destroy
+  #   shop = Shops.find(prams[:id])
+  #   shop.update(chkFlg = "1")
+  # end
 
   # def create
   #   shop = Shop.find(params[:shop_id])

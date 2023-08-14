@@ -1,18 +1,25 @@
-<h2>会員一覧画面</h2>
+<div class="my-5">
+<h2 class="text-center">会員一覧</h2>
 
-<div class="d-flex flex-row">
-  <div>
+  <div class="container mt-5">
     <% @users.each do |user| %>
-      <% if user.image.attached? %>
-          <p><%= image_tag user.image, size: "100x100" %></p>
-      <% else %>
-          <p><%= image_tag 'no_image', size: "100x100" %></p>
-      <% end %>
+      <div class="mb-5 bg-white rounded-3 p-5 border" style="border-radius:50px;">
+        <div class="p-5 row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+            <% if user.image.attached? %>
+              <p class="text-center"><%= image_tag user.image, size: "100x100" %></p>
+            <% else %>
+              <p class="text-center"><%= image_tag 'no_image', size: "200x200" %></p>
+            <% end %>
+            <p class="text-center"><%= link_to user.name, admin_user_path(user.id) %></p>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+            <p><%= user.email %></p>
+            <p><%= user.is_deleted_i18n %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div>
-      <p><%= link_to user.name, admin_user_path(user.id) %></p>
-      <p><%= user.nickname %></p>
-      <p> <%= user.email %></p>
-  </div>
-<%end%>
+    <%= paginate @users %>
 </div>

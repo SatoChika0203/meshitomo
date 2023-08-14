@@ -1,24 +1,23 @@
-<h2><%= @user.name %>さんの募集履歴</h2>
-
-<div>
-  <% if @recruitments.exists? %>
+<div class="my-5">
+  <h2 class="text-center"><%= @user.name %>さんの募集履歴</h2>
+  
+  <div class="container mt-5"> 
     <% @recruitments.each do |recruitment| %>
-    <p><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></p>
-    <p><%= image_tag recruitment.shop.img %></p>
-    <p><%= recruitment.shop.name %></p>
-    <p>希望日</p>
-    <p><%= recruitment.schedule %></p>
-    <p>募集期限</p>
-    <p><%= recruitment.deadline %></p>
-    <% if recruitment.user.image.attached? %>
-      <p><%= image_tag recruitment.user.image, size: "80x80" %></p>
-    <% else %>
-      <p><%= image_tag 'no_image', size: "80x80" %></p>
+     <div class="mb-5 p-5 rounded-3 bg-white border" style="border-radius:50px;">
+       <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></strong></h4>
+         <div class="row pt-3">
+            <div class="col-lg-3 col-md-4 col-sm-12">
+              <p class="text-center"><%= image_tag recruitment.shop.img %></p>
+            </div>
+         <div class="col-lg-9 col-md-8 col-sm-12">
+           <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
+           <p><%= recruitment.shop.address %></p>
+           <p>希望日　<%= recruitment.schedule %></p>
+           <p>募集期限　<%= recruitment.deadline %></p>
+         </div>
+       </div>
+     </div>
     <% end %>
-    <p><%= link_to recruitment.user.name, admin_user_path(recruitment.user.id) %></p>
-    <% end %>
-  <% else %>
-    <p>まだ募集はありません。</p>
-  <% end %>
+  </div>
+  <%= paginate @recruitments %>
 </div>
-<%= paginate @recruitments_page %>

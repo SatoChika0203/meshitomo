@@ -1,50 +1,144 @@
-募集の詳細画面
-
-<div class="d-flex flex-row">
-    <p><%= image_tag @recruitment.shop.img %></p>
-        <div>
-            <p><strong><%= link_to @recruitment.shop.name, @recruitment.shop.url %></strong></p>
-            <p><%= @recruitment.shop.catch %></p>
-            <p><%= @recruitment.shop.genre %></p>
-            <p><%= @recruitment.shop.budget_average %></p>
-            <p><%= @recruitment.shop.address %></p>
-            <p><%= @recruitment.shop.access %></p>
-            <p><%= @recruitment.shop.parking %></p>
-            <p><%= @recruitment.shop.open %></p>
-            <p><%= @recruitment.shop.close %></p>
+<div class="my-5">
+<div class="container my-3">
+    <h2 class="text-center">募集詳細</h2>
+        <div class="bg-white border-radius-80 pt-5 pb-2 mt-4">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <% if @recruitment.user.image.attached? %>
+                    <p class="text-center"><%= image_tag @recruitment.user.image, size: "150x150" %></p>
+                    <% else %>
+                    <p class="text-center"><%= image_tag 'no_image', size: "150x150" %></p>
+                    <% end %>
+                    <p class="text-center"><%= link_to @recruitment.user.nickname, admin_user_path(@recruitment.user.id) %></p>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <h3 class="mb-4"><strong><%= @recruitment.title %></strong></h3>
+                    <p class="mb-4  pt-2"><%= @recruitment.introduction %></p>
+                    <table class="table table-borderless ">
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">希望の日にち</th>
+                            <% if @recruitment.schedule.present? %>
+                                <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.schedule %></td>
+                            <% else %>
+                                <td class="col-lg-8 col-md-8 col-sm-7 col-7">いつでもいいよ</td>
+                            <% end %>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人数</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.number_of_people_i18n %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集している人</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.recruitment_gender_i18n %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-4 col-md-4 col-sm-5 col-5">募集期限</th>
+                            <td class="col-lg-8 col-md-8 col-sm-7 col-7"><%= @recruitment.deadline %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mx-auto">
+                <p><%= link_to "編集", edit_admin_recruitment_path(@recruitment.id), class: "btn btn-secondary" %></p>
+                <p><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">削除</button></p>
+    
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <!--モーダルのタイトル-->
+                        <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                         <!--モーダルのメッセージ-->
+                      <div class="modal-body">データベースから削除されます。<br>本当に削除しますか？</div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">やめる</button>
+                        <%= link_to "削除", admin_recruitment_path(@recruitment.id), method: :delete, class: "btn btn-secondary" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
 </div>
 
-<% if @recruitment.user.image.attached? %>
-<p><%= image_tag @recruitment.user.image, size: "100x100" %></p>
-<% else %>
-<p><%= image_tag 'no_image', size: "100x100" %></p>
-<% end %>
-<p><%= link_to @recruitment.user.name, admin_user_path(@recruitment.user.id) %></p>
-<p><%= @recruitment.title %></p>
-<p><%= @recruitment.introduction %></p>
-<p><%= @recruitment.schedule %></p>
-<p><%= @recruitment.prefecture %></p>
-<p><%= @recruitment.number_of_people_i18n %></p>
-<p><%= @recruitment.recruitment_gender_i18n %></p>
-<p><%= @recruitment.deadline %></p>
+<div class="container py-5">
+    <h2 class="text-center">お店の情報</h2>
+    <div class="bg-white border-radius-80 mt-4">
+        <div class="row pt-5 pb-3">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
+                <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 text-wrap">
+                <h4 class="mb-4"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></h4>
+                <p class="mb-3"><%= @recruitment.shop.catch %></p>
+                    <table class="table table-borderless ">
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">ジャンル</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.genre %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">予算</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.budget_average %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">住所</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.address %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">アクセス</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.access %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">駐車場</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.parking %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">営業時間</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.open %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">定休日</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.close %></td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p><%= link_to "編集", edit_recruitment_path %></p>
-<p><%= link_to '削除', recruitment_path(@recruitment.id), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } }  %></p>
 
-
-<% if @recruitment.is_valid==false %>
-    <p>こちらの募集は終了しました。</p>
-    <p>参加者は以下の方々です。</p>
-        <% @chat_group_users.each do |chat_group_user| %>
-            <% if chat_group_user.user.image.attached? %>
-                <p><%= image_tag chat_group_user.user.image, size: "100x100" %></p>
-            <% else %>
-                <p><%= image_tag 'no_image', size: "100x100" %></p>
+<div class="container">
+    <h2 class="text-center">応募状況</h2>
+        <div class="bg-white border-radius-80 py-3 mt-4">
+            <% if @recruitment.is_valid == true && @applications.blank? %>
+                <p class="text-center mt-4">まだ応募は来ていません。</p>
+            <% elsif @recruitment.is_valid == false && @applications.present? && @recruitment.chat_groups.present? %>
+                <p class="text-center mt-4">こちらの募集は終了しました。</p>
+                <p class="text-center pb-5">参加者は以下の方々です。</p>
+                <div class="row mx-auto text-wrap">
+                   <% @chat_group_users.each do |chat_group_user| %>
+                        <% if chat_group_user.user.image.attached? %>
+                        <div>
+                            <p class="text-center"><%= image_tag chat_group_user.user.image, size: "100x100" %></p>
+                        <% else %>
+                        <div>
+                            <p class="text-center"><%= image_tag 'no_image', size: "100x100" %></p>
+                        <% end %>
+                        <p class="text-center"><%= link_to chat_group_user.user.nickname, admin_user_path(chat_group_user.user_id) %></p>
+                        </div>
+                　<% end %>
+                　    <p><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(@recruitment.id) %></p>
+                </div>
+            <% elsif @recruitment.is_valid==false && @applications.present? && @recruitment.chat_groups.blank? %>
+                <p class="text-center mt-4">既に終了しました。</p>
+            <% elsif @recruitment.is_valid == false && @applications.blank? %>
+                <p class="text-center mt-4">参加者は集まりませんでした・・・</p>
             <% end %>
-                <p><%= link_to chat_group_user.user.name, admin_user_path(chat_group_user.user_id) %></p>
-        <% end %>
-    <p><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(@recruitment.id) %></p>
-<% else %>
-    <p>募集中</p>
-<% end %>
+        </div>
+    </div>
+</div>
+</div>

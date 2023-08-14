@@ -1,6 +1,21 @@
-<h2>メッセージグループ一覧</h2>
-<% @chat_groups.each do |chat_group| %>
+<div class="my-5">
+  <h2 class="text-center">メッセージグループ一覧</h2>
 
-  <p><%= link_to chat_group.recruitment.title, admin_recruitment_path(chat_group.recruitment.id) %></p>
-  <p><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(chat_group.recruitment.id) %></p>
-<% end %>
+  <div class="container mt-5">
+    <% @chat_groups.each do |chat_group| %>
+      <div class="rounded-3 bg-white border p-5 mb-5" style="border-radius:50px;">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-4 col-4">
+            <p class="text-right"><%= image_tag chat_group.recruitment.shop.img %></p>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-8 col-8 pl-5">
+            <h4><%= link_to chat_group.recruitment.title, admin_recruitment_path(chat_group.recruitment.id) %></h4>
+            <p class="mt-3 ml-4">お店　<%= link_to chat_group.recruitment.shop.name, chat_group.recruitment.shop.url %></p>
+            <p class="mt-4 ml-4"><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(chat_group.recruitment.id), class: "btn btn-color-green" %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @chat_groups %>
+</div>

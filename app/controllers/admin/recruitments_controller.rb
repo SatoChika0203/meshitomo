@@ -1,6 +1,7 @@
 class Admin::RecruitmentsController < ApplicationController
   def index
     @recruitments=Recruitment.all
+    @recruitments=Recruitment.all.page(params[:page])
     @users=User.all
   end
   
@@ -43,7 +44,7 @@ class Admin::RecruitmentsController < ApplicationController
   def history
     @user=User.find(params[:user_id])
     @recruitments=Recruitment.where(user_id: params[:user_id])
-    @recruitments_page = Recruitment.all.page(params[:page]).per(5)
+    @recruitments = Recruitment.all.page(params[:page]).per(5)
   end
   
   private

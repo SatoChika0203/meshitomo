@@ -7,7 +7,7 @@
         <div class="row pt-3">
           <div class="col-lg-3 col-md-4 col-sm-12 col-12">
             <p class="text-center"><%= image_tag shop.img %></p>
-            <p class="text-center mt-5"><%= link_to "お気に入りを解除する", shop_path(shop.id), method: :delete, class: "btn btn-color-green btn-sm" %></p>
+            <p class="text-center mt-5"><%= link_to "お気に入りを解除する", withdraw_shop_path(shop.id), method: :patch, class: "btn btn-color-green btn-sm" %></p>
           </div>
           <div class="col-lg-9 col-md-8 col-sm-12 col-12">
             <h4 class="mb-4"><strong><%= link_to shop.name, shop.url %></strong></h4>

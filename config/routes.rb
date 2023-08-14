@@ -49,8 +49,11 @@ scope module: :public do
 
   resources :chat_groups, only: [:index]
   resources :chats, only: [:create]
-  resources :reviews, except: [:destroy, :edit, :update]
+  resources :reviews, except: [:destroy, :edit]
   resources :shops do
+    member do
+      patch 'withdraw'
+    end
     collection do
       get 'search'
     end
@@ -73,8 +76,8 @@ namespace :admin do
       resources :chat_groups, only: [:index]
       resource :recruitments, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
         collection do
-          get 'history'  
-        end 
+          get 'history'
+        end
       end
       resource :applications, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
         collection do
@@ -82,22 +85,22 @@ namespace :admin do
         end
       end
   end
-  
+
   resources :recruitments do
-      resource :chat_groups, only: [:show]
+      resource :chat_groups, only: [:show, :destroy]
   end
-  
+
   resources :chat_groups, only: [:index]
-  
+
   resources :chats, only: [:destroy]
-  
+
   resources :reviews
-  
+
   resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do
     collection do
       get 'history'
     end
-    
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 

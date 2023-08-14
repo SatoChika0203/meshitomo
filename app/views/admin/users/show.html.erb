@@ -1,47 +1,91 @@
-会員詳細
+<div class="my-5">
+    <h2 class="text-center">会員詳細</h2>
+    
+    <div class="container my-5 border border-radius-80 bg-white py-5">
+        <div class="text-center pt-4">
+            <% if @user.image.attached? %>
+                <p><%= image_tag @user.image, size: "200x200" %></p>
+            <% else %>
+                <p><%= image_tag 'no_image', size: "200x200" %></p>
+            <% end %>
+        </div>
+        <div>
+            <table class="table table-borderless">
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">名前</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.name %><br><%= @user.name_kana %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">ニックネーム</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.nickname %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">説明文</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.introduction %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">住所</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.adress_all %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">電話番号</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.telephone_number %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">性別</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.gender_i18n %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">都道府県</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.prefecture %></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">ステータス</th>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.is_deleted_i18n %></td>
 
-<div class="d-flex flex-row">
-    <div>
-    <% if @user.image.attached? %>
-        <p><%= image_tag @user.image, size: "200x200" %></p>
-    <% else %>
-        <p><%= image_tag 'no_image', size: "200x200" %></p>
-    <% end %>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center pt-4">
+            <p><%= link_to "編集", edit_admin_user_path(@user.id) %></p>
+            <p><%= link_to "募集履歴", history_admin_user_recruitments_path(@user.id) %></p>
+            <p><%= link_to "応募履歴", history_admin_user_applications_path(@user.id) %></p>
+            <p><%= link_to "所属メッセージグループ一覧", admin_user_chat_groups_path(@user.id) %></p>
+            <p><%= link_to "お気に入りの店", admin_user_user_shops_path(@user.id) %></p>    
+        </div>
     </div>
-    <div>
-        <p><%= @user.name %></p>
-        <p><%= @user.name_kana %></p>
-        <p><%= @user.adress_all %></p>
-        <p><%= @user.telephone_number %></p>
-        <p><%= @user.nickname %></p>
-        <p><%= @user.introduction %></p>
-        <p><%= @user.gender_i18n %></p>
-        <p><%= @user.prefecture %></p>
-        <% if @user.is_deleted == true %>
-          <p>退会中</p>
-        <% else %>
-          <p>有効</p>
-        <% end %>
-
-        <p><%= link_to "編集", edit_admin_user_path(@user.id) %></p>
-        <p><%= link_to "募集履歴", history_admin_user_recruitments_path(@user.id) %></p>
-        <p><%= link_to "応募履歴", history_admin_user_applications_path(@user.id) %></p>
-        <p><%= link_to "所属メッセージグループ一覧", admin_user_chat_groups_path(@user.id) %></p>
-        <p><%= link_to "お気に入りの店", admin_user_user_shops_path(@user.id) %></p>       
-    </div>
+    
+    <h3 class="text-center"><%= @user.name %>さんの募集一覧</h3>
+        <div class="container mt-5 border border-radius-80 bg-white py-5">
+            <div class="row mt-5 pt-4">
+                <% if @recruitments.exists? %>
+                    <% @recruitments.each do |recruitment| %>
+                          <div class="col-xl-4 col-lg-5 col-md-4 col-sm-12 col-12 pb-4">
+                            <p class="text-center"><%= image_tag recruitment.shop.img %></p>
+                          </div>
+                          <div class="col-xl-8 col-lg-7 col-md-8 col-sm-12 col-12">
+                            <h6 class="mb-4"><strong><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></strong></h6>
+                            <table class="table table-borderless ml-4">
+                                <tr class="row">
+                                    <th class="col-lg-2 col-md-3 col-sm-4 col-4">お店</th>
+                                    <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= link_to recruitment.shop.name, recruitment.shop.url %></td>
+                                </tr>
+                                <tr class="row">
+                                    <th class="col-lg-2 col-md-3 col-sm-4 col-4">希望日</th>
+                                    <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.schedule %></td>
+                                </tr>
+                                <tr class="row mb-5">
+                                    <th class="col-lg-2 col-md-3 col-sm-4 col-4">募集期限</th>
+                                    <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.deadline %></td>
+                                </tr>
+                            </table>
+                          </div>
+                    <% end %>
+                <% else %>
+                    <p>まだ募集はありません…</p>
+                <% end %>
+            </div>
+         </div>                        
 </div>
 
-<div>
-<p><%= @user.name %>さんの募集一覧</p>
-    <% if @recruitments.exists? %>
-        <% @recruitments.each do |recruitment| %>
-          <p><%= link_to recruitment.title, admin_recruitment_path(recruitment.id) %></p>
-          <p>希望日</p>
-          <p><%= recruitment.schedule %></p>
-          <p>募集期限</p>
-          <p><%= recruitment.deadline %></p>
-        <% end %>
-    <% else %>
-          <p>まだ募集はありません…</p>
-    <% end %>
-</div>
+

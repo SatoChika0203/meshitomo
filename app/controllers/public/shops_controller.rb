@@ -19,46 +19,39 @@ class Public::ShopsController < ApplicationController
       @shops = response_body['results']['shop'] #results>shop の階層までは記述している
 
       @shop=Shop.new()
-      # @favorite_shop=Shop.find_by(hotpepper_shop_id: @shops['id'])
+
       @favorite_shop=Shop.where(user_id: current_user.id)
-      # @favorite_shop=Shop.exists?(hotpepper_shop_id: @shops['id'])
+      
+
     end
-
-
   end
 
 
   def create
     shop = Shop.new(shop_params)
     shop.user_id=current_user.id
-    # if Shop.exists?(hotpepper_shop_id: shop.hotpepper_shop_id)
-    #   render :index
-    # else
     shop.save
     redirect_to user_user_shops_path(current_user.id)
-    # end
   end
-  
-  def destroy
-    shop = Shop.find(params[:id])
-    shop.destroy
+
+  def update
+    shop=Shop.find(params[:id])
+    shop.update(registration_flg: 0)
     redirect_to user_user_shops_path(current_user.id)
   end
 
 
-  def search
-    # require 'net/http'
-    # require 'uri'
-    # require 'json'
-
-    # key = ENV['SECRET_KEY']
-    # lat = '35.658'
-    # lng = '139.7016'
-    # range = 1
-    # api = URI.parse("https://webservice.recruit.co.jp/hotpepper")
-    # json = Net::HTTP.get(api)
-    # @result = JSON.parse(json)
+  def withdraw
+    shop=Shop.find(params[:id])
+    shop.update(registration_flg: 1)
+    redirect_to user_user_shops_path(current_user.id)
   end
+  
+  # def destroy
+  #   shop = Shop.find(params[:id])
+  #   shop.destroy
+  #   redirect_to user_user_shops_path(current_user.id)
+  # end
 end
 
 private

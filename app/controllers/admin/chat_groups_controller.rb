@@ -1,6 +1,7 @@
 class Admin::ChatGroupsController < ApplicationController
   def index
     @chat_groups=ChatGroup.all
+    @chat_groups=ChatGroup.all.page(params[:page])
   end
   
   def show

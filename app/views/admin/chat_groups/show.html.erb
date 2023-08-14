@@ -1,27 +1,81 @@
-<h2><%= link_to @recruitment.title, admin_recruitment_path(@recruitment.id) %>のメッセージグループです</h2>
-
-<h4>参加者</h4>
-<div class="d-flex flex-row">
-    <% @chat_group_users.each do |chat_group_user| %>
-        <% if chat_group_user.user.image.attached? %>
-            <p><%= image_tag chat_group_user.user.image, size: "80x80" %></p>
-        <% else %>
-            <p><%= image_tag 'no_image', size: "80x80" %></p>
-        <% end %> 
-            <p><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user.id) %></p>
-    <% end %>
-</div>
-
-<div class='jscroll-div'>
-    <% @chats.each do |chat| %>
-        <% if chat.user.image.attached? %>
-            <p><%= image_tag chat.user.image, size: "80x80" %></p>
-        <% else %>
-            <p><%= image_tag 'no_image', size: "80x80" %></p>
-        <% end %> 
-            <p><%= chat.user.nickname %></p>
-            <p><%= chat.chat %></p>
-            <p><%= link_to "削除する", admin_chat_path(chat.id), method: :delete %></p>
-    <% end %>
-    <%= paginate @chat_pages %>
+<div class="my-5">
+    <div class="container">
+        <h2 class="text-center"><%= link_to @recruitment.title, admin_recruitment_path(@recruitment.id) %>のメッセージグループです</h2>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center mt-4">
+                <button class="btn btn-color-gray" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                  aria-controls="collapseExample">
+                    参加者
+                </button>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="overflow-hidden">
+                   <div id="collapseExample" class="collapse">
+                        <div class="border bg-white p-3">
+                            <div class="row">
+                            <% @chat_group_users.each do |chat_group_user| %>
+                                <% if chat_group_user.user.image.attached? %>
+                                    <div class="ml-2 mr-1">
+                                        <p><%= image_tag chat_group_user.user.image, size: "80x80" %></p>
+                                <% else %>
+                                    <div class="ml-2 mr-1">
+                                        <p><%= image_tag 'no_image', size: "80x80" %></p>
+                                <% end %>
+                                        <p class="text-center"><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user.id) %></p>
+                                    </div>
+                            <% end %>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="text-center mt-3">
+        <p><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">メッセージグループを削除する</button></p>
+    
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!--モーダルのタイトル-->
+                <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                 <!--モーダルのメッセージ-->
+              <div class="modal-body">データベースから削除されます。<br>本当に削除しますか？</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">やめる</button>
+                <%= link_to "削除", admin_recruitment_chat_groups_path(@recruitment.id), method: :delete, class: "btn btn-secondary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="container mt-5">
+        <div class="bg-white border border-radius-50 p-5 d-flex align-items-center" style="height: 390px !important;">
+            <div class="h-100 overflow-auto container">
+                <% @chats.each do |chat| %>
+                <div class="row py-3 border-bottom">
+                  <div class="col-lg-2 col-md-3 col-sm-4 col-4">
+                    <% if chat.user.image.attached? %>
+                        <p class="text-center"><%= link_to image_tag(chat.user.image, size: "70x70"), user_path(chat.user.id) %></p>
+                    <% else %>
+                        <p class="text-center"><%= link_to image_tag('no_image', size: "70x70"), user_path(chat.user.id) %></p>
+                    <% end %>
+                  </div>
+                  <div class="my-auto col-lg-10 col-md-9 col-sm-8 col-8 text-wrap">
+                        <p><%= chat.chat %></p>
+                        <p><%= link_to "削除する", admin_chat_path(chat.id), method: :delete, class: "btn btn-secondary"  %></p>
+                  </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>

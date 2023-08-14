@@ -13,8 +13,8 @@
 <%= recruitment.text_field :schedule_three %>
 
 都道府県
-<!--<%= recruitment.text_field :prefectures %>-->
-<%= recruitment.select :prefecture, Recruitment.prefecture.keys, {} %>
+<!--<%= recruitment.text_field :prefecture %>-->
+<%= recruitment.select :prefectures, Recruitment.prefectures.keys, {} %>
 
 募集人数
 <%= recruitment.text_field :number_of_people %>
