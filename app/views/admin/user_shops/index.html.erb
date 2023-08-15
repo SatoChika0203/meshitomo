@@ -1,21 +1,76 @@
-お気に入りのお店一覧
-<div>
-  <ul class="d-flex flex-row">
+<div class="my-5">
+  <h2 class="text-center" id="user-shops"><%= @user.nickname %>さんのお気に入りのお店</h2>
+  
+  <div class="container mt-5">
     <% @shops.each do |shop| %>
-       <div>
-            <p><%= image_tag shop.img %></p>
+      <div class="rounded-3 bg-white border p-5 mb-5" style="border-radius:50px;">
+        <div class="row pt-3">
+          <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+            <p class="text-center"><%= image_tag shop.img %></p>
+            <p class="text-center"><button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">お気に入りを削除する</button></p>
+            
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <!--モーダルのタイトル-->
+                    <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                     <!--モーダルのメッセージ-->
+                  <div class="modal-body">データベースから削除されます。<br>本当に削除しますか？</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">やめる</button>
+                    <%= link_to "削除", admin_user_user_shop_path(@user.id, shop.id), method: :delete, class: "btn btn-secondary" %>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+            <h4 class="mb-4"><strong><%= link_to shop.name, shop.url %></strong></h4>
+            <p class="mb-4"><%= shop.catch %></p>
+          <table class="table table-borderless">
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">ジャンル</th>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.genre %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">予算</th>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.budget_average %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">住所</th>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.address %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">駐車場</th>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.parking %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">営業時間</th>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.open %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">定休日</th>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left"><%= shop.close %></td>
+            </tr>
+            <tr class="row">
+              <th class="col-lg-2 col-md-3 col-sm-3 col-3 text-right">登録状況</th>
+              <% if shop.registration_flg == 0 %>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left text-danger">お気に入り登録中</td>
+              <% else %>
+              <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-left text-primary">お気に入り解除中</td>
+              <% end %>
+            </tr>
+          </table>
         </div>
-        <div>
-            <p><strong><%= link_to shop.name, shop.url %></strong></p>
-            <p><%= shop.catch %></p>
-            <p><%= shop.genre %></p>
-            <p><%= shop.budget_average %></p>
-            <p><%= shop.address %></p>
-            <p><%= shop.access %></p>
-            <p>駐車場：<%= shop.parking %></p>
-            <p><%= shop.open %></p>
-            <p><%= shop.close %></p>
         </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
+  <%= paginate @shops %>
 </div>

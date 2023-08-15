@@ -1,4 +1,5 @@
 class Public::ApplicationsController < ApplicationController
+before_action :authenticate_user!
 
 def confirm
   @recruitment=Recruitment.find_by(id: params[:recruitment_id])

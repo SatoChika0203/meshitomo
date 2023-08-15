@@ -1,4 +1,6 @@
 class Public::ChatGroupsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     # @chat_group_users=current_user.chat_group_users
     # @chat_groups=@chat_group_users.each do |chat_group_user|

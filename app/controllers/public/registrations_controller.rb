@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  
+  def after_sign_up_path_for(resource)
+    flash[:notice]="Signed in successfully."
+    recruitments_path
+  end
+  
+  def after_sign_out_path_for(resource)
+    flash[:notice]="Signed out successfully."
+    root_path
+  end
+  
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

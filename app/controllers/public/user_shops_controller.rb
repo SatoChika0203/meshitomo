@@ -1,4 +1,6 @@
 class Public::UserShopsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @shops=current_user.shops.where(registration_flg: 0).page(params[:page])
     # @shops.each do |shop|

@@ -69,9 +69,9 @@
                         <p class="text-center"><%= link_to image_tag('no_image', size: "70x70"), user_path(chat.user.id) %></p>
                     <% end %>
                   </div>
-                  <div class="my-auto col-lg-10 col-md-9 col-sm-8 col-8 text-wrap">
-                        <p><%= chat.chat %></p>
-                        <p><%= link_to "削除する", admin_chat_path(chat.id), method: :delete, class: "btn btn-secondary"  %></p>
+                  <div class="my-auto col-lg-10 col-md-9 col-sm-8 col-8 text-wrap row">
+                        <p class="col-lg-10 col-md-8 col-sm-12 col-12"><%= chat.chat %></p>
+                        <p class="col-lg-2 col-md-4 col-sm-12 col-12"><%= link_to "削除する", admin_chat_path(chat.id), method: :delete, class: "btn btn-secondary btn-sm"  %></p>
                   </div>
                 </div>
                 <% end %>

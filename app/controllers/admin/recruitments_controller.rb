@@ -1,4 +1,6 @@
 class Admin::RecruitmentsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @recruitments=Recruitment.all
     @recruitments=Recruitment.all.page(params[:page])

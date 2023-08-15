@@ -1,8 +1,9 @@
 class Public::RecruitmentsController < ApplicationController
-
+  before_action :authenticate_user!
+  
   def new
     @recruitment=Recruitment.new
-    @shops=Shop.where(user_id: current_user.id)
+    @shops=Shop.where(user_id: current_user.id, registration_flg: 0)
   end
 
   def create

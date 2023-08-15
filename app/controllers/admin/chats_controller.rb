@@ -1,4 +1,6 @@
 class Admin::ChatsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def destroy
     chat=Chat.find(params[:id])
     chat.destroy

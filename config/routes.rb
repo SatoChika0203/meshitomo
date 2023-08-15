@@ -31,7 +31,6 @@ scope module: :public do
           post 'confirm'
           get 'complete'
           patch 'withdraw'
-          # get 'history'
         end
       end
       resource :chat_groups, expect: [:new, :create, :index, :edit, :update] do
@@ -72,12 +71,15 @@ namespace :admin do
       member do
         patch 'withdraw'
       end
-      resources :user_shops, only: [:index]
+      resources :user_shops, only: [:index, :destroy]
       resources :chat_groups, only: [:index]
       resource :recruitments, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
         collection do
           get 'history'
         end
+      end
+      resources :recruitments, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
+        resource :applications, only: [:show, :destroy]
       end
       resource :applications, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
         collection do
@@ -88,6 +90,7 @@ namespace :admin do
 
   resources :recruitments do
       resource :chat_groups, only: [:show, :destroy]
+      resource :applications, only: [:show, :destroy] 
   end
 
   resources :chat_groups, only: [:index]
@@ -96,7 +99,7 @@ namespace :admin do
 
   resources :reviews
 
-  resource :applications, except: [:new, :create, :index, :edit, :update, :destroy] do
+  resource :applications, except: [:new, :create, :show, :index, :edit, :update, :destroy] do
     collection do
       get 'history'
     end
