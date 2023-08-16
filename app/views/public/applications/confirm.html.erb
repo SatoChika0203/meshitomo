@@ -53,7 +53,7 @@
           <div>
             <table class="table table-borderless ml-4">
               <tr class="row">
-                  <th class="col-lg-12 col-md-12 col-sm-12 col-12">希望の日にち<br>（2つ目、3つ目は任意）</th>
+                  <th class="col-lg-12 col-md-12 col-sm-12 col-12">希望の日にち</th>
                   <td class="col-lg-12 col-md-12 col-sm-12 col-12">
                     <p class="mb-0">1：<%= application.date_field :schedule_one, placeholder:"1つ目" %></p><br>
                     <p class="my-0">２：<%= application.date_field :schedule_two, placeholder:"2つ目" %></p><br>
@@ -62,13 +62,13 @@
               </tr>
               <tr class="row">
                   <th class="col-lg-12 col-md-12 col-sm-12 col-12 mt-1 mb-0">メッセージをどうぞ</th>
-                  <td class="col-lg-12 col-md-12 col-sm-12 col-12 mt-0"><%= application.text_area :message %></td>
+                  <td class="col-lg-12 col-md-12 col-sm-12 col-12 mt-0"><%= application.text_area :message, class: "text-area" %></td>
               </tr>
             </table>
           </div>
-          <p><%= application.submit "応募する！"%></p>
+          <p><button class="btn btn-color-green my-3" type="submit">応募する！</button></p>
         <% end %>
       </div>
-    <p><%= link_to "やっぱりやめる", recruitment_path(@recruitment.id), method: :get %></p>
+    <p class="text-center"><%= link_to "やっぱりやめる", recruitment_path(@recruitment.id), method: :get, class: "text-secondary" %></p>
   </div>
 </div>

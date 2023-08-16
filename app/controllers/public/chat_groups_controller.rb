@@ -2,12 +2,6 @@ class Public::ChatGroupsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    # @chat_group_users=current_user.chat_group_users
-    # @chat_groups=@chat_group_users.each do |chat_group_user|
-    #   chat_group_user.chat_group
-    # end
-    # @chat_groups=ChatGroup.where(recruitment_id: params[:id])
-    
     @chat_group_users=current_user.chat_group_users
     @chat_groups=ChatGroup.where(id: @chat_group_users.pluck(:chat_group_id)).page(params[:page])
   end
@@ -19,10 +13,6 @@ class Public::ChatGroupsController < ApplicationController
     @chats=Chat.where(chat_group_id: @chat_group.id)
     @chats=Chat.where(chat_group_id: @chat_group.id).order(created_at: :desc)
     @chat=Chat.new
-    # @chat_pages = Chat.all.page(params[:page]).per(5)
-    
-    # @chat_data = Chat.all.order(created_at: :desc)
-    # @chat_pages = Kaminari.paginate_array(@chat_data).page(params[:page]).per(10)
   end
   
   def confirm
@@ -33,7 +23,7 @@ class Public::ChatGroupsController < ApplicationController
   def destroy
     chat_group=ChatGroup.find_by(recruitment_id: params[:recruitment_id])
     chat_group.destroy
-    redirect_to user_path(current_user.id)
+    redirect_to chat_groups_path
   end
   
 end

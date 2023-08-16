@@ -25,11 +25,10 @@ class Admin::UsersController < ApplicationController
     end
   end
   
-  def withdraw
-    current_user.update(is_deleted: true)
-    # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
-    reset_session
-    redirect_to root_path
+  def destroy
+    user=User.find(params[:id])
+    user.destroy
+    redirect_to admin_users_path
   end
   
   private

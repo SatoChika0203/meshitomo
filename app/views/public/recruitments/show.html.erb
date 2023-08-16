@@ -38,53 +38,52 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 
-    <div class="container py-5">
-        <h2 class="text-center">お店の情報</h2>
-        <div class="bg-white border-radius-80 mt-4">
-            <div class="row pt-5 pb-3">
-                <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
-                    <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 text-wrap">
-                    <h4 class="mb-4"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></h4>
-                    <p class="mb-3"><%= @recruitment.shop.catch %></p>
-                        <table class="table table-borderless ">
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">ジャンル</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.genre %></td>
-                            </tr>
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">予算</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.budget_average %></td>
-                            </tr>
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">住所</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.address %></td>
-                            </tr>
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">アクセス</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.access %></td>
-                            </tr>
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">駐車場</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.parking %></td>
-                            </tr>
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">営業時間</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.open %></td>
-                            </tr>
-                            <tr class="row">
-                                <th class="col-lg-2 col-md-4 col-sm-5 col-5">定休日</th>
-                                <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.close %></td>
-                            </tr>
-                        </table>
-                </div>
+<div class="container py-5">
+    <h2 class="text-center">お店の情報</h2>
+    <div class="bg-white border-radius-80 mt-4">
+        <div class="row pt-5 pb-3">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
+                <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 text-wrap">
+                <h4 class="mb-4"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></h4>
+                <p class="mb-3"><%= @recruitment.shop.catch %></p>
+                    <table class="table table-borderless ">
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">ジャンル</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.genre %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">予算</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.budget_average %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">住所</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.address %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">アクセス</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.access %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">駐車場</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7"><%= @recruitment.shop.parking %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">営業時間</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.open %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-lg-2 col-md-4 col-sm-5 col-5">定休日</th>
+                            <td class="col-lg-10 col-md-8 col-sm-7 col-7 text-wrap"><%= @recruitment.shop.close %></td>
+                        </tr>
+                    </table>
             </div>
         </div>
     </div>
-<div>
+</div>
 
 <% if @recruitment.user_id != current_user.id %>
     <div class="my-5">
@@ -128,9 +127,9 @@
     <div class="mb-5">
         <div class="container">
             <div class="row mx-auto">
-                <p><%= link_to "編集", edit_recruitment_path, class: "btn btn-color-green" %></p>
-                <p><button type="button" class="btn btn-color-gray" data-toggle="modal" data-target="#exampleModal">削除</button></p>
-    
+                <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-right"><%= link_to "編集", edit_recruitment_path, class: "btn btn-color-green btn-lg" %></p>
+                <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><button type="button" class="btn btn-color-gray btn-lg" data-toggle="modal" data-target="#exampleModal">削除</button></p>
+
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -151,7 +150,11 @@
                   </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="mb-5">
+        <div class="container">
             <h2 class="text-center">応募状況</h2>
                 <div class="bg-white border-radius-80 py-3 mt-4">
                     <% if @recruitment.is_valid == true && @applications.present? %>
@@ -175,8 +178,7 @@
                                         <p>希望日：<%= application.schedule_one %>　<%= application.schedule_two %>　<%= application.schedule_three %></p>
                                     </div>
                                 </div>
-                                <p><%= f.submit "決めた" %></p>
-                                <p class="text-center mt-3"><button type="button" class="btn btn-color-green btn-lg" type="submit">次へ進む</button></p>
+                                <p class="text-center mt-3"><button class="btn btn-color-green btn-lg my-3" type="submit">次へ進む</button></p>
                                 <% end %>
                             <% end %>
                     <% elsif @recruitment.is_valid == true && @applications.blank? %>
@@ -184,19 +186,22 @@
                     <% elsif @recruitment.is_valid == false && @applications.present? && @recruitment.chat_groups.present? %>
                         <p class="text-center mt-4">こちらの募集は終了しました。</p>
                         <p class="text-center pb-5">参加者は以下の方々です。</p>
-                        <div class="row mx-auto text-wrap">
-                           <% @chat_group_users.each do |chat_group_user| %>
-                                <% if chat_group_user.user.image.attached? %>
-                                <div>
-                                    <p class="text-center"><%= image_tag chat_group_user.user.image, size: "100x100" %></p>
-                                <% else %>
-                                <div>
-                                    <p class="text-center"><%= image_tag 'no_image', size: "100x100" %></p>
-                                <% end %>
-                                <p class="text-center"><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user_id) %></p>
+                        <div class="row mx-auto text-wrap px-5">
+                            <% @chat_group_users.each do |chat_group_user| %>
+                                <div class="p-3">
+                                    <% if chat_group_user.user.image.attached? %>
+                                    <div>
+                                        <p class="text-center"><%= image_tag chat_group_user.user.image, size: "100x100" %></p>
+                                    <% else %>
+                                    <div>
+                                        <p class="text-center"><%= image_tag 'no_image', size: "100x100" %></p>
+                                    <% end %>
+                                    <p class="text-center"><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user_id) %></p>
+                                    </div>
                                 </div>
-                        　<% end %>
+                        　  <% end %>
                         </div>
+                        <p class="text-center"><%= link_to "メッセージグループ", recruitment_chat_groups_path(@recruitment.id), class: "btn btn-color-green btn-sm" %></p>
                     <% elsif @recruitment.is_valid==false && @applications.present? && @recruitment.chat_groups.blank? %>
                         <p class="text-center mt-4">既に終了しました。</p>
                     <% elsif @recruitment.is_valid == false && @applications.blank? %>

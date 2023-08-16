@@ -3,7 +3,7 @@
 
   <div class="container mt-5">
     <% @chat_groups.each do |chat_group| %>
-      <div class="rounded-3 bg-white border p-5 mb-5" style="border-radius:50px;">
+      <div class="border border-radius-50 bg-white border p-5 mb-5">
         <div class="row">
           <div class="col-lg-3 col-md-4 col-sm-4 col-4">
             <p class="text-right"><%= image_tag chat_group.recruitment.shop.img %></p>
@@ -11,7 +11,7 @@
           <div class="col-lg-9 col-md-8 col-sm-8 col-8 pl-5">
             <h4><%= link_to chat_group.recruitment.title, admin_recruitment_path(chat_group.recruitment.id) %></h4>
             <p class="mt-3 ml-4">お店　<%= link_to chat_group.recruitment.shop.name, chat_group.recruitment.shop.url %></p>
-            <p class="mt-4 ml-4"><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(chat_group.recruitment.id), class: "btn btn-color-green" %></p>
+            <p class="mt-4 ml-4"><%= link_to "メッセージグループ", admin_recruitment_chat_groups_path(chat_group.recruitment.id), class: "btn btn-secondary" %></p>
           </div>
         </div>
       </div>

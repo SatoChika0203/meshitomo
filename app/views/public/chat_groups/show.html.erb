@@ -40,10 +40,10 @@
     </div>
     
     <div class="container mt-5">
-        <div class="mt-5">
+        <div class="my-3 text-center">
             <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
-                <p><%= chat.text_area :chat %></p>
-                <p><%= chat.submit "送信" %></p>
+                <span><%= chat.text_area :chat, class: "text-area" %></span>
+                <span class="pl-3"><button class="btn btn-color-green" type="submit">送信</button></span>
                 <%= chat.hidden_field :chat_group_id, :value => @chat_group.id %>
             <% end %>
         </div>

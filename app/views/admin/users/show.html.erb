@@ -41,8 +41,11 @@
                 </tr>
                 <tr class="row">
                     <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">ステータス</th>
-                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.is_deleted_i18n %></td>
-
+                    <% if @user.is_deleted == true %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">退会中</td>
+                    <% else %>
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">有効</td>
+                    <% end %>
                 </tr>
             </table>
         </div>

@@ -1,5 +1,8 @@
 @use '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@600&display=swap');
+
+
 
 
 // .nav-bg{
@@ -9,7 +12,7 @@
 *{
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-color: #4b4b4b;
-  
+
 }
 
 .btn-color-green{
@@ -37,7 +40,7 @@
 
 .recruitment_logo{
   background-image: url(../images/white_grain.jpg);
-  width: 80px;
+  width: 130px;
   border: 6px solid #dfd6c8;
 }
 
@@ -48,4 +51,28 @@
 .body-bg{
   // background-image: url(../images/white_grain.jpg);
   background-color: #fffce7;
+}
+
+h2{
+  font-family: 'Murecho', sans-serif;
+}
+
+h1{
+  font-family: 'Murecho', sans-serif;
+}
+
+.text-area{
+  width: 300px;
+  height: 100px;
+}
+
+.sign_in_btn{
+  background: #4de0d6;
+  // #58dddf
+  color: white;
+}
+
+.sign_up_btn{
+  background: #f4be48;
+  color: white;
 }

@@ -55,14 +55,37 @@
         <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12">会員ステータス</th>
           <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
-            <span><%= user.radio_button :is_deleted, User.is_deleteds.key(0) %></span><span><%= user.label :is_deleted_false, User.is_deleteds_i18n[:false] %></span>
-            <span><%= user.radio_button :is_deleted, User.is_deleteds.key(1) %></span><span><%= user.label :is_deleted_true, User.is_deleteds_i18n[:true] %></span>
+            <span><%= user.radio_button :is_deleted, false %></span><span><%= user.label :is_deleted, '有効' %></span>
+            <span><%= user.radio_button :is_deleted, true %></span><span><%= user.label :is_deleted, '退会' %></span>
           </td>
         </tr> 
       </table>
-    <p><%= user.submit "更新する" %></p>
+    <p class="text-center"><button class="btn btn-secondary btn-sm" type="submit">更新する</button></p>
     <%end%>
     <p><%= link_to "戻る", admin_user_path(@user.id) %></p>
   </div>
+  
+  <p class="text-center"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">ユーザーを削除する</button></p>
+    
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--モーダルのタイトル-->
+          <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+           <!--モーダルのメッセージ-->
+        <div class="modal-body">データベースから削除されます。<br>本当に削除しますか？</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">やめる</button>
+          <%= link_to "削除", admin_user_path(@user.id), method: :delete, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+        
 </div>
 

@@ -25,6 +25,32 @@ class Public::RecruitmentsController < ApplicationController
     @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])    
+    
+    # 募集締め切り日が過ぎたものは、is_validをfalseにする
+    today = Date.today
+    @recruitments_male_only.each do |recruitments_male_only|
+      @recruitments_male_only_deadline = recruitments_male_only.deadline
+    end
+    
+    @recruitments_female_only.each do |recruitments_female_only|
+      @recruitments_female_only_deadline = recruitments_female_only.deadline
+    end
+    
+    @recruitments_anyone.each do |recruitments_anyone|
+      @recruitments_anyone_deadline = recruitments_anyone.deadline
+    end
+
+    if today > @recruitments_male_only_deadline
+      @recruitments_male_only.update(is_valid: false)
+    end
+    
+    if today > @recruitments_female_only_deadline
+      @recruitments_female_only.update(is_valid: false)
+    end
+    
+    if today > @recruitments_anyone_deadline
+      @recruitments_anyone.update(is_valid: false)
+    end
   end
 
   def show
@@ -34,12 +60,11 @@ class Public::RecruitmentsController < ApplicationController
     @chat_group_user=ChatGroupUser.new
     chat_group=ChatGroup.where(recruitment_id: params[:id])
     @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
-    if DateTime.now.after? @recruitment.deadline
-      # @recruitment.is_valid.update(is_valid: false)
-      @recruitment.update(is_valid: false)
-    end
 
-    # @shop=Shop.find_by(id: params[:shop_id])
+    today = Date.today
+    if today > @recruitment.deadline
+      @recruitment.update(is_valid: false)
+    end   
     # :shop_id　はshowに渡されていないため使用できない
   end
 
@@ -59,23 +84,9 @@ class Public::RecruitmentsController < ApplicationController
   def withdraw
     recruitment=Recruitment.find(params[:id])
     recruitment.update(is_valid: false)
-    # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
     redirect_to user_path(current_user.id)
+    # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
   end
-
-  # def destroy
-  #   @applications=Application.where(recruitment_id: params[:id])
-  #   @recruitment=Recruitment.find(params[:id])
-  #   @chat_group_user=ChatGroupUser.new
-  #   chat_group=ChatGroup.where(recruitment_id: params[:id])
-  #   @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
-
-  #   if @recruitment.destroy
-  #     redirect_to history_recruitments_path
-  #   else
-  #     render :show
-  #   end
-  # end
 
   def confirm
     @chat_group = ChatGroup.new(recruitment_id: params[:id])

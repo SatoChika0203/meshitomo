@@ -1,72 +1,90 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-  
-  <div class="field">
-    <%= f.label :"プロフィール画像" %><br />
-    <%= f.file_field :image, placeholder: "プロィール画像", accept: "image/*" %>
+<div class="m-5">
+  <div class="container">
+    <h2 class="mb-5 ml-5">新規登録画面</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
+        <table class="table table-borderless">
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :image, "プロフィール画像" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1"><%= f.file_field :image, placeholder: "プロィール画像", accept: "image/*" %></td>
+          </tr>
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :"氏名" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1">
+              <span><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder:"性" %></span>
+              <span><%= f.text_field :first_name, autocomplete: "first_name", placeholder:"名" %></span>
+            </td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :"氏名（カナ）" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1">
+              <%= f.text_field :last_name_kana, autocomplete: "last_name_kana", placeholder:"セイ" %>
+              <%= f.text_field :first_name_kana, autocomplete: "first_name_kana", placeholder:"メイ" %>
+            </td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :"ニックネーム" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1"><%= f.text_field :nickname, autocomplete: "nickname" %></td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :email, "メールアドレス" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1"><%= f.email_field :email, autocomplete: "email" %></td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :"住所" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1">
+              〒<%= f.text_field :postal_code, autocomplete: "postal_code", placeholder:"郵便番号" %><br />
+              　<%= f.text_area :address, autocomplete: "address", placeholder:"住所" %>
+            </td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :telephone_number, "電話番号" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1"><%= f.text_field :telephone_number, autocomplete: "telephone_number", placeholder:"ハイフンなし" %></td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :gender, "性別" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1">
+              <%= f.radio_button :gender, User.genders.key(0) %>
+              <%= f.label :gender_male, User.genders_i18n[:male] %>
+              <%= f.radio_button :gender, User.genders.key(1) %>
+              <%= f.label :gender_female, User.genders_i18n[:female] %>
+              <%= f.radio_button :gender, User.genders.key(2) %>
+              <%= f.label :gender_other, User.genders_i18n[:other] %>
+            </td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1">
+              <%= f.label :password, "パスワード" %><br>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> 文字以上入力してください)</em>
+              <% end %>
+            </th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1"><%= f.password_field :password, autocomplete: "new-password" %></td>
+          </tr>
+      
+          <tr class="row mb-4 field">
+            <th class="col-lg-3 col-md-4 col-sm-5 col-12 mb-1"><%= f.label :password_confirmation, "パスワードの確認" %></th>
+            <td class="col-lg-9 col-md-8 col-sm-7 col-12 mb-1"><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+          </tr>
+        </table>
+        
+      <div class="actions">
+        <p><button class="btn btn-color-green my-3" type="submit">新規登録</button></p>
+      </div>
+      
+    <% end %>
+    
+    <div class="my-4">
+      <%= render "public/shared/links" %>
+    </div>
+    
   </div>
-  
-  <div class="field">
-    <%= f.label :"氏名" %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder:"性" %>
-    <%= f.text_field :first_name, autocomplete: "first_name", placeholder:"名" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"氏名（カナ）" %><br />
-    <%= f.text_field :last_name_kana, autocomplete: "last_name_kana", placeholder:"セイ" %>
-    <%= f.text_field :first_name_kana, autocomplete: "first_name_kana", placeholder:"メイ" %>
-  </div>  
-
-  <div class="field">
-    <%= f.label :"ニックネーム" %><br />
-    <%= f.text_field :nickname, autocomplete: "nickname" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"メールアドレス" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"住所" %><br />
-    〒<%= f.text_field :postal_code, autocomplete: "postal_code" %><br />
-    <%= f.text_area :address, autocomplete: "address" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"電話番号" %><br />
-    <%= f.text_field :telephone_number, autocomplete: "telephone_number" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"性別" %><br />
-    <%= f.radio_button :gender, User.genders.key(0) %>
-    <%= f.label :gender_male, User.genders_i18n[:male] %>
-    <%= f.radio_button :gender, User.genders.key(1) %>
-    <%= f.label :gender_female, User.genders_i18n[:female] %>
-    <%= f.radio_button :gender, User.genders.key(2) %>
-    <%= f.label :gender_other, User.genders_i18n[:other] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
