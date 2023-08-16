@@ -1,18 +1,17 @@
 @use '~bootstrap/scss/bootstrap';
+@charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Murecho:wght@600&display=swap');
 
 
-
-
-// .nav-bg{
-//   background-image: url(app/assets/images/background_wahu.jpeg);
-// }
-
+/*========= レイアウト調整のためのCSS ===============*/
 *{
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-color: #4b4b4b;
+}
 
+.body-bg{
+  background-image: url(../images/white_grain.jpg);
 }
 
 .btn-color-green{
@@ -35,7 +34,8 @@
 }
 
 .nav-bg{
-  background-image: url(../images/check.png);
+  background-image: url(../images/ivy.png);
+  height: 200px;
 }
 
 .recruitment_logo{
@@ -46,11 +46,6 @@
 
 .border-color{
   border: 6px solid #dfd6c8;
-}
-
-.body-bg{
-  // background-image: url(../images/white_grain.jpg);
-  background-color: #fffce7;
 }
 
 h2{
@@ -75,4 +70,97 @@ h1{
 .sign_up_btn{
   background: #f4be48;
   color: white;
+}
+
+.meshitomo_logo{
+  width: 100%;
+}
+
+.visual{
+  background-image: url(../images/photo_1.jpg);
+  background-size: auto
+}
+
+
+/*========= LoadingのためのCSS ===============*/
+
+/* Loading背景画面設定　*/
+#splash {
+    /*fixedで全面に固定*/
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-image: url(../images/white_grain.jpg);
+  background-color: rgba( 0, 0, 0, 0.5);
+}
+
+#splash_rgba{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba( 0, 0, 0, 0.5);
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo img {
+  width: 300px;
+}
+
+/* fadeUpをするアイコンの動き */
+.fadeUp{
+animation-name: fadeUpAnime;
+animation-duration:0.5s;
+animation-fill-mode:forwards;
+opacity: 0;
+}
+
+@keyframes fadeUpAnime{
+  from {
+    opacity: 0;
+  transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+  transform: translateY(0);
+  }
+}
+
+
+
+/*========= レイアウトのためのCSS ===============*/
+
+#container{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url(../images/white_grain.jpg);
+}
+
+a{
+    color: #333;
+}
+
+a:hover{
+     text-decoration: none;
+}
+
+.border-radius-top{
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 500px;
+  text-align: center;
 }

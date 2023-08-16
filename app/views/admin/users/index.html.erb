@@ -13,7 +13,11 @@
           <% end %>
           <p><%= link_to user.name, admin_user_path(user.id) %></p>
           <p><%= user.email %></p>
-          <p><%= user.is_deleted_i18n %></p>
+          <% if user.is_deleted == true %>
+            <p class="text-secondary">退会中</p>
+          <% else %>
+            <p class="text-danger">有効</p>
+          <% end %>
         </div>
       <% end %>
       </div>

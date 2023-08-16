@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Meshitomo</title>
+    <title>meshiTomo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,29 +16,32 @@
         $('[data-toggle="tooltip"]').tooltip()
       })
     </script-->
+    
+    
+  <meta name="description" content="meshiTomo">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
+  <link rel="stylesheet" type="text/css" href=".../javascript/stylesheets/application.scss">
+  
   </head>
+  
   <body class="body-bg">
     <header class="sticky-top">
     <% if user_signed_in? %>
-      <nav class="navbar navbar-expand-md navbar-light nav-bg mb-5 pb-5">
-        <% if user_signed_in? %>
-          <a class="navbar-brand p-3" href="/recruitments"><%= image_tag('meshitomo_logo.png') %></a>
-        <% elsif admin_signed_in? %>
-          <a class="navbar-brand p-3" href="/admin/users"><%= image_tag('meshitomo_logo.png') %></a>
-        <% else %>
-          <a class="navbar-brand p-3" href="/"><%= image_tag('meshitomo_logo.png') %></a>
-        <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light nav-bg">
+          <a class="navbar-brand" href="/recruitments"><%= image_tag('meshitomo_sm.png') %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
             <div class="justify-content-end collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center">
-                  <div class="search-form p-5">
+              <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center mr-3">
+                  <div class="search-form px-4 pt-4">
                     <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
                       <%= search.text_field :keyword, value: @keyword %>
                       <%= search.select :prefecture, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
                       <%= search.date_field :schedule, value: @schedule %>
-                      <button class="btn btn-color-gray btn-sm" type="submit">検索</button>
+                      <button class="btn btn-color-gray btn-sm mt-1" type="submit">検索</button>
                     <% end %>
                   </div>
                   <li class="nav-item m-2 p-2" data-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
@@ -61,14 +64,8 @@
             </div>
       </nav>
   <% elsif admin_signed_in? %>
-    <nav class="navbar navbar-expand-md navbar-light nav-bg mb-5 pb-5">
-      <% if user_signed_in? %>
-        <a class="navbar-brand p-3" href="/recruitments"><%= image_tag('meshitomo_logo.png') %></a>
-      <% elsif admin_signed_in? %>
-        <a class="navbar-brand p-3" href="/admin/users"><%= image_tag('meshitomo_logo.png') %></a>
-      <% else %>
-        <a class="navbar-brand p-3" href="/"><%= image_tag('meshitomo_logo.png') %></a>
-      <% end %>
+    <nav class="navbar navbar-expand-md navbar-light mb-5 pb-5">
+        <a class="navbar-brand" href="/admin/users"><%= image_tag('meshitomo_sm.png') %></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

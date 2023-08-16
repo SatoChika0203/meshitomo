@@ -77,9 +77,17 @@
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">希望日</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.schedule %></td>
                                 </tr>
-                                <tr class="row mb-5">
+                                <tr class="row">
                                     <th class="col-lg-2 col-md-3 col-sm-4 col-4">募集期限</th>
                                     <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.deadline %></td>
+                                </tr>
+                                <tr class="row mb-5">
+                                    <th class="col-lg-2 col-md-3 col-sm-4 col-4">募集状況</th>
+                                <% if recruitment.is_valid == true %>
+                                    <td class="col-lg-10 col-md-9 col-sm-8 col-8 text-denger">募集中</td>
+                                <% else %>
+                                    <td class="col-lg-10 col-md-9 col-sm-8 col-8 text-secondary">募集終了</td>
+                                <% end %>
                                 </tr>
                             </table>
                           </div>
