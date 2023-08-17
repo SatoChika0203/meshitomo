@@ -8,8 +8,8 @@ class Recruitment < ApplicationRecord
   has_many :applicants, through: :applications, dependent: :destroy
   # applicationsの中にapplicants（応募者・Userに付随する）があるが、あくまで別物？
 
-  validates :title, presence: true
-  validates :introduction, presence: true
+  validates :title, presence: true, length: { in: 1..20 }
+  validates :introduction, presence: true, length: { in: 1..150 }
   validates :prefecture, presence: true
   validates :number_of_people, presence: true
   validates :recruitment_gender, presence: true

@@ -1,12 +1,14 @@
 class Public::RecruitmentsController < ApplicationController
   before_action :authenticate_user!
-  
+
+
   def new
     @recruitment=Recruitment.new
     @shops=Shop.where(user_id: current_user.id, registration_flg: 0)
   end
 
   def create
+    @shops=Shop.where(user_id: current_user.id, registration_flg: 0)
     @recruitment=Recruitment.new(recruitment_params)
     @recruitment.user_id=current_user.id
     if @recruitment.save
@@ -19,23 +21,24 @@ class Public::RecruitmentsController < ApplicationController
   def index
     @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
     @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
-    # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0)
     @recruitments_anyone=Recruitment.where(recruitment_gender: 2).page(params[:page])
+    # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0) こっちでもいける
 
     @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
-    @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])    
-    
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])
+
     # 募集締め切り日が過ぎたものは、is_validをfalseにする
     today = Date.today
+    
     @recruitments_male_only.each do |recruitments_male_only|
       @recruitments_male_only_deadline = recruitments_male_only.deadline
     end
-    
+
     @recruitments_female_only.each do |recruitments_female_only|
       @recruitments_female_only_deadline = recruitments_female_only.deadline
     end
-    
+
     @recruitments_anyone.each do |recruitments_anyone|
       @recruitments_anyone_deadline = recruitments_anyone.deadline
     end
@@ -43,11 +46,11 @@ class Public::RecruitmentsController < ApplicationController
     if today > @recruitments_male_only_deadline
       @recruitments_male_only.update(is_valid: false)
     end
-    
+
     if today > @recruitments_female_only_deadline
       @recruitments_female_only.update(is_valid: false)
     end
-    
+
     if today > @recruitments_anyone_deadline
       @recruitments_anyone.update(is_valid: false)
     end
@@ -64,7 +67,7 @@ class Public::RecruitmentsController < ApplicationController
     today = Date.today
     if today > @recruitment.deadline
       @recruitment.update(is_valid: false)
-    end   
+    end
     # :shop_id　はshowに渡されていないため使用できない
   end
 
@@ -80,7 +83,7 @@ class Public::RecruitmentsController < ApplicationController
       render :edit
     end
   end
-  
+
   def withdraw
     recruitment=Recruitment.find(params[:id])
     recruitment.update(is_valid: false)
@@ -109,14 +112,13 @@ class Public::RecruitmentsController < ApplicationController
     end
     redirect_to  complete_recruitment_path(recruitment.id)
   end
-  
+
   def complete
     @recruitment=Recruitment.find(params[:id])
   end
 
   def history
     @recruitments=current_user.recruitments.page(params[:page])
-    # @recruitments_page = Recruitment.all.page(params[:page]).per(5)
     @recruitments=current_user.recruitments.order(created_at: :desc).page(params[:page])
   end
 

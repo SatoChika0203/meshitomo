@@ -53,37 +53,3 @@
   <p><%= link_to "戻る", admin_recruitment_path(@recruitment.id) %></p>
   </div>
 
-
-
-募集の編集画面
-
-<%= form_with model: @recruitment, url:admin_recruitment_path(@recruitment.id), method: :patch do |recruitment| %>
-題名
-<%= recruitment.text_field :title %>
-
-自己紹介文
-<%= recruitment.text_field :introduction %>
-
-スケジュール
-<%= recruitment.text_field :schedule_one %>
-<%= recruitment.text_field :schedule_two %>
-<%= recruitment.text_field :schedule_three %>
-
-都道府県
-<!--<%= recruitment.text_field :prefecture %>-->
-<%= recruitment.select :prefectures, Recruitment.prefectures.keys, {} %>
-
-募集人数
-<%= recruitment.text_field :number_of_people %>
-
-募集性別
-<%= recruitment.text_field :recruitment_gender %>
-
-募集期限
-<%= recruitment.text_field :deadline %>
-
-有効ステータス
-<%= recruitment.text_field :deadline %>
-
-<%= recruitment.submit "更新する" %>
-<%end%>

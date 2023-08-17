@@ -15,12 +15,12 @@
 }
 
 .btn-color-green{
-  background: #abb97f;
+  background: #96ad6a;
   color: white;
 }
 
 .btn-color-gray{
-  background: #C6C2BE;
+  background: #b5b1ae;
   color: white;
 }
 
@@ -79,6 +79,10 @@ h1{
 .visual{
   background-image: url(../images/photo_1.jpg);
   background-size: auto
+}
+
+ul {
+  list-style: none;
 }
 
 
@@ -150,9 +154,9 @@ opacity: 0;
     background-image: url(../images/white_grain.jpg);
 }
 
-a{
-    color: #333;
-}
+// a{
+//     color: #333;
+// }
 
 a:hover{
      text-decoration: none;
@@ -161,6 +165,15 @@ a:hover{
 .border-radius-top{
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.7);
-  width: 500px;
+  width: 600px;
   text-align: center;
+  margin: 2rem auto !important;
+}
+
+
+/*========= マウスオーバーのためのCSS ===============*/
+.cap {
+  text-align: center;
+  margin:100px 0;
+  font-size: 1.2rem;
 }

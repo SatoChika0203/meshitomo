@@ -1,17 +1,16 @@
 <div class="my-5">
   <h2 class="text-center">ご飯を食べに行きましょう！</h2>
 
-  <div class="container my-5">
-    <div>
-      <% if @recruitment.errors.any? %>
-        <%= @recruitment.errors.count %>件のエラーが発生しました
-        <ul>
-          <% @recruitment.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+<div class="text-center m-3">
+  <% if @recruitment.errors.any? %>
+  <p><%= @recruitment.errors.count %>件のエラーが発生しました</p>
+    <ul class="text-danger text-center">
+      <% @recruitment.errors.full_messages.each do |message| %>
+        <li class="py-1"><%= message %></li>
       <% end %>
-    </div>
+    </ul>
+  <% end %>
+</div>
 
     <div class="text-center rounded-3 bg-white py-5" style="border-radius:100px;">
       <%= form_with model: @recruitment, url: recruitments_path, method: :post do |recruitment| %>

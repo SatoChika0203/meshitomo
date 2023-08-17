@@ -1,13 +1,24 @@
 <div class="my-5">
   <h2 class="text-center"><%= @recruitment.title %>の編集画面</h2>
   
+  <div class="text-center m-3">
+    <% if @recruitment.errors.any? %>
+    <p><%= @recruitment.errors.count %>件のエラーが発生しました</p>
+      <ul class="text-danger text-center">
+        <% @recruitment.errors.full_messages.each do |message| %>
+          <li class="py-1"><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  
   <div class="container text-center bg-white my-5 py-5 border-radius-80">
     <%= form_with model: @recruitment, url: recruitment_path(@recruitment.id), method: :patch do |recruitment| %>
       <table class="table table-borderless">
         <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12">タイトル</th>
           <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0"><%= recruitment.text_field :title, autofocus: true %></td>
-          <!--image/*　：　画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
+          <!--image/*：画像ファイル以外の全てのファイル(音声ファイルや動画ファイルなど)はNG-->
         </tr>  
         <tr class="row mb-4">
           <th class="col-lg-12 col-md-12 col-sm-12 col-12">募集文</th>

@@ -14,17 +14,17 @@ class User < ApplicationRecord
   has_many :user_shops, dependent: :destroy
   # belongs_to :shop, optional: true
   
-# 　validates :last_name, presence: true
-# 　validates :first_name, presence: true
-# 　validates :last_name_kana, presence: true
-# 　validates :first_name_kana, presence: true
-# 　validates :nickname, presence: true
-# 　validates :postal_code, presence: true
-# 　validates :address, presence: true
-# 　validates :telephone_number, presence: true
-# 　validates :gender, presence: true
-# 　validates :email, presence: true
-# 　validates :image, presence: true
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :first_name_kana, presence: true
+  validates :nickname, presence: true
+  validates :postal_code, presence: true
+  validates :address, presence: true
+  validates :telephone_number, presence: true
+  validates :gender, presence: true
+  validates :email, presence: true
+  validates :introduction, length: { in: 1..150 }
          
   enum gender: { male: 0, female: 1, other: 2 }
   enum prefecture:{

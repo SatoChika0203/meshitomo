@@ -16,17 +16,19 @@
         $('[data-toggle="tooltip"]').tooltip()
       })
     </script-->
-    
-    
+
+
   <meta name="description" content="meshiTomo">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
   <link rel="stylesheet" type="text/css" href=".../javascript/stylesheets/application.scss">
-  
+
   </head>
-  
+
   <body class="body-bg">
+    <script src="application.js"></script>
+
     <header class="sticky-top">
     <% if user_signed_in? %>
       <nav class="navbar navbar-expand-lg navbar-light nav-bg">
@@ -92,10 +94,16 @@
     <% if user_signed_in? %>
       <!--<div class="fixed-bottom d-flex justify-content-end" data-toggle="tooltip" data-placement="top" title="お食事に行きましょう">-->
         <%= link_to new_recruitment_path, class: "fixed-bottom ml-auto d-block rounded-circle mb-4 mr-4 shadow recruitment_logo" do %>
-          <%= image_tag 'dinner.png', class: "img-fluid p-3" %>
+          <span class="cap" data-tippy-content="お食事に行く人を募集しましょう！"><%= image_tag 'dinner.png', class: "img-fluid p-3" %></span>
         <% end %>
         <!--ブロック要素にすると画面幅全体に要素が適用されてしまう。インライン要素にすることで、ボタンのみ選択できる。-->
       <!--</div>-->
+
+      <!--ツールチップを出すためのJS-->
+      <script src="https://unpkg.com/popper.js@1"></script>
+      <script src="https://unpkg.com/tippy.js@5"></script>
+      <!--ツールチップのJSを制御するための自作のJS-->
+      <script src="application.js"></script>
     <% end %>
   </body>
 </html>

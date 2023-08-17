@@ -12,9 +12,12 @@ def create
   # application.save(recruitment_id: @recruitment.id, applicant_id: current_user.id)
   application.recruitment_id=@recruitment.id
   application.applicant_id=current_user.id
-  application.save
+  if application.save
   # application.save(recruitment_id: params[:recruitment_id], applicant_id: current_user.id)
-  redirect_to complete_recruitment_applications_path
+    redirect_to complete_recruitment_applications_path
+  else
+    render :confirm
+  end
 end
 
 def complete
@@ -23,7 +26,6 @@ end
 
 def history
   @applications=current_user.applications.page(params[:page])
-  # @applications_page = Application.all.page(params[:page]).per(5)
   @applications=current_user.applications.order(created_at: :desc).page(params[:page])
 end
 

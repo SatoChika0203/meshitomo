@@ -1,6 +1,17 @@
 <div class="my-5">
   <h2 class="text-center mb-5">応募の確認</h2>
 
+  <div class="text-center m-3">
+    <% if @application.errors.any? %>
+    <p><%= @application.errors.count %>件のエラーが発生しました</p>
+      <ul class="text-danger text-center">
+        <% @application.errors.full_messages.each do |message| %>
+          <li class="py-1"><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
   <h5 class="text-center mb-2">以下のお食事に応募しますか？</h5>
 
   <div class="container mt-5 border-radius-80 py-5">
