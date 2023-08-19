@@ -1,6 +1,10 @@
- <div class="container my-3">
+ <div class="my-3">
+　　<div class="my-2 mx-5">
+    　<h6 class="text-muted"><%= flash[:notice] %></h6>
+ 　 </div>
+ 　 
     <h2 class="text-center">募集詳細</h2>
-        <div class="bg-white border-radius-80 pt-5 px-5 pb-2 mt-4">
+        <div class="container border border-radius-80 pt-5 px-5 pb-2 mt-4">
             <div class="row mb-5">
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <% if @recruitment.user.image.attached? %>
@@ -42,7 +46,7 @@
 
 <div class="container py-5">
     <h2 class="text-center">お店の情報</h2>
-    <div class="bg-white border-radius-80 pt-5 px-5 pb-2 mt-4">
+    <div class="border border-radius-80 pt-5 px-5 pb-2 mt-4">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
                 <p class="text-center"><%= image_tag @recruitment.shop.img, class: "rounded" %></p>
@@ -89,7 +93,7 @@
     <div class="my-5">
         <div class="container">
              <h2 class="text-center">応募状況</h2>
-             <div class="bg-white border-radius-80 py-3 my-3">
+             <div class="border border-radius-80 py-3 my-3">
                 <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
                     <p class="text-center"><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post, class: "btn btn-color-gray" %></p>
                 <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
@@ -157,7 +161,7 @@
     <div class="mb-5">
         <div class="container">
             <h2 class="text-center">応募状況</h2>
-                <div class="bg-white border-radius-80 py-3 mt-4">
+                <div class="border border-radius-80 py-3 mt-4">
                     <% if @recruitment.is_valid == true && @applications.present? %>
                         <p class="text-center mt-4 pb-3">応募者が来ました！どなたと一緒に行きますか？（行きたい人全員にチェックボックスを入れてください）</p>
                             <%= form_with model: @chat_group_user, url: confirm_recruitment_path(@recruitment.id), method: :post do |f| %>

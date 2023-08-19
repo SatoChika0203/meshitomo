@@ -14,6 +14,7 @@ class Public::RecruitmentsController < ApplicationController
     @recruitment=Recruitment.new(recruitment_params)
     @recruitment.user_id=current_user.id
     if @recruitment.save
+      flash[:notice]="募集が完了しました！"
       redirect_to recruitment_path(@recruitment.id)
     else
       render :new
@@ -113,6 +114,7 @@ class Public::RecruitmentsController < ApplicationController
   def update
     @recruitment=Recruitment.find(params[:id])
     if @recruitment.update(recruitment_params)
+      flash[:notice]="変更が完了しました！。"
       redirect_to recruitment_path(@recruitment.id)
     else
       render :edit
@@ -122,6 +124,7 @@ class Public::RecruitmentsController < ApplicationController
   def withdraw
     recruitment=Recruitment.find(params[:id])
     recruitment.update(is_valid: false)
+    flash[:notice]="募集を削除しました。"
     redirect_to user_path(current_user.id)
     # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
   end
@@ -226,6 +229,7 @@ private
   def is_deleted_recruitment_user
     recruitment=Recruitment.find(params[:id])
     if recruitment.user.is_deleted == true
+      flash[:notice]="このユーザーは退会しました。"
       redirect_to recruitments_path
     end
   end

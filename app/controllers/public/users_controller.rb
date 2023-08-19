@@ -24,6 +24,7 @@ class Public::UsersController < ApplicationController
   def update
     @user=User.find(params[:id])
     if @user.update(user_params)
+      flash[:notice]="変更が完了しました！"
       redirect_to user_path(@user.id)
       # redirect_toはgetメソッドに働く
     else
@@ -59,6 +60,7 @@ private
   def is_deleted_user
     user = User.find(params[:id])
     if user.is_deleted == true
+      flash[:notice]="このユーザーは退会しました。"
       redirect_to recruitments_path
     end
   end

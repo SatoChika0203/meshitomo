@@ -1,4 +1,8 @@
 <div class="my-5">
+  <div class="my-2 mx-5">
+    <h6 class="text-muted"><%= flash[:notice] %></h6>
+  </div>
+  
   <h2 class="text-center">募集一覧</h2>
   <!--さあ、まだ見ぬ仲間たちと食事を共にしましょう-->
   
@@ -6,7 +10,7 @@
     <% if current_user.gender == "male" %>
       <% @recruitments_male_only.each do |recruitment| %>
         <% if recruitment.is_valid==true %>
-          <div class="mb-5 bg-white rounded-3 p-5" style="border-radius:50px;">
+          <div class="mb-5 bg-white rounded-3 border p-5" style="border-radius:50px;">
             <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
               <div class="row pt-3">
                 <div class="col-lg-3 col-md-12 col-sm-12 col-12 mb-4">
@@ -42,7 +46,7 @@
     <% elsif current_user.gender == "female" %>
       <% @recruitments_female_only.each do |recruitment| %>
         <% if recruitment.is_valid==true %>
-          <div class="mb-5 bg-white rounded-3 p-5" style="border-radius:50px;">
+          <div class="mb-5 bg-white rounded-3 border p-5" style="border-radius:50px;">
             <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
               <div class="row pt-3">
                 <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
@@ -80,7 +84,7 @@
     <% elsif current_user.gender == "other" %>
       <% @recruitments_anyone.each do |recruitment| %>
         <% if recruitment.is_valid==true %>
-          <div class="mb-5 bg-white rounded-3 p-5" style="border-radius:50px;">
+          <div class="mb-5 bg-white rounded-3 border p-5" style="border-radius:50px;">
             <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
               <div class="row pt-3">
                 <div class="col-lg-3 col-md-12 col-sm-12 mb-4">

@@ -1,6 +1,6 @@
 class Public::ApplicationsController < ApplicationController
 before_action :authenticate_user!
-before_action :is_matching_login_user, only[:show, :cancel, :withdraw]
+before_action :is_matching_login_user, only: [:cancel, :withdraw]
 
 def confirm
   @recruitment=Recruitment.find_by(id: params[:recruitment_id])
@@ -45,6 +45,7 @@ def withdraw
   # application.update(is_valid: false)
 
   application.update(is_valid: false)
+  flash[:notice]="のキャンセルが完了しました。"
   redirect_to history_applications_path
   # redirect_to recruitment_applications_path(recruitment.id)
 end
@@ -58,7 +59,7 @@ private
 
   def is_matching_login_user
     recruitment=Recruitment.find_by(id: params[:recruitment_id])
-    unless recruitment.applicant.id == current_user.id
+    unless recruitment.applicant_id == current_user.id
       redirect_to recruitments_path
     end
   end

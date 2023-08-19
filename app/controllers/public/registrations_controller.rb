@@ -3,14 +3,14 @@
 class Public::RegistrationsController < Devise::RegistrationsController
   
   def after_sign_up_path_for(resource)
-    flash[:notice]="Signed in successfully."
+    flash[:notice]="はじめまして！"
     recruitments_path
   end
   
-  def after_sign_out_path_for(resource)
-    flash[:notice]="Signed out successfully."
-    root_path
-  end
+  # def after_sign_out_path_for(resource)
+  #   flash[:notice]="Signed out successfully."
+  #   root_path
+  # end
   
 
   # before_action :configure_sign_up_params, only: [:create]

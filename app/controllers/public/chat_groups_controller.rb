@@ -25,6 +25,7 @@ class Public::ChatGroupsController < ApplicationController
   def destroy
     chat_group=ChatGroup.find_by(recruitment_id: params[:recruitment_id])
     chat_group.destroy
+    flash[:notice]="お食事は楽しかったですか？また募集してくださいね！"
     redirect_to chat_groups_path
   end
 
