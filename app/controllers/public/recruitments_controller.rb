@@ -1,6 +1,8 @@
 class Public::RecruitmentsController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :is_matching_login_user, only: [:edit, :update, :withdraw, :confirm, :generate, :complete]
+  # before_action :match_gender, only: [:show]
+  before_action :is_deleted_recruitment_user, only: [:show]
 
   def new
     @recruitment=Recruitment.new
@@ -19,18 +21,18 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def index
-    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
-    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
-    @recruitments_anyone=Recruitment.where(recruitment_gender: 2).page(params[:page])
+    # @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
+    # @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
+    # @recruitments_anyone=Recruitment.where(recruitment_gender: 2).page(params[:page])
     # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0) こっちでもいける
-
+    
     @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])
 
     # 募集締め切り日が過ぎたものは、is_validをfalseにする
     today = Date.today
-    
+
     @recruitments_male_only.each do |recruitments_male_only|
       @recruitments_male_only_deadline = recruitments_male_only.deadline
     end
@@ -69,7 +71,40 @@ class Public::RecruitmentsController < ApplicationController
       @recruitment.update(is_valid: false)
     end
     # :shop_id　はshowに渡されていないため使用できない
+
+
+    # -----render用-------
+    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
+    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])
+
+    today = Date.today
+
+    @recruitments_male_only.each do |recruitments_male_only|
+      @recruitments_male_only_deadline = recruitments_male_only.deadline
+    end
+
+    @recruitments_female_only.each do |recruitments_female_only|
+      @recruitments_female_only_deadline = recruitments_female_only.deadline
+    end
+
+    @recruitments_anyone.each do |recruitments_anyone|
+      @recruitments_anyone_deadline = recruitments_anyone.deadline
+    end
+
+    if today > @recruitments_male_only_deadline
+      @recruitments_male_only.update(is_valid: false)
+    end
+
+    if today > @recruitments_female_only_deadline
+      @recruitments_female_only.update(is_valid: false)
+    end
+
+    if today > @recruitments_anyone_deadline
+      @recruitments_anyone.update(is_valid: false)
+    end
   end
+
 
   def edit
     @recruitment=Recruitment.find(params[:id])
@@ -175,22 +210,38 @@ class Public::RecruitmentsController < ApplicationController
 =end
   end
 
-  private
+private
 
   def recruitment_params
     params.require(:recruitment).permit(:title, :introduction, :schedule, :prefecture, :number_of_people, :recruitment_gender, :deadline, :shop_id)
   end
-
-
-
-  # def recruitment_search_params
-  #   params.fetch(:recruitment, {}).permit(:keyword, :prefectures, :schedule_one)
-  #   #fetch(:search, {})と記述することで、検索フォームに値がない場合はnilを返し、エラーが起こらなくなる
-  #   #ここでの:searchには、フォームから送られてくるparamsの値が入っている
-  # end
-
-  # def chat_group_user_params
-  #   params.permit(:user_id)
-  #         # params.require(:chat_group_users).permit(:user_id, keys: [:applicant_id[]])
-  # end
+  
+  def is_matching_login_user
+    recruitment=Recruitment.find(params[:id])
+    unless recruitment.user.id == current_user.id
+      redirect_to recruitments_path
+    end
+  end
+  
+  def is_deleted_recruitment_user
+    recruitment=Recruitment.find(params[:id])
+    if recruitment.user.is_deleted == true
+      redirect_to recruitments_path
+    end
+  end
+  
 end
+
+  # def match_gender
+  #   recruitment=Recruitment.find(params[:id])
+  #     if (current_user.gender=="male" && recruitment.recruitment_gender=="male_only" || recruitment.recruitment_gender=="anyone")
+  #       redirect_to recruitment_path(recruitment.id)
+  #     elsif (current_user.gender=="female" && recruitment.recruitment_gender=="female_only" || recruitment.recruitment_gender=="anyone")
+  #       redirect_to recruitment_path(recruitment.id)
+  #     elsif  (current_user.gender=="other" && recruitment.recruitment_gender=="anyone")
+  #       redirect_to recruitment_path(recruitment.id)
+  #     else
+  #       render :index
+  #     end
+  # end
+

@@ -1,5 +1,6 @@
 class Public::ShopsController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:update, :withdraw]
   
   # require 'httparty'
   require 'net/http'
@@ -54,10 +55,18 @@ class Public::ShopsController < ApplicationController
   #   shop.destroy
   #   redirect_to user_user_shops_path(current_user.id)
   # end
-end
+
 
 private
 
-def shop_params
-  params.require(:shop).permit(:hotpepper_shop_id, :name, :address, :url, :catch, :open, :close, :genre, :budget_average, :access, :parking, :img)
+  def shop_params
+    params.require(:shop).permit(:hotpepper_shop_id, :name, :address, :url, :catch, :open, :close, :genre, :budget_average, :access, :parking, :img)
+  end
+
+  def is_matching_login_user
+    shop=Shop.find(params[:id])
+    unless shop.user.id == current_user.id
+      redirect_to recruitments_path
+    end
+  end
 end

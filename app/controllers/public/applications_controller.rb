@@ -1,5 +1,6 @@
 class Public::ApplicationsController < ApplicationController
 before_action :authenticate_user!
+before_action :is_matching_login_user, only[:show, :cancel, :withdraw]
 
 def confirm
   @recruitment=Recruitment.find_by(id: params[:recruitment_id])
@@ -48,11 +49,19 @@ def withdraw
   # redirect_to recruitment_applications_path(recruitment.id)
 end
 
-end
+
 
 private
-def application_params
-  params.require(:application).permit(:message, :schedule_one, :schedule_two, :schedule_three)
-end
+  def application_params
+    params.require(:application).permit(:message, :schedule_one, :schedule_two, :schedule_three)
+  end
 
+  def is_matching_login_user
+    recruitment=Recruitment.find_by(id: params[:recruitment_id])
+    unless recruitment.applicant.id == current_user.id
+      redirect_to recruitments_path
+    end
+  end
+  
+end
 

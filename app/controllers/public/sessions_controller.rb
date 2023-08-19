@@ -18,10 +18,10 @@ class Public::SessionsController < Devise::SessionsController
   
   def user_state
     @user = User.find_by(email: params[:user][:email])
-    return if !@customer  # アカウントを取得できなかった場合、このメソッドを終了する
+    return if !@user  # アカウントを取得できなかった場合、このメソッドを終了する
     if @user.valid_password?(params[:user][:password])
       if @user.is_deleted==true
-        redirect_to new_user_registration_path
+        redirect_to new_user_session_path
       end
     end
   end
