@@ -5,7 +5,7 @@ class Public::ChatsController < ApplicationController
     @chat=current_user.chats.new(chat_params)
     @chat.save
     redirect_to recruitment_chat_groups_path(@chat.chat_group.recruitment_id)
-    # params[:recruitment][:recruitment_id]
+      # params[:recruitment][:recruitment_id]
   end
 end
 

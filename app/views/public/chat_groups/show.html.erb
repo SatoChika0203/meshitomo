@@ -35,7 +35,7 @@
     
     <div class="text-center mt-3">
     <% if @recruitment.user.id == current_user.id %>
-    <%= link_to "食事に行きました！", confirm_recruitment_chat_groups_path(@recruitment.id), method: :post %>
+    <%= link_to "食事に行きました！", confirm_recruitment_chat_groups_path(@recruitment.id), method: :post, class: "text-secondary" %>
     <% end %>
     </div>
     
@@ -52,16 +52,19 @@
             <div class="h-100 overflow-auto container">
                 <% @chats.each do |chat| %>
                 <div class="row py-3 border-bottom">
-                  <div class="col-lg-2 col-md-3 col-sm-4 col-4">
+                  <div class="col-lg-2 col-md-3 col-sm-3 col-3">
                     <% if chat.user.image.attached? %>
-                        <p class="text-center"><%= link_to image_tag(chat.user.image, size: "70x70"), user_path(chat.user.id) %></p>
+                        <p class="text-center"><%= link_to image_tag(chat.user.image, size: "70x70", class: "rounded"), user_path(chat.user.id) %></p>
                     <% else %>
-                        <p class="text-center"><%= link_to image_tag('no_image', size: "70x70"), user_path(chat.user.id) %></p>
+                        <p class="text-center"><%= link_to image_tag('no_image', size: "70x70", class: "rounded"), user_path(chat.user.id) %></p>
                     <% end %>
                   </div>
-                  <div class="my-auto col-lg-10 col-md-9 col-sm-8 col-8 text-wrap">
+                  <div class="my-auto col-lg-8 col-md-7 col-sm-7 col-7 text-wrap">
                         <p><%= chat.chat %></p>
                   </div>
+                  <div class="my-auto col-lg-2 col-md-2 col-sm-2 col-2 text-wrap small">
+                        <p><%= chat.created_at %></p>
+                  </div>                  
                 </div>
                 <% end %>
             </div>

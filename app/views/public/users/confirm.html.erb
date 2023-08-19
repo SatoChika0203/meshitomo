@@ -1,6 +1,12 @@
-<h1>退会画面</h1>
+<div class="my-5 text-center">
+  <h1 class="mb-5">退会画面</h1>
 
-<p>本当に退会しますか？</p>
+  <h4 class="mb-4">本当に退会しますか？</h4>
+  <p class="mb-5">退会すると、meshiTomo内の全てのデータを閲覧できなくなります。<br>
+  退会する場合は、「退会する」をクリックしてください。</p>
 
-<%= link_to "退会しない", user_path(@user.id) %>
-<%= link_to "退会する", withdraw_user_path(@user.id), method: :patch %>
+  <div class="row">
+    <p class="col-lg-6 col-md-6 col-sm-6 col-5 text-right"><%= link_to "退会しない", user_path(@user.id), class: "btn btn-color-green btn-lg" %></p>
+    <p class="col-lg-6 col-md-6 col-sm-6 col-7 text-left"><%= link_to "退会する", withdraw_user_path(@user.id), method: :patch, class: "btn btn-color-gray btn-lg" %></p>
+  </div>
+</div>

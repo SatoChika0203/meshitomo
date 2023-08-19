@@ -9,25 +9,16 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
-    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
-     <!--script>
-      document.addEventListener('turbolinks:load', () => {
-        $('[data-toggle="tooltip"]').tooltip()
-      })
-    </script-->
+    <meta name="description" content="meshiTomo">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-
-  <meta name="description" content="meshiTomo">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
-  <link rel="stylesheet" type="text/css" href=".../javascript/stylesheets/application.scss">
+    <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
+    <!--<link rel="stylesheet" type="text/css" href=".../javascript/stylesheets/application.scss">-->
 
   </head>
 
   <body class="body-bg">
-    <script src="application.js"></script>
 
     <header class="sticky-top">
     <% if user_signed_in? %>
@@ -93,17 +84,15 @@
     <%= yield %>
     <% if user_signed_in? %>
       <!--<div class="fixed-bottom d-flex justify-content-end" data-toggle="tooltip" data-placement="top" title="お食事に行きましょう">-->
-        <%= link_to new_recruitment_path, class: "fixed-bottom ml-auto d-block rounded-circle mb-4 mr-4 shadow recruitment_logo" do %>
-          <span class="cap" data-tippy-content="お食事に行く人を募集しましょう！"><%= image_tag 'dinner.png', class: "img-fluid p-3" %></span>
+        <%= link_to new_recruitment_path, class: "fixed-bottom ml-auto d-block rounded-circle mb-5 mr-5 shadow recruitment_logo" do %>
+          <%= image_tag 'dinner.png',
+                        class: "img-fluid p-3",
+                        'data-toggle': "tooltip",
+                        'data-placement': "top",
+                        title: 'お食事に行く人を募集しましょう！'  %>
         <% end %>
         <!--ブロック要素にすると画面幅全体に要素が適用されてしまう。インライン要素にすることで、ボタンのみ選択できる。-->
       <!--</div>-->
-
-      <!--ツールチップを出すためのJS-->
-      <script src="https://unpkg.com/popper.js@1"></script>
-      <script src="https://unpkg.com/tippy.js@5"></script>
-      <!--ツールチップのJSを制御するための自作のJS-->
-      <script src="application.js"></script>
     <% end %>
   </body>
 </html>

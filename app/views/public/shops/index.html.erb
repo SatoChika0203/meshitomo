@@ -16,7 +16,7 @@
         <div class="rounded-3 bg-white p-5 mb-5" style="border-radius:50px;">
           <div class="row pt-3">
             <div class="col-lg-3 col-md-4 col-sm-12 col-12">
-              <p class="text-center"><%= image_tag shop['photo']['pc']['m'] %></p>
+              <p class="text-center"><%= image_tag shop['photo']['pc']['m'], class: "rounded" %></p>
                 <% if @favorite_shop.exists?(hotpepper_shop_id: shop['id'], registration_flg: 0) %>  <!--フラグが０：お気に入り解除（フラグ１に変更）-->
                   <p class="text-center pt-2"><%= link_to "お気に入りを解除する", withdraw_shop_path(@favorite_shop.ids), method: :patch, class: "btn btn-color-green btn-sm" %></p>   <!--フラグが1：お気に入り追加（フラグ0に変更）-->
                 <% elsif @favorite_shop.exists?(hotpepper_shop_id: shop['id'], registration_flg: 1) %>  
@@ -67,4 +67,3 @@
   <% end %>
   </div>
 </div>
-

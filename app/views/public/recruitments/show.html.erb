@@ -1,14 +1,14 @@
  <div class="container my-3">
     <h2 class="text-center">募集詳細</h2>
-        <div class="bg-white border-radius-80 pt-5 pb-2 mt-4">
+        <div class="bg-white border-radius-80 pt-5 px-5 pb-2 mt-4">
             <div class="row mb-5">
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <% if @recruitment.user.image.attached? %>
-                    <p class="text-center"><%= image_tag @recruitment.user.image, size: "150x150" %></p>
+                    <p class="text-center"><%= link_to image_tag(@recruitment.user.image, size: "150x150", class: "rounded"), user_path(@recruitment.user.id) %></p>
                     <% else %>
-                    <p class="text-center"><%= image_tag 'no_image', size: "150x150" %></p>
+                    <p class="text-center"><%= link_to image_tag('no_image', size: "150x150", class: "rounded"), user_path(@recruitment.user.id) %></p>
                     <% end %>
-                    <p class="text-center"><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id) %></p>
+                    <p class="text-center"><%= link_to @recruitment.user.nickname, user_path(@recruitment.user.id), class: "text-body" %></p>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <h3 class="mb-4"><strong><%= @recruitment.title %></strong></h3>
@@ -42,10 +42,10 @@
 
 <div class="container py-5">
     <h2 class="text-center">お店の情報</h2>
-    <div class="bg-white border-radius-80 mt-4">
-        <div class="row pt-5 pb-3">
+    <div class="bg-white border-radius-80 pt-5 px-5 pb-2 mt-4">
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 mb-5">
-                <p class="text-center"><%= image_tag @recruitment.shop.img %></p>
+                <p class="text-center"><%= image_tag @recruitment.shop.img, class: "rounded" %></p>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 text-wrap">
                 <h4 class="mb-4"><%= link_to @recruitment.shop.name, @recruitment.shop.url %></h4>
@@ -101,18 +101,19 @@
                         こちらの募集は終了しました。<br>
                         参加者は以下の方々です。
                     </p>
-                    <div class="row text-wrap">
+                    <div class="row mx-auto text-wrap px-5">
                         <% @chat_group_users.each do |chat_group_user| %>
-                            <% if chat_group_user.user.image.attached? %>
-                            <div>
-                                <p><%= image_tag chat_group_user.user.image, size: "200x200" %></p>
+                            <div class="p-3 text-center">
+                                <% if chat_group_user.user.image.attached? %>
+                                <div>
+                                    <p><%= link_to image_tag(chat_group_user.user.image, size: "100x100", class: "rounded"), user_path(chat_group_user.user_id) %></p>
+                                <% else %>
+                                <div>
+                                    <p><%= link_to image_tag('no_image', size: "100x100", class: "rounded"), user_path(chat_group_user.user_id) %></p>
+                                <% end %>
+                                <p class="text-center"><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user_id), class: "text-body" %></p>
+                                </div>
                             </div>
-                            <% else %>
-                            <div>
-                                <p><%= image_tag 'no_image', size: "200x200" %></p>
-                            </div>
-                            <% end %>
-                                <p><%= chat_group_user.user.nickname %></p>
                         <% end %>
                     </div>
                 <% elsif @recruitment.is_valid==false && @application.is_approval==true && @recruitment.chat_groups.blank? %>
@@ -167,13 +168,13 @@
                                     </div>
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-4">
                                         <% if application.applicant.image.attached? %>
-                                            <p class="text-center"><%= image_tag application.applicant.image, size: "80x80" %></p>
+                                            <p class="text-center"><%= image_tag application.applicant.image, size: "80x80", class: "rounded" %></p>
                                         <% else %>
-                                            <p class="text-center"><%= image_tag 'no_image', size: "80x80" %></p>
+                                            <p class="text-center"><%= image_tag 'no_image', size: "80x80", class: "rounded" %></p>
                                         <% end %>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-6">
-                                        <p><%= link_to application.applicant.nickname, user_path(application.applicant.id) %></p>
+                                        <p><%= link_to application.applicant.nickname, user_path(application.applicant.id), class: "text-body" %></p>
                                         <p><%= application.message %></p>
                                         <p>希望日：<%= application.schedule_one %>　<%= application.schedule_two %>　<%= application.schedule_three %></p>
                                     </div>
@@ -191,12 +192,12 @@
                                 <div class="p-3">
                                     <% if chat_group_user.user.image.attached? %>
                                     <div>
-                                        <p class="text-center"><%= image_tag chat_group_user.user.image, size: "100x100" %></p>
+                                        <p class="text-center"><%= link_to image_tag(chat_group_user.user.image, size: "100x100", class: "rounded"), user_path(chat_group_user.user_id) %></p>
                                     <% else %>
                                     <div>
-                                        <p class="text-center"><%= image_tag 'no_image', size: "100x100" %></p>
+                                        <p class="text-center"><%= link_to image_tag('no_image', size: "100x100", class: "rounded"), user_path(chat_group_user.user_id) %></p>
                                     <% end %>
-                                    <p class="text-center"><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user_id) %></p>
+                                    <p class="text-center"><%= link_to chat_group_user.user.nickname, user_path(chat_group_user.user_id), class: "text-body" %></p>
                                     </div>
                                 </div>
                         　  <% end %>

@@ -4,16 +4,32 @@
   <div class="container mt-5"> 
     <% @recruitments.each do |recruitment| %>
      <div class="mb-5 p-5 rounded-3 bg-white border" style="border-radius:50px;">
-       <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
+       <h4 class="my-2 ml-4"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>
          <div class="row pt-3">
-            <div class="col-lg-3 col-md-4 col-sm-12">
-              <p class="text-center"><%= image_tag recruitment.shop.img %></p>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+              <p class="text-center"><%= image_tag recruitment.shop.img, class: "rounded" %></p>
             </div>
-         <div class="col-lg-9 col-md-8 col-sm-12">
+         <div class="col-lg-8 col-md-8 col-sm-12 col-12">
            <p><%= link_to recruitment.shop.name, recruitment.shop.url %></p>
            <p><%= recruitment.shop.address %></p>
-           <p>希望日　<%= recruitment.schedule %></p>
-           <p>募集期限　<%= recruitment.deadline %></p>
+             <table class="table table-borderless">
+                <tr class="row">
+                  <th class="col-lg-2 col-md-3 col-sm-3 col-3">希望日</th>
+                  <td class="col-lg-10 col-md-9 col-sm-9 col-9"><%= recruitment.schedule %></td>
+                </tr>
+                <tr class="row">
+                  <th class="col-lg-2 col-md-3 col-sm-3 col-3">募集期限</th>
+                  <td class="col-lg-10 col-md-9 col-sm-9 col-9"><%= recruitment.deadline %></td>
+                </tr>
+                <tr class="row">
+                  <th class="col-lg-2 col-md-3 col-sm-3 col-3">募集状況</th>
+                  <% if recruitment.is_valid==true %>
+                    <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-success">募集中</td>
+                  <% else %>
+                    <td class="col-lg-10 col-md-9 col-sm-9 col-9 text-secondary">募集終了</td>
+                  <% end %>
+                </tr>
+             </table>
          </div>
        </div>
      </div>

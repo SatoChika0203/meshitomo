@@ -68,7 +68,7 @@ h1{
 }
 
 .sign_up_btn{
-  background: #f4be48;
+  background: #f2c530;
   color: white;
 }
 
@@ -80,6 +80,17 @@ h1{
   background-image: url(../images/photo_1.jpg);
   background-size: auto
 }
+
+.user-image{
+  border-radius: 50px;
+}
+
+.recruitment-image{
+  border-radius: 5px;
+}
+
+.tooltip-arrow,
+.tooltip > .tooltip-inner {background-color: #D1C9BC !important;}
 
 ul {
   list-style: none;
