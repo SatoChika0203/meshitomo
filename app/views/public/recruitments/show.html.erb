@@ -1,6 +1,6 @@
  <div class="my-3">
 　　<div class="my-2 mx-5">
-    　<h6 class="text-muted"><%= flash[:notice] %></h6>
+    　<h6 class="text-muted"><strong><%= flash[:notice] %></strong></h6>
  　 </div>
  　 
     <h2 class="text-center">募集詳細</h2>
@@ -94,9 +94,9 @@
         <div class="container">
              <h2 class="text-center">応募状況</h2>
              <div class="border border-radius-80 py-3 my-3">
-                <% if @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).exists? %>  <!--whereメソッドで条件を絞り込んで確認-->
+                <% if @recruitment.is_valid==true && @application.is_valid==true %>  <!--whereメソッドで条件を絞り込んで確認 @applications.where(applicant_id: current_user.id).exists?-->
                     <p class="text-center"><%= link_to "キャンセルする", cancel_recruitment_applications_path(@recruitment.id), method: :post, class: "btn btn-color-gray" %></p>
-                <% elsif @recruitment.is_valid==true && @applications.where(applicant_id: current_user.id).blank? %>
+                <% elsif @recruitment.is_valid==true && ( @application.is_valid==false || @applications.where(applicant_id: current_user.id).blank? ) %>     <!--@applications.where(applicant_id: current_user.id).blank?-->
                     <p class="text-center"><%= link_to "行きたい！", confirm_recruitment_applications_path(@recruitment.id), method: :post, class: "btn btn-color-green" %></p>
                 <% elsif @recruitment.is_valid==false && @application.is_approval==false %>
                     <p class="text-center">この募集は締め切られました</p>
