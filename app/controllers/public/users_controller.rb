@@ -38,12 +38,8 @@ class Public::UsersController < ApplicationController
 
   def withdraw
     ActiveRecord::Base.transaction do
-    current_user.update(is_deleted: true)
-    # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
-    current_user.applications.destroy
-    current_user.chats.destroy
-    current_user.chat_group_users.destroy
-    current_user.shops.destroy
+    current_user.update(is_deleted: true)  # is_deletedカラムをtrueにupdateする事により、退会状態を作り出す
+    current_user.chat_group_users.destroy_all
     current_user.recruitments.update(is_valid: false)
     end
     reset_session

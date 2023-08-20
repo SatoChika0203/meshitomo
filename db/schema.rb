@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_16_075909) do
+ActiveRecord::Schema.define(version: 2023_08_20_065749) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -89,6 +89,15 @@ ActiveRecord::Schema.define(version: 2023_08_16_075909) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "shop_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_favorites_on_shop_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "public_applications", force: :cascade do |t|
     t.integer "recruitment_id", null: false
     t.integer "user_id", null: false
@@ -123,7 +132,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_075909) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "recruitment_id"
-    t.integer "user_id", null: false
     t.string "catch", default: "-"
     t.string "open", default: "-"
     t.string "close", default: "-"
@@ -178,4 +186,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_075909) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "applications", "recruitments"
   add_foreign_key "applications", "users", column: "applicant_id"
+  add_foreign_key "favorites", "shops"
+  add_foreign_key "favorites", "users"
 end

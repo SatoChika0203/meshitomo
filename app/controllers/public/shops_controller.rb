@@ -23,7 +23,7 @@ class Public::ShopsController < ApplicationController
 
       @shop=Shop.new()
 
-      @favorite_shop=Shop.where(user_id: current_user.id)
+      @favorite_shop= current_user.shops
       
 
     end
@@ -31,9 +31,15 @@ class Public::ShopsController < ApplicationController
 
 
   def create
-    shop = Shop.new(shop_params)
-    shop.user_id=current_user.id
-    shop.save
+    if Shop.find_by(hotpepper_shop_id: shop_params[:hotpepper_shop_id])
+      shop = Shop.find_by(hotpepper_shop_id: shop_params[:hotpepper_shop_id])
+    else
+      shop = Shop.new(shop_params)
+      shop.save
+    end
+
+   favorite = Favorite.new(user_id: current_user.id, shop_id: shop.id)
+   favorite.save
     redirect_to user_user_shops_path(current_user.id)
   end
 

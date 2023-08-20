@@ -6,7 +6,8 @@ class Public::RecruitmentsController < ApplicationController
 
   def new
     @recruitment=Recruitment.new
-    @shops=Shop.where(user_id: current_user.id, registration_flg: 0)
+    @shops=current_user.shops
+    # .where(user_id: current_user.id, registration_flg: 0)
   end
 
   def create
