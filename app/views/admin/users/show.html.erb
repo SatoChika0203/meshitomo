@@ -1,6 +1,6 @@
 <div class="my-5">
     <h2 class="text-center">会員詳細</h2>
-    
+
     <div class="container my-5 border border-radius-80 bg-white py-5">
         <div class="text-center pt-4">
             <% if @user.image.attached? %>
@@ -54,10 +54,10 @@
             <p><%= link_to "募集履歴", history_admin_user_recruitments_path(@user.id) %></p>
             <p><%= link_to "応募履歴", history_admin_user_applications_path(@user.id) %></p>
             <p><%= link_to "所属メッセージグループ一覧", admin_user_chat_groups_path(@user.id) %></p>
-            <p><%= link_to "お気に入りの店", admin_user_user_shops_path(@user.id) %></p>    
+            <p><%= link_to "お気に入りの店", admin_user_favorite_index_path(@user.id) %></p>
         </div>
     </div>
-    
+
     <h3 class="text-center"><%= @user.name %>さんの募集一覧</h3>
         <div class="container mt-5 border border-radius-80 bg-white py-5">
             <div class="row mt-5 pt-4">
@@ -96,7 +96,7 @@
                     <p>まだ募集はありません…</p>
                 <% end %>
             </div>
-         </div>                        
+         </div>
 </div>
 
 
