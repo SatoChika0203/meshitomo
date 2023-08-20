@@ -19,7 +19,7 @@
             <th class="col-lg-12 col-md-12 col-sm-12 col-12 pb-0"><%= recruitment.label :"お店" %></th>
             <td class="col-lg-12 col-md-12 col-sm-12 col-12 pt-0">
               <%= recruitment.select :shop_id,  @shops.map{ |shop| [shop.name, shop.id] }, { include_blank: "お気に入りの店から選択してください" } %><br>
-              <%= link_to "お気に入りの店を登録しよう", user_favorite_index_path(current_user.id) %>
+              <%= link_to "お気に入りの店を登録しよう", shops_path %>
             </td>
             <!--@shops.map{ |shop|  [ 選択肢の表示名, 実際に送信されるデータ] }-->
           </tr>

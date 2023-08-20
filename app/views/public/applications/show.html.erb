@@ -71,9 +71,11 @@
               <tr class="row pb-3">
                   <th class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">応募状況</th>
                   <% if @application.is_valid==true && @application.is_approval.blank? %>
-                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left">
+                    <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left text-success">
                       応募済み<br>
-                      <%= link_to "キャンセルしますか？", cancel_recruitment_applications_path(@application.recruitment.id), method: :post, class: "btn btn-color-gray btn-sm"%>
+                      <% if @application.recruitment.is_valid==true %>
+                        <%= link_to "キャンセルしますか？", cancel_recruitment_applications_path(@application.recruitment.id), method: :post, class: "btn btn-color-gray btn-sm"%>
+                      <% end %>
                     </td>
                   <% elsif @application.is_valid==false && @application.is_approval.blank? %>
                     <td class="col-lg-6 col-md-6 col-sm-6 col-7 text-left text-secondary">キャンセル済み</td>

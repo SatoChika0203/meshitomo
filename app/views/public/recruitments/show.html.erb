@@ -132,7 +132,9 @@
     <div class="mb-5">
         <div class="container">
             <div class="row mx-auto">
+                <% if @recruitment.is_valid == true %>
                 <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-right"><%= link_to "編集", edit_recruitment_path, class: "btn btn-color-green btn-lg" %></p>
+                <% end %>
                 <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><button type="button" class="btn btn-color-gray btn-lg" data-toggle="modal" data-target="#exampleModal">削除</button></p>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -183,8 +185,8 @@
                                         <p>希望日：<%= application.schedule_one %>　<%= application.schedule_two %>　<%= application.schedule_three %></p>
                                     </div>
                                 </div>
-                                <p class="text-center mt-3"><button class="btn btn-color-green btn-lg my-3" type="submit">次へ進む</button></p>
                                 <% end %>
+                                <p class="text-center mt-3"><button class="btn btn-color-green btn-lg my-3" type="submit">次へ進む</button></p>
                             <% end %>
                     <% elsif @recruitment.is_valid == true && (@applications.blank? || @application.is_valid==false) %>
                         <p class="text-center mt-4">まだ応募は来ていません。</p>

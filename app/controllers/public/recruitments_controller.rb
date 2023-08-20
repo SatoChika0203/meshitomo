@@ -37,26 +37,23 @@ class Public::RecruitmentsController < ApplicationController
 
     @recruitments_male_only.each do |recruitments_male_only|
       @recruitments_male_only_deadline = recruitments_male_only.deadline
+      if today > @recruitments_male_only_deadline
+        @recruitments_male_only.update(is_valid: false)
+      end      
     end
 
     @recruitments_female_only.each do |recruitments_female_only|
       @recruitments_female_only_deadline = recruitments_female_only.deadline
+      if today > @recruitments_female_only_deadline
+        @recruitments_female_only.update(is_valid: false)
+      end     
     end
 
     @recruitments_anyone.each do |recruitments_anyone|
       @recruitments_anyone_deadline = recruitments_anyone.deadline
-    end
-
-    if today > @recruitments_male_only_deadline
-      @recruitments_male_only.update(is_valid: false)
-    end
-
-    if today > @recruitments_female_only_deadline
-      @recruitments_female_only.update(is_valid: false)
-    end
-
-    if today > @recruitments_anyone_deadline
-      @recruitments_anyone.update(is_valid: false)
+      if today > @recruitments_anyone_deadline
+        @recruitments_anyone.update(is_valid: false)
+      end
     end
   end
 
@@ -73,38 +70,6 @@ class Public::RecruitmentsController < ApplicationController
       @recruitment.update(is_valid: false)
     end
     # :shop_id　はshowに渡されていないため使用できない
-
-
-    # -----render用-------
-    @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
-    @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
-    @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])
-
-    today = Date.today
-
-    @recruitments_male_only.each do |recruitments_male_only|
-      @recruitments_male_only_deadline = recruitments_male_only.deadline
-    end
-
-    @recruitments_female_only.each do |recruitments_female_only|
-      @recruitments_female_only_deadline = recruitments_female_only.deadline
-    end
-
-    @recruitments_anyone.each do |recruitments_anyone|
-      @recruitments_anyone_deadline = recruitments_anyone.deadline
-    end
-
-    if today > @recruitments_male_only_deadline
-      @recruitments_male_only.update(is_valid: false)
-    end
-
-    if today > @recruitments_female_only_deadline
-      @recruitments_female_only.update(is_valid: false)
-    end
-
-    if today > @recruitments_anyone_deadline
-      @recruitments_anyone.update(is_valid: false)
-    end
   end
 
 
@@ -115,7 +80,7 @@ class Public::RecruitmentsController < ApplicationController
   def update
     @recruitment=Recruitment.find(params[:id])
     if @recruitment.update(recruitment_params)
-      flash[:notice]="変更が完了しました！。"
+      flash[:notice]="変更が完了しました！"
       redirect_to recruitment_path(@recruitment.id)
     else
       render :edit
@@ -131,6 +96,7 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def confirm
+    @recruitment=Recruitment.find(params[:id])
     @chat_group = ChatGroup.new(recruitment_id: params[:id])
     params[:chat_group_user][:user_ids].each do |user_id|
       @chat_group.chat_group_users << ChatGroupUser.new(user_id: user_id)
