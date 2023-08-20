@@ -40,7 +40,7 @@ class Public::ShopsController < ApplicationController
 
    favorite = Favorite.new(user_id: current_user.id, shop_id: shop.id)
    favorite.save
-    redirect_to user_user_shops_path(current_user.id)
+    redirect_to user_favorite_index_path(current_user.id)
   end
 
   def update

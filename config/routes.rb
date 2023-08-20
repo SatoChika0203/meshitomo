@@ -11,7 +11,7 @@ scope module: :public do
         get 'confirm'
         patch 'withdraw'
       end
-      resources :user_shops, only: [:index]
+      resources :favorite, only: [:index, :destroy]
   end
 
   resources :recruitments do
@@ -49,6 +49,7 @@ scope module: :public do
   resources :chat_groups, only: [:index]
   resources :chats, only: [:create]
   resources :reviews, except: [:destroy, :edit]
+  resources :favorite, only: [:destroy]
   resources :shops do
     member do
       patch 'withdraw'
@@ -59,7 +60,7 @@ scope module: :public do
     # resource :user_shops, only: [:create, :destroy]
   end
 end
-
+  
 # __________________________
 
 devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -71,7 +72,7 @@ namespace :admin do
       member do
         patch 'withdraw'
       end
-      resources :user_shops, only: [:index, :destroy]
+      resources :favorite, only: [:index, :destroy]
       resources :chat_groups, only: [:index]
       resource :recruitments, except: [:new, :create, :index, :show, :edit, :update, :destroy] do
         collection do

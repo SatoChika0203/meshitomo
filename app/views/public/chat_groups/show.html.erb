@@ -1,4 +1,4 @@
-<div class="my-5">
+<div class="mt-2 mb-3">
     <div class="container">
         <h2 class="text-center"><%= link_to @recruitment.title, recruitment_path(@recruitment.id) %>のメッセージグループです</h2>
         <div class="row">
@@ -39,7 +39,7 @@
     <% end %>
     </div>
     
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="my-3 text-center">
             <%= form_with model: @chat, url: chats_path, method: :create do |chat| %>
                 <span><%= chat.text_area :chat, class: "text-area" %></span>
@@ -48,7 +48,7 @@
             <% end %>
         </div>
     
-        <div class="bg-white border border-radius-50 p-5 d-flex align-items-center" style="height: 390px !important;">
+        <div class="bg-white border border-radius-50 p-4 d-flex align-items-center" style="height: 390px !important;">
             <div class="h-100 overflow-auto container">
                 <% @chats.each do |chat| %>
                 <div class="row py-3 border-bottom">

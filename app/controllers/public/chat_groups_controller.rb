@@ -34,11 +34,8 @@ private
   def is_matching_login_user
     chat_group=ChatGroup.find_by(recruitment_id: params[:recruitment_id])
     chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.id)
-    chat_group_users.each do |chat_group_user|
-      chat_group_user=chat_group_user
-      if chat_group_user.user.id == current_user.id
-        redirect_to recruitment_chat_groups_path(chat_group.recruitment.id)
-      end
+    unless chat_group_users.pluck(:user_id).include?(current_user.id)
+        redirect_to chat_groups_path
     end
     # unless chat_group_user.user.id == current_user.id
     #   redirect_to recruitments_path

@@ -50,9 +50,9 @@
           </div>
           <div class="text-center col-lg-2 col-md-4 col-sm-12 col-12">
           <% if application.recruitment.user.image.attached? %>
-            <p><%= image_tag(application.recruitment.user.image, size: "120x120", class: "rounded-circle") %></p>
+            <p><%= link_to image_tag(application.recruitment.user.image, size: "120x120", class: "rounded-circle"), user_path(application.recruitment.user.id) %></p>
           <% else %>
-            <p><%= image_tag('no_image', size: "120x120", class: "rounded-circle") %></p>
+            <p><%= link_to image_tag('no_image', size: "120x120", class: "rounded-circle"), user_path(application.recruitment.user.id) %></p>
           <% end %>
             <p><%= link_to application.recruitment.user.nickname, user_path(application.recruitment.user.id), class: "text-body" %></p>
           </div>         

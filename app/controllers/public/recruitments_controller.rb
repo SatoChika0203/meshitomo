@@ -1,7 +1,7 @@
 class Public::RecruitmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update, :withdraw, :confirm, :generate, :complete]
-  # before_action :match_gender, only: [:show]
+  before_action :match_gender, only: [:show]
   before_action :is_deleted_recruitment_user, only: [:show]
 
   def new
@@ -11,7 +11,7 @@ class Public::RecruitmentsController < ApplicationController
   end
 
   def create
-    @shops=Shop.where(user_id: current_user.id, registration_flg: 0)
+    @shops=current_user.shops
     @recruitment=Recruitment.new(recruitment_params)
     @recruitment.user_id=current_user.id
     if @recruitment.save
@@ -27,7 +27,7 @@ class Public::RecruitmentsController < ApplicationController
     # @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
     # @recruitments_anyone=Recruitment.where(recruitment_gender: 2).page(params[:page])
     # @recruitments_female_only=Recruitment.where.not(recruitment_gender: 0) こっちでもいける
-    
+
     @recruitments_male_only=Recruitment.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_female_only=Recruitment.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
     @recruitments_anyone=Recruitment.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])
@@ -62,7 +62,7 @@ class Public::RecruitmentsController < ApplicationController
 
   def show
     @applications=Application.where(recruitment_id: params[:id])
-    @application=Application.find_by(applicant_id: current_user.id)
+    @application=Application.find_by(recruitment_id: params[:id], applicant_id: current_user.id)
     @recruitment=Recruitment.find(params[:id])
     @chat_group_user=ChatGroupUser.new
     chat_group=ChatGroup.where(recruitment_id: params[:id])
@@ -219,34 +219,35 @@ private
   def recruitment_params
     params.require(:recruitment).permit(:title, :introduction, :schedule, :prefecture, :number_of_people, :recruitment_gender, :deadline, :shop_id)
   end
-  
+
   def is_matching_login_user
     recruitment=Recruitment.find(params[:id])
     unless recruitment.user.id == current_user.id
       redirect_to recruitments_path
     end
   end
-  
+
   def is_deleted_recruitment_user
     recruitment=Recruitment.find(params[:id])
     if recruitment.user.is_deleted == true
-      flash[:notice]="このユーザーは退会しました。"
+      flash[:notice]="募集したユーザーが退会しました。"
       redirect_to recruitments_path
     end
   end
-  
+
+  def match_gender
+    recruitment=Recruitment.find(params[:id])
+    return if current_user.id == recruitment.user_id  #募集ユーザーとログインユーザーがマッチしたら、抜ける
+
+      if (current_user.gender == "male" && recruitment.recruitment_gender == "female_only") ||
+      (current_user.gender == "female" && recruitment.recruitment_gender == "male_only") ||
+      (current_user.gender == "other" && recruitment.recruitment_gender != "anyone")
+      redirect_to action: "index"
+      end
+      # 性別マッチしなかったら、indexに戻る
+  end
+
 end
 
-  # def match_gender
-  #   recruitment=Recruitment.find(params[:id])
-  #     if (current_user.gender=="male" && recruitment.recruitment_gender=="male_only" || recruitment.recruitment_gender=="anyone")
-  #       redirect_to recruitment_path(recruitment.id)
-  #     elsif (current_user.gender=="female" && recruitment.recruitment_gender=="female_only" || recruitment.recruitment_gender=="anyone")
-  #       redirect_to recruitment_path(recruitment.id)
-  #     elsif  (current_user.gender=="other" && recruitment.recruitment_gender=="anyone")
-  #       redirect_to recruitment_path(recruitment.id)
-  #     else
-  #       render :index
-  #     end
-  # end
+
 

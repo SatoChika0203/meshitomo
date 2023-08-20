@@ -8,7 +8,8 @@
   
   <div class="container mt-5">
     <% if current_user.gender == "male" %>
-      <% @recruitments_male_only.each do |recruitment| %>
+    <% @recruitments=@recruitments_male_only %>
+      <% @recruitments.each do |recruitment| %>
         <% if recruitment.is_valid==true %>
           <div class="mb-5 bg-white rounded-3 border p-5" style="border-radius:50px;">
             <h4 class="my-2 ml-3"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h4>

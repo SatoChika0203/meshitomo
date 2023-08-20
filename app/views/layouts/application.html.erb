@@ -51,7 +51,7 @@
                       <li class="dropdown-item"><%= link_to "マイページ", user_path(current_user.id), class: "text-secondary" %></li>
                       <li class="dropdown-item"><%= link_to "募集履歴", history_recruitments_path, class: "text-secondary" %></li>
                       <li class="dropdown-item"><%= link_to "応募履歴", history_applications_path, class: "text-secondary" %></li>
-                      <li class="dropdown-item"><%= link_to "お気に入りのお店", user_user_shops_path(current_user.id), class: "text-secondary" %></li>
+                      <li class="dropdown-item"><%= link_to "お気に入りのお店", user_favorite_index_path(current_user.id), class: "text-secondary" %></li>
                     </ul>
                   </li>
             </div>
