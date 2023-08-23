@@ -61,6 +61,8 @@ gem "enum_help"
 
 gem 'kaminari'
 
+gem 'httparty'
+
 gem 'dotenv-rails'
 
 gem 'rails-i18n'
