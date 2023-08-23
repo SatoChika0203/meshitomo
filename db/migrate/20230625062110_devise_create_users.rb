@@ -26,7 +26,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.boolean :is_deleted, null: false, default: false
       
       t.integer :gender, null: false
-      t.integer :prefectures
+      t.integer :prefecture
       t.string :introduction, default: "よろしくお願いします。"
 
       ## Trackable
