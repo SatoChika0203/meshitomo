@@ -48,9 +48,9 @@ scope module: :public do
 
   resources :chat_groups, only: [:index]
   resources :chats, only: [:create]
-  resources :reviews, except: [:destroy, :edit]
+  # resources :reviews, except: [:destroy, :edit]
   resources :favorite, only: [:destroy]
-  resources :shops do
+  resources :shops, except: [:new, :edit, :show, :destroy] do
     member do
       patch 'withdraw'
     end
@@ -98,7 +98,7 @@ namespace :admin do
 
   resources :chats, only: [:destroy]
 
-  resources :reviews
+  # resources :reviews
 
   resource :applications, except: [:new, :create, :show, :index, :edit, :update, :destroy] do
     collection do
