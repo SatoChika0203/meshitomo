@@ -14,7 +14,7 @@
                         </tr>
                         <tr class="row">
                             <th class="col-lg-2 col-md-3 col-sm-4 col-4">希望日</th>
-                            <% if recruitment.schedule.exists? %>
+                            <% if recruitment.schedule.present? %>
                             <td class="col-lg-10 col-md-9 col-sm-8 col-8"><%= recruitment.schedule %></td>
                             <% else %>
                             <td class="col-lg-10 col-md-9 col-sm-8 col-8">相談して決めたい</td>
