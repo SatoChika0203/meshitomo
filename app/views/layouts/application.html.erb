@@ -22,16 +22,16 @@
 
     <header class="sticky-top">
     <% if user_signed_in? %>
-      <nav class="navbar navbar-expand-lg navbar-light nav-bg container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light nav-bg">
         <div class="col-lg-5 col-md-6 col-sm-12 col-12">
-          <a class="navbar-brand" href="/recruitments"><%= image_tag('meshitomo_sm.png') %></a>
+          <a class="navbar-brand mx-auto" href="/recruitments"><%= image_tag 'meshitomo_sm.png', class: "meshitomo_logo" %></a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="justify-content-end collapse navbar-collapse col-lg-7 col-md-6 col-sm-12 col-12" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center mr-3">
-              <div class="search-form px-5 pt-4 col-lg-9 col-md-9 col-sm-12 col-12 text-right">
+              <div class="search-form p-5 col-lg-9 col-md-9 col-sm-12 col-12 text-right">
                 <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
                   <%= search.text_field :keyword, value: @keyword %>
                   <%= search.select :prefecture, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
