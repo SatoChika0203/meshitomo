@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 2023_08_20_065749) do
     t.date "schedule_three"
     t.string "message"
     t.boolean "is_approval", default: false, null: false
+    t.boolean "is_valid", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_valid", default: true, null: false
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
     t.index ["recruitment_id"], name: "index_applications_on_recruitment_id"
   end
@@ -98,18 +98,6 @@ ActiveRecord::Schema.define(version: 2023_08_20_065749) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "public_applications", force: :cascade do |t|
-    t.integer "recruitment_id", null: false
-    t.integer "user_id", null: false
-    t.date "schedule_one", null: false
-    t.date "schedule_two"
-    t.date "schedule_three"
-    t.string "message"
-    t.boolean "is_approval", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "recruitments", force: :cascade do |t|
     t.string "title", null: false
     t.string "introduction", null: false
@@ -119,18 +107,16 @@ ActiveRecord::Schema.define(version: 2023_08_20_065749) do
     t.integer "recruitment_gender", null: false
     t.date "deadline", null: false
     t.boolean "is_valid", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "shop_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "shops", force: :cascade do |t|
     t.string "name", default: "-", null: false
     t.string "url", default: "-", null: false
     t.string "address", default: "-", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "recruitment_id"
     t.string "catch", default: "-"
     t.string "open", default: "-"
@@ -141,21 +127,8 @@ ActiveRecord::Schema.define(version: 2023_08_20_065749) do
     t.string "parking", default: "-"
     t.string "img"
     t.string "hotpepper_shop_id"
-    t.integer "registration_flg", default: 0, null: false
-    t.index ["hotpepper_shop_id"], name: "index_shops_on_hotpepper_shop_id", unique: true
-  end
-
-  create_table "user_shops", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "shop_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "catch"
-    t.string "address"
-    t.string "open"
-    t.string "close"
-    t.string "urls"
   end
 
   create_table "users", force: :cascade do |t|
