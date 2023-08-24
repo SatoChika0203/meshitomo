@@ -8,13 +8,13 @@ class Public::UsersController < ApplicationController
     @user=User.find(params[:id])
     @recruitments = Recruitment.where(user_id: @user.id)
 
-    @recruitments_male_only=@recruitments.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
-    @recruitments_female_only=@recruitments.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
-    @recruitments_anyone=@recruitments.where(recruitment_gender: 2).page(params[:page])
+    @recruitments_male_only=Recruitment.where(recruitment_gender: 0, user_id: @user.id).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
+    @recruitments_female_only=Recruitment.where(recruitment_gender: 1, user_id: @user.id).or(Recruitment.where(recruitment_gender: 2)).page(params[:page])
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2, user_id: @user.id).page(params[:page])
 
-    @recruitments_male_only=@recruitments.where(recruitment_gender: 0).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
-    @recruitments_female_only=@recruitments.where(recruitment_gender: 1).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
-    @recruitments_anyone=@recruitments.where(recruitment_gender: 2).order(created_at: :desc).page(params[:page])
+    @recruitments_male_only=Recruitment.where(recruitment_gender: 0, user_id: @user.id).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
+    @recruitments_female_only=Recruitment.where(recruitment_gender: 1, user_id: @user.id).or(Recruitment.where(recruitment_gender: 2)).order(created_at: :desc).page(params[:page])
+    @recruitments_anyone=Recruitment.where(recruitment_gender: 2, user_id: @user.id).order(created_at: :desc).page(params[:page])
   end
 
   def edit
