@@ -22,39 +22,42 @@
 
     <header class="sticky-top">
     <% if user_signed_in? %>
-      <nav class="navbar navbar-expand-lg navbar-light nav-bg">
+      <nav class="navbar navbar-expand-lg navbar-light nav-bg container-fluid">
+        <div class="col-lg-5 col-md-6 col-sm-12 col-12">
           <a class="navbar-brand" href="/recruitments"><%= image_tag('meshitomo_sm.png') %></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-            <div class="justify-content-end collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center mr-3">
-                  <div class="search-form px-4 pt-4">
-                    <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
-                      <%= search.text_field :keyword, value: @keyword %>
-                      <%= search.select :prefecture, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
-                      <%= search.date_field :schedule, value: @schedule %>
-                      <button class="btn btn-color-gray btn-sm mt-1" type="submit">検索</button>
-                    <% end %>
-                  </div>
-                  <li class="nav-item m-2 p-2" data-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
-                    <%= link_to image_tag('mail.png'), chat_groups_path %>
-                  </li>
-                  <li class="nav-item m-2 p-2" data-toggle="tooltip" data-bs-placement="bottom" title="お店を探す">
-                    <%= link_to image_tag('katorari.png'), shops_path %>
-                  </li>
-                  <li class="nav-item  dropdown m-2" data-toggle="tooltip" title="ユーザー情報">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <%= image_tag('people.png') %>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right text-center border-color" aria-labelledby="navbarDropdown">
-                      <li class="dropdown-item"><%= link_to "マイページ", user_path(current_user.id), class: "text-secondary" %></li>
-                      <li class="dropdown-item"><%= link_to "募集履歴", history_recruitments_path, class: "text-secondary" %></li>
-                      <li class="dropdown-item"><%= link_to "応募履歴", history_applications_path, class: "text-secondary" %></li>
-                      <li class="dropdown-item"><%= link_to "お気に入りのお店", user_favorite_index_path(current_user.id), class: "text-secondary" %></li>
-                    </ul>
-                  </li>
-            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="justify-content-end collapse navbar-collapse col-lg-7 col-md-6 col-sm-12 col-12" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center mr-3">
+              <div class="search-form px-5 pt-4 col-lg-9 col-md-9 col-sm-12 col-12 text-right">
+                <%= form_with url: search_recruitments_path, method: :get, local: true do |search| %>
+                  <%= search.text_field :keyword, value: @keyword %>
+                  <%= search.select :prefecture, Recruitment.prefectures.keys, {include_blank: '都道府県を選択してください'} %>
+                  <%= search.date_field :schedule, value: @schedule %>
+                  <button class="btn btn-color-gray btn-sm mt-1" type="submit">検索</button>
+                <% end %>
+              </div>
+              <li class="nav-item p-2 col-lg-1 col-md-1 col-sm-12 col-12 text-center" data-toggle="tooltip" data-bs-placement="bottom" title="メッセージ">
+                <%= link_to image_tag('mail.png'), chat_groups_path %>
+              </li>
+              <li class="nav-item p-2 col-lg-1 col-md-1 col-sm-12 col-12 text-center" data-toggle="tooltip" data-bs-placement="bottom" title="お店を探す">
+                <%= link_to image_tag('katorari.png'), shops_path %>
+              </li>
+              <li class="nav-item  dropdown col-lg-1 col-md-1 col-sm-12 col-12 p-0 text-center" data-toggle="tooltip" title="ユーザー情報">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= image_tag('people.png') %>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right text-center border-color" aria-labelledby="navbarDropdown">
+                  <li class="dropdown-item"><%= link_to "マイページ", user_path(current_user.id), class: "text-secondary" %></li>
+                  <li class="dropdown-item"><%= link_to "募集履歴", history_recruitments_path, class: "text-secondary" %></li>
+                  <li class="dropdown-item"><%= link_to "応募履歴", history_applications_path, class: "text-secondary" %></li>
+                  <li class="dropdown-item"><%= link_to "お気に入りのお店", user_favorite_index_path(current_user.id), class: "text-secondary" %></li>
+                </ul>
+              </li>
+          </ul>
+        </div>
       </nav>
   <% elsif admin_signed_in? %>
     <nav class="navbar navbar-expand-md navbar-light mb-5 pb-5">
