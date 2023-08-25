@@ -13,7 +13,6 @@ class Recruitment < ApplicationRecord
   validates :prefecture, presence: true
   validates :number_of_people, presence: true
   validates :recruitment_gender, presence: true
-  validates :deadline, presence: true
   validates :shop_id, presence: true
 
   enum recruitment_gender: { male_only: 0, female_only: 1, anyone: 2 }
