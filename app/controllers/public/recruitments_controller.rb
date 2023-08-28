@@ -35,18 +35,19 @@ class Public::RecruitmentsController < ApplicationController
     # 募集締め切り日が過ぎたものは、is_validをfalseにする
     today = Date.today
 
+
     @recruitments_male_only.each do |recruitments_male_only|
       @recruitments_male_only_deadline = recruitments_male_only.deadline
       if today > @recruitments_male_only_deadline
         @recruitments_male_only.update(is_valid: false)
-      end      
+      end
     end
 
     @recruitments_female_only.each do |recruitments_female_only|
       @recruitments_female_only_deadline = recruitments_female_only.deadline
       if today > @recruitments_female_only_deadline
         @recruitments_female_only.update(is_valid: false)
-      end     
+      end
     end
 
     @recruitments_anyone.each do |recruitments_anyone|
