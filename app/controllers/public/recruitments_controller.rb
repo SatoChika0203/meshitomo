@@ -39,21 +39,21 @@ class Public::RecruitmentsController < ApplicationController
     @recruitments_male_only.each do |recruitments_male_only|
       @recruitments_male_only_deadline = recruitments_male_only.deadline
       if today > @recruitments_male_only_deadline
-        @recruitments_male_only.update(is_valid: false)
+        recruitments_male_only.update(is_valid: false)
       end
     end
 
     @recruitments_female_only.each do |recruitments_female_only|
       @recruitments_female_only_deadline = recruitments_female_only.deadline
       if today > @recruitments_female_only_deadline
-        @recruitments_female_only.update(is_valid: false)
+        recruitments_female_only.update(is_valid: false)
       end
     end
 
     @recruitments_anyone.each do |recruitments_anyone|
       @recruitments_anyone_deadline = recruitments_anyone.deadline
       if today > @recruitments_anyone_deadline
-        @recruitments_anyone.update(is_valid: false)
+        recruitments_anyone.update(is_valid: false)
       end
     end
   end
