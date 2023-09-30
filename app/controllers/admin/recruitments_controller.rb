@@ -37,7 +37,7 @@ class Admin::RecruitmentsController < ApplicationController
     @chat_group_users=ChatGroupUser.where(chat_group_id: chat_group.ids)
 
     if @recruitment.destroy
-      redirect_to history_recruitments_path
+      redirect_to admin_recruitments_path
     else
       render :show
     end
