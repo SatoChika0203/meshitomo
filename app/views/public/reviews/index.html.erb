@@ -1,0 +1,138 @@
+<div class="my-5">
+    <div class="m-5">
+        <h6 class="text-muted"><%= flash[:notice] %></h6>
+    </div>
+
+    <h2 class="text-center">会員詳細</h2>
+    
+    <div class="col-lg-1 col-md-1 col-sm-1 col-1">
+      <ul class="nav nav-tabs tabs-right sideways">
+        <li><a href="#recruitments-vr" data-toggle="tab">募集中</a></li>
+        <li>レビュー</li>
+      </ul>
+    </div>
+
+    <div class="container mt-5 border-radius-50 border py-5 text-wrap pr-5">
+      <div class="row">
+        <div class="col-lg-4 col-md-5 col-sm-5 col-5">
+          <div class="text-center py-3">
+              <% if @user.image.attached? %>
+                  <p><%= image_tag @user.image, size: "200x200", class: "rounded" %></p>
+              <% else %>
+                  <p><%= image_tag 'no_image', size: "200x200", class: "rounded" %></p>
+              <% end %>
+          </div>
+          <% if @user.id != current_user.id %>
+          <div class="text-center">
+              <h5 class="pb-3"><%= @user.nickname %></h5>
+              <p><%= @user.introduction %></p>
+          </div>
+          <div>
+              <table class="table table-borderless pt-4">
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">性別</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.gender_i18n %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">都道府県</th>
+                      <% if @user.prefecture.present? %>
+                          <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.prefecture %></td>
+                      <% else %>
+                          <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">-</td>
+                      <% end %>
+                  </tr>
+              </table>
+          </div>
+          <% elsif @user.id == current_user.id %>
+          <div class="text-center py-3">
+              <h5 class="pb-3"><%= @user.nickname %></h5>
+              <p><%= @user.introduction %></p>
+          </div>
+          <div>
+              <table class="table table-borderless pt-4">
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">性別</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.gender_i18n %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">都道府県</th>
+                      <% if @user.prefecture.present? %>
+                          <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.prefecture %></td>
+                      <% else %>
+                          <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">-</td>
+                      <% end %>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">名前</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.name %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">名前（カナ）</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.name_kana %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">住所</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left text-wrap"><%= @user.adress_all %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">電話番号</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.telephone_number %></td>
+                  </tr>
+                  <tr class="row">
+                      <th class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">メールアドレス</th>
+                      <td class="col-lg-6 col-md-6 col-sm-6 col-6 text-left"><%= @user.email %></td>
+                  </tr>
+              </table>
+              <div class="row mt-5 pb-4">
+                  <p class="col-lg-6 col-md-6 col-sm-6 col-6 text-right"><%= link_to "編集", edit_user_path(@user.id), class: "btn btn-color-green" %></p>
+                  <p><button type="button" class="btn btn-color-gray" data-toggle="modal" data-target="#exampleModal">ログアウト</button></p>
+  
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <!--モーダルのタイトル-->
+                          <h5 class="modal-title" id="exampleModalLabel">ログアウト</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                           <!--モーダルのメッセージ-->
+                        <div class="modal-body">ログアウトしますか？</div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-color-green" data-dismiss="modal">やめる</button>
+                          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-color-gray" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <% end %>
+        </div>
+        
+        <div class="col-lg-8 col-md-7 col-sm-7 col-7" id="recruitments-vr" >
+          <% if @user.id != current_user.id %>
+              <h4 class="text-center"><%= @user.nickname %>さんと食事に行きませんか？</h4>
+              <div>
+                  <% if current_user.gender == "male" && @recruitments_male_only.exists? %>
+                      <% @recruitment=@recruitments_male_only %>
+                          <%= render 'user', recruitment: @recruitment %>
+                  <% elsif current_user.gender == "female" && @recruitments_female_only.exists? %>
+                      <% @recruitment=@recruitments_female_only %>
+                          <%= render 'user', recruitment: @recruitment %>
+                  <% elsif current_user.gender == "other" && @recruitments_anyone.exists? %>
+                      <% @recruitment=@recruitments_anyone %>
+                          <%= render 'user', recruitment: @recruitment %>
+                  <% elsif @recruitments.blank? %>
+                      <p class="text-center pt-5">まだ募集はありません…</p>
+                  <% end %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>

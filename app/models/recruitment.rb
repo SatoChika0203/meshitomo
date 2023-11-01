@@ -4,6 +4,7 @@ class Recruitment < ApplicationRecord
   belongs_to :user
   belongs_to :shop
   has_many :chat_groups
+  has_many :reviews
   has_many :applications, dependent: :destroy
   has_many :applicants, through: :applications, dependent: :destroy
   # applicationsの中にapplicants（応募者・Userに付随する）があるが、あくまで別物？

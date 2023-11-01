@@ -12,6 +12,12 @@ scope module: :public do
         patch 'withdraw'
       end
       resources :favorite, only: [:index, :destroy]
+      resources :reviews do
+        collection do
+          post 'confirm'
+          get 'complete'
+        end
+      end
   end
 
   resources :recruitments do
@@ -58,6 +64,7 @@ scope module: :public do
       get 'search'
     end
   end
+  
 end
   
 # __________________________

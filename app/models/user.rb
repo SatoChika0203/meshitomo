@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :shops, through: :favorites
-  
+  has_many :reviews, dependent: :destroy
   has_many :recruitments, dependent: :destroy
   has_many :applications, foreign_key: "applicant_id", dependent: :destroy
   has_many :user_shops, dependent: :destroy

@@ -1,0 +1,35 @@
+<div class="mt-5 border-radius-50 border p-1">
+    <div class="row mt-2 pt-4">
+        <% recruitment.each do |recruitment| %>
+            <% if  recruitment.is_valid == true %>
+                  <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pb-4 ">
+                    <p class="text-center"><%= image_tag recruitment.shop.img, class: "rounded", size: "130x130" %></p>
+                  </div>
+                  <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-4 text-wrap"><strong><%= link_to recruitment.title, recruitment_path(recruitment.id) %></strong></h6>
+                    <table class="table table-borderless ml-4 h6">
+                        <tr class="row">
+                            <th class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">お店</th>
+                            <td class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 text-wrap"><%= link_to recruitment.shop.name, recruitment.shop.url %></td>
+                        </tr>
+                        <tr class="row">
+                            <th class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">希望日</th>
+                            <% if recruitment.schedule.present? %>
+                            <td class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12"><%= recruitment.schedule %></td>
+                            <% else %>
+                            <td class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12">相談して決めたい</td>
+                            <% end %>
+                        </tr>
+                        <tr class="row mb-5">
+                            <th class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">募集期限</th>
+                            <td class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12"><%= recruitment.deadline %></td>
+                        </tr>
+                    </table>
+                  </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+<div class="text-center text-secondary">
+    <p><%= paginate recruitment %></p>
+</div>
